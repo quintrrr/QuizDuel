@@ -1,35 +1,26 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
-using QuizDuel.DataAccess;
+using Microsoft.EntityFrameworkCore.Design;
 
-namespace QuizDuel.UI
+namespace QuizDuel.DataAccess
 {
-    internal static class Program
+    class AppDbContextFactory : IDesignTimeDbContextFactory<AppDbContext>
     {
-        /// <summary>
-        ///  The main entry point for the application.
-        /// </summary>
-        [STAThread]
-        static void Main()
+        public AppDbContext CreateDbContext(string[] args)
         {
             var optionsBuilder = new DbContextOptionsBuilder<AppDbContext>();
             optionsBuilder.UseNpgsql(CreateConnectionString());
-            var db = new AppDbContext(optionsBuilder.Options);
-
-            ApplicationConfiguration.Initialize();
-            Application.Run(new Form1());
+            return new AppDbContext(optionsBuilder.Options);
         }
 
+        
         private static string CreateConnectionString()
         {
-            try
-            {
-                EnvReader.TryLoad("../../../../.env");
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-            
+            EnvReader.TryLoad("../../../../.env");
             var host = Environment.GetEnvironmentVariable("DB_HOST");
             var port = Environment.GetEnvironmentVariable("DB_PORT");
             var username = Environment.GetEnvironmentVariable("DB_USER");

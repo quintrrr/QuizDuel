@@ -10,7 +10,7 @@ namespace QuizDuel.DataAccess
     /// <summary>
     /// Вспомогательный класс для чтения переменных окружения из файла .env
     /// </summary>
-    class EnvReader
+    public class EnvReader
     {
         /// <summary>
         /// Загружает переменные окружения из указанного файла

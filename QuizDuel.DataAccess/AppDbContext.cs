@@ -9,7 +9,7 @@ using QuizDuel.DataAccess.Models;
 
 namespace QuizDuel.DataAccess
 {
-    public class AppDbContext : DbContext
+    public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(options)
     {
         public DbSet<User> Users { get; set; }
 
