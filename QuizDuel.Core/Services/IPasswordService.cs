@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace QuizDuel.Core.Services
 {
-    public interface IPasswordServise
+    public interface IPasswordService
     {
         string GenerateSalt();
 
