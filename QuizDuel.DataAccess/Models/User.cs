@@ -29,6 +29,6 @@ namespace QuizDuel.DataAccess.Models
         public string? Picture { get; set; }
 
         [Column("birthdate")]
-        public DateTime? BirthDate { get; set; }
+        public DateTime? Birthdate { get; set; }
     }
 }

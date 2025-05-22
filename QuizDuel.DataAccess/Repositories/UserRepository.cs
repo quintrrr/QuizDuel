@@ -17,5 +17,17 @@ namespace QuizDuel.DataAccess.Repositories
             return await _db.Users
                 .FirstOrDefaultAsync(u => u.Username == username);
         }
+
+        public async Task<bool> IsUserExistsByUsername(string username)
+        {
+            return await _db.Users
+                .AnyAsync(u => u.Username == username);
+        }
+
+        public async Task AddUser(User user)
+        {
+            await _db.Users.AddAsync(user);
+            await _db.SaveChangesAsync();
+        }
     }
 }
