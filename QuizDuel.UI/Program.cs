@@ -16,7 +16,7 @@ namespace QuizDuel.UI
             var db = new AppDbContext(optionsBuilder.Options);
 
             ApplicationConfiguration.Initialize();
-            Application.Run(new Form1());
+            Application.Run(new Form1(db));
         }
 
         private static string CreateConnectionString()
