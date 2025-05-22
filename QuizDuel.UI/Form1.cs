@@ -1,4 +1,3 @@
-using System.Threading.Tasks;
 using QuizDuel.DataAccess;
 using QuizDuel.DataAccess.Repositories;
 
