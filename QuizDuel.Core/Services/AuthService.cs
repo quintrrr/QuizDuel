@@ -40,25 +40,31 @@ namespace QuizDuel.Core.Services
                 _errorService.SendError(errorMessage);
                 return;
             }
-
-            if (await _userRepository.IsUserExistsByUsername(registerDTO.Username))
+            try
             {
-                _errorService.SendError("Такой пользователь уже существует.");
-                return;
+                if (await _userRepository.IsUserExistsByUsername(registerDTO.Username))
+                {
+                    _errorService.SendError("Такой пользователь уже существует.");
+                    return;
+                }
+
+                var salt = _passwordService.GenerateSalt();
+                var passwordHash = _passwordService.HashPassword(registerDTO.Password, salt);
+                var newUser = new User
+                {
+                    Id = Guid.NewGuid(),
+                    Username = registerDTO.Username,
+                    PasswordHash = passwordHash,
+                    Salt = salt,
+                    Birthdate = registerDTO.Birthdate.ToUniversalTime(),
+                };
+
+                await _userRepository.AddUser(newUser);
             }
-
-            var salt = _passwordService.GenerateSalt();
-            var passwordHash = _passwordService.HashPassword(registerDTO.Password, salt);
-            var newUser = new User
+            catch (Exception ex)
             {
-                Id = Guid.NewGuid(),
-                Username = registerDTO.Username,
-                PasswordHash = passwordHash,
-                Salt = salt,
-                Birthdate = registerDTO.Birthdate,
-            };
-
-            await _userRepository.AddUser(newUser);
+                _errorService.SendError(ex.Message);
+            }
         }        
     }
 }

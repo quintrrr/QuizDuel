@@ -42,7 +42,7 @@ namespace QuizDuel.Core.Services
 
             if (errorMessages.Count > 0)
             {
-                errorMessage = string.Join("/n", errorMessages);
+                errorMessage = string.Join("\n", errorMessages);
                 return false;
             }
 

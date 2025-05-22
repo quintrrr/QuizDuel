@@ -26,7 +26,7 @@ namespace QuizDuel.DataAccess.Models
         public string Salt { get; set; } = string.Empty;
 
         [Column("picture", TypeName = "varchar(255)")]
-        public string? Picture { get; set; }
+        public string Picture { get; set; } = string.Empty;
 
         [Column("birthdate")]
         public DateTime? Birthdate { get; set; }

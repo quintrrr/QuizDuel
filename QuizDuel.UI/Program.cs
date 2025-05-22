@@ -35,6 +35,8 @@ namespace QuizDuel.UI
                     services.AddSingleton<IEnvReader, EnvReader>();
                     services.AddSingleton<IPasswordService, PasswordService>();
                     services.AddSingleton<IErrorService, WinFormsErrorService>();
+                    services.AddSingleton<IRegisterValidator, RegisterValidator>();
+                    services.AddSingleton<IPasswordValidator, PasswordValidator>();
 
                     services.AddDbContext<AppDbContext>((provider, options) =>
                     {
@@ -43,6 +45,7 @@ namespace QuizDuel.UI
                     });
 
                     services.AddTransient<IUserRepository, UserRepository>();
+                    services.AddTransient<IAuthService, AuthService>();
                     services.AddTransient<Form1>();
                 });
         }
