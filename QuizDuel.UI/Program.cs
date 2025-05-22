@@ -1,9 +1,11 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using QuizDuel.Core.Services;
 using QuizDuel.DataAccess;
 using QuizDuel.DataAccess.Classes;
 using QuizDuel.DataAccess.Repositories;
+using QuizDuel.UI.Classes;
 
 namespace QuizDuel.UI
 {
@@ -31,6 +33,9 @@ namespace QuizDuel.UI
                 {
                     services.AddSingleton<IConnectionStringBuilder, ConnectionStringBuilder>();
                     services.AddSingleton<IEnvReader, EnvReader>();
+                    services.AddSingleton<IPasswordService, PasswordService>();
+                    services.AddSingleton<IErrorService, WinFormsErrorService>();
+
                     services.AddDbContext<AppDbContext>((provider, options) =>
                     {
                         var connectionStringBuilder = provider.GetRequiredService<IConnectionStringBuilder>();

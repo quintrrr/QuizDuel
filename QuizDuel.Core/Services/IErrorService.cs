@@ -8,6 +8,6 @@ namespace QuizDuel.Core.Services
 {
     public interface IErrorService
     {
-        void Error(string message);
+        void SendError(string message);
     }
 }

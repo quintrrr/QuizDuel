@@ -20,6 +20,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\QuizDuel.Core\QuizDuel.Core.csproj" />
     <ProjectReference Include="..\QuizDuel.DataAccess\QuizDuel.DataAccess.csproj" />
   </ItemGroup>
 
