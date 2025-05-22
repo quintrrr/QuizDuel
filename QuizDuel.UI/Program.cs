@@ -1,5 +1,9 @@
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using QuizDuel.DataAccess;
+using QuizDuel.DataAccess.Classes;
+using QuizDuel.DataAccess.Repositories;
 
 namespace QuizDuel.UI
 {
@@ -11,32 +15,31 @@ namespace QuizDuel.UI
         [STAThread]
         static void Main()
         {
-            var optionsBuilder = new DbContextOptionsBuilder<AppDbContext>();
-            optionsBuilder.UseNpgsql(CreateConnectionString());
-            var db = new AppDbContext(optionsBuilder.Options);
-
             ApplicationConfiguration.Initialize();
-            Application.Run(new Form1(db));
+
+            var host = CreateHostBuilder().Build();
+            var form = host.Services.GetRequiredService<Form1>();
+            
+            Application.Run(form);
         }
 
-        private static string CreateConnectionString()
+
+        private static IHostBuilder CreateHostBuilder()
         {
-            try
-            {
-                EnvReader.TryLoad("../../../../.env");
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-            
-            var host = Environment.GetEnvironmentVariable("DB_HOST");
-            var port = Environment.GetEnvironmentVariable("DB_PORT");
-            var username = Environment.GetEnvironmentVariable("DB_USER");
-            var password = Environment.GetEnvironmentVariable("DB_PASSWORD");
-            var database = Environment.GetEnvironmentVariable("DB_NAME");
-            return $"Host={host};Port={port};Username={username};" +
-                                    $"Password={password};Database={database}";
+            return Host.CreateDefaultBuilder()
+                .ConfigureServices((provider, services) =>
+                {
+                    services.AddSingleton<IConnectionStringBuilder, ConnectionStringBuilder>();
+                    services.AddSingleton<IEnvReader, EnvReader>();
+                    services.AddDbContext<AppDbContext>((provider, options) =>
+                    {
+                        var connectionStringBuilder = provider.GetRequiredService<IConnectionStringBuilder>();
+                        options.UseNpgsql(connectionStringBuilder.CreateConnectionString());
+                    });
+
+                    services.AddTransient<IUserRepository, UserRepository>();
+                    services.AddTransient<Form1>();
+                });
         }
     }
 }

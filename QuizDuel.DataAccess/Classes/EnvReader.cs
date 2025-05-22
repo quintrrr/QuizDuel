@@ -5,17 +5,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace QuizDuel.DataAccess
+namespace QuizDuel.DataAccess.Classes
 {
     /// <summary>
     /// Вспомогательный класс для чтения переменных окружения из файла .env
     /// </summary>
-    public class EnvReader
+    public class EnvReader : IEnvReader
     {
         /// <summary>
         /// Загружает переменные окружения из указанного файла
         /// </summary>
-        public static bool TryLoad(string filePath)
+        public bool TryLoad(string filePath)
         {
             if (!File.Exists(filePath))
             {

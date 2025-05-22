@@ -3,26 +3,28 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Design;
-using QuizDuel.DataAccess.Classes;
 
-namespace QuizDuel.DataAccess
+namespace QuizDuel.DataAccess.Classes
 {
-    class AppDbContextFactory : IDesignTimeDbContextFactory<AppDbContext>
+    public class ConnectionStringBuilder : IConnectionStringBuilder
     {
-        public AppDbContext CreateDbContext(string[] args)
+        private readonly IEnvReader _envReader;
+
+        public ConnectionStringBuilder(IEnvReader envReader)
         {
-            var optionsBuilder = new DbContextOptionsBuilder<AppDbContext>();
-            optionsBuilder.UseNpgsql(CreateConnectionString());
-            return new AppDbContext(optionsBuilder.Options);
+            _envReader = envReader;
         }
 
-        
-        private static string CreateConnectionString()
+        public string CreateConnectionString()
         {
-            var envReader = new EnvReader();
-            envReader.TryLoad("../../../../.env");
+            try
+            {
+                _envReader.TryLoad("../../../../.env");
+            }
+            catch (Exception ex)
+            {
+            }
+
             var host = Environment.GetEnvironmentVariable("DB_HOST");
             var port = Environment.GetEnvironmentVariable("DB_PORT");
             var username = Environment.GetEnvironmentVariable("DB_USER");
