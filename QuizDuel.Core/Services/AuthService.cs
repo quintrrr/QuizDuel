@@ -29,9 +29,36 @@ namespace QuizDuel.Core.Services
             _passwordService = passwordService;
         }
 
-        public Task LoginAsync(LoginDTO loginDTO)
+        public async Task LoginAsync(LoginDTO loginDTO)
         {
-            throw new NotImplementedException();
+            if (!IsUsernameEmpty(loginDTO.Username))
+            {
+                _errorService.SendError("Заполните имя пользователя");
+                return;
+            }
+            try
+            {
+                var user = await _userRepository.GetByUsername(loginDTO.Username);
+
+                if (user == null)
+                {
+                    _errorService.SendError("Такого пользователя не существует");
+                    return;
+                }
+
+                var inputHash = _passwordService.HashPassword(loginDTO.Password, user.Salt);
+
+                if (inputHash != user.PasswordHash)
+                {
+                    _errorService.SendError("Неверный пароль");
+                    return;
+                }
+            }
+            catch (Exception ex)
+            {
+                _errorService.SendError(ex.Message);
+            }
+
         }
 
         public async Task RegisterAsync(RegisterDTO registerDTO)
@@ -67,5 +94,10 @@ namespace QuizDuel.Core.Services
                 _errorService.SendError(ex.Message);
             }
         }        
+
+        private bool IsUsernameEmpty(string username)
+        {
+            return string.IsNullOrEmpty(username);
+        }
     }
 }
