@@ -13,12 +13,9 @@ namespace QuizDuel.DataAccess.Classes
 
         public string CreateConnectionString()
         {
-            try
+            if (!_envReader.TryLoad("../../../../.env"))
             {
-                _envReader.TryLoad("../../../../.env");
-            }
-            catch (Exception ex)
-            {
+                throw new Exception("Не удалось загрузить данные из файла .env");
             }
 
             var host = Environment.GetEnvironmentVariable("DB_HOST");

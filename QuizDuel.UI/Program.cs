@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -43,7 +44,16 @@ namespace QuizDuel.UI
                     services.AddDbContext<AppDbContext>((provider, options) =>
                     {
                         var connectionStringBuilder = provider.GetRequiredService<IConnectionStringBuilder>();
-                        options.UseNpgsql(connectionStringBuilder.CreateConnectionString());
+
+                        try
+                        {
+                            options.UseNpgsql(connectionStringBuilder.CreateConnectionString());
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show(ex.Message);
+                            Process.GetCurrentProcess().Kill();
+                        }
                     });
 
                     services.AddTransient<IUserRepository, UserRepository>();

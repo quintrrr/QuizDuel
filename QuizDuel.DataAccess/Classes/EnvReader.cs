@@ -15,7 +15,6 @@ namespace QuizDuel.DataAccess.Classes
         {
             if (!File.Exists(filePath))
             {
-                Process.GetCurrentProcess().Kill();
                 return false;
             }
 
