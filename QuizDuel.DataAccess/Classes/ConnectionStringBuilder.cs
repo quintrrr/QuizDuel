@@ -1,4 +1,6 @@
-﻿namespace QuizDuel.DataAccess.Classes
+﻿using QuizDuel.DataAccess.Interfaces;
+
+namespace QuizDuel.DataAccess.Classes
 {
     public class ConnectionStringBuilder : IConnectionStringBuilder
     {

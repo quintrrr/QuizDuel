@@ -1,5 +1,6 @@
 ﻿using System.Security.Cryptography;
 using System.Text;
+using QuizDuel.Core.Interfaces;
 
 namespace QuizDuel.Core.Services
 {

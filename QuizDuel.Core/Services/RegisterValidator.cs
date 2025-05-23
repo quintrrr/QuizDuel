@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using QuizDuel.Core.DTO;
+using QuizDuel.Core.Interfaces;
 using QuizDuel.DataAccess.Repositories;
 
 namespace QuizDuel.Core.Services

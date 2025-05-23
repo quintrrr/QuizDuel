@@ -1,9 +1,11 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using QuizDuel.Core.Interfaces;
 using QuizDuel.Core.Services;
 using QuizDuel.DataAccess;
 using QuizDuel.DataAccess.Classes;
+using QuizDuel.DataAccess.Interfaces;
 using QuizDuel.DataAccess.Repositories;
 using QuizDuel.UI.Classes;
 

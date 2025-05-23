@@ -1,5 +1,5 @@
 using QuizDuel.Core.DTO;
-using QuizDuel.Core.Services;
+using QuizDuel.Core.Interfaces;
 using QuizDuel.DataAccess;
 using QuizDuel.DataAccess.Repositories;
 

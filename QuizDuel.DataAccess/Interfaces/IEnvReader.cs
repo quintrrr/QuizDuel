@@ -1,4 +1,4 @@
-﻿namespace QuizDuel.DataAccess.Classes
+﻿namespace QuizDuel.DataAccess.Interfaces
 {
     public interface IEnvReader
     {

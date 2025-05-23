@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics;
+using QuizDuel.DataAccess.Interfaces;
 
 namespace QuizDuel.DataAccess.Classes
 {
