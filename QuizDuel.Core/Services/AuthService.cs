@@ -32,7 +32,7 @@ namespace QuizDuel.Core.Services
 
             if (!IsUsernameEmpty(loginDTO.Username))
             {
-                result.MessageKeys.Add("Заполните имя пользователя");
+                result.MessageKeys.Add("Login.EmptyUsername");
                 return result;
             }
             try
@@ -41,7 +41,7 @@ namespace QuizDuel.Core.Services
 
                 if (user == null)
                 {
-                    result.MessageKeys.Add("Такого пользователя не существует");
+                    result.MessageKeys.Add("Login.NonExistingUser");
                     return result;
                 }
 
@@ -49,7 +49,7 @@ namespace QuizDuel.Core.Services
 
                 if (inputHash != user.PasswordHash)
                 {
-                    result.MessageKeys.Add("Неверный пароль");
+                    result.MessageKeys.Add("Login.WrongPassword");
                     return result;
                 }
 
@@ -67,16 +67,16 @@ namespace QuizDuel.Core.Services
         {
             var result = new OperationResultDTO();
 
-            if (!_registerValidator.ValidateInput(registerDTO, out string errorMessage))
+            if (!_registerValidator.ValidateInput(registerDTO, out List<string> errorMessages))
             {
-                result.MessageKeys.Add(errorMessage);
+                result.MessageKeys.AddRange(errorMessages);
                 return result;
             }
             try
             {
                 if (await _userRepository.IsUserExistsByUsername(registerDTO.Username))
                 {
-                    result.MessageKeys.Add("Такой пользователь уже существует.");
+                    result.MessageKeys.Add("Register.ExistingUser");
                     return result;
                 }
 

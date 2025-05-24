@@ -34,14 +34,16 @@ namespace QuizDuel.UI
             };
 
             var result = await _authService.RegisterAsync(registerDTO);
+            var message = string.Join("\n", result.MessageKeys
+                .Select(k => Resources.ResourceManager.GetString(k) ?? k));
 
             if (!result.Success)
             {
-                _notificationService.ShowError(string.Join("\n", result.MessageKeys));
+                _notificationService.ShowError(message);
             }
             else
             {
-                _notificationService.ShowSuccess("Регистрация прошла успешно");
+                _notificationService.ShowSuccess(Resources.Register_Successful);
             }
         }
     }

@@ -11,12 +11,12 @@ namespace QuizDuel.UI.Classes
     {
         public void ShowError(string message)
         {
-           MessageBox.Show(message, "ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+           MessageBox.Show(message, Resources.Notification_Error, MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
         public void ShowSuccess(string message)
         {
-            MessageBox.Show(message, "успешно", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show(message, Resources.Notification_Success, MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
     }
 }

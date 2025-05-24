@@ -8,6 +8,6 @@ namespace QuizDuel.Core.Interfaces
 {
     public interface IPasswordValidator
     {
-        bool ValidatePassword(string password, out string errorMessage);
+        bool ValidatePassword(string password, out List<string> errorMessages);
     }
 }

@@ -9,6 +9,6 @@ namespace QuizDuel.Core.Interfaces
 {
     public interface IRegisterValidator
     {
-        bool ValidateInput(RegisterDTO registerDTO, out string errorMessage);
+        bool ValidateInput(RegisterDTO registerDTO, out List<string> errorMessage);
     }
 }

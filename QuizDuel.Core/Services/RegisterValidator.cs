@@ -18,48 +18,46 @@ namespace QuizDuel.Core.Services
             _passwordValidator = passwordValidator;
         }
 
-        public bool ValidateInput(RegisterDTO registerDTO, out string errorMessage)
+        public bool ValidateInput(RegisterDTO registerDTO, out List<string> errorMessages)
         {
-            var errorMessages = new List<string>();
+            errorMessages = [];
 
             if (string.IsNullOrEmpty(registerDTO.Username.Trim()))
             {
-                errorMessages.Add("Заполните имя пользователя");
+                errorMessages.Add("Register.EmptyUsername");
             }
             if (string.IsNullOrEmpty(registerDTO.Password.Trim()))
             {
-                errorMessages.Add("Введите пароль");
+                errorMessages.Add("Register.EmptyPassword");
             }
             if (string.IsNullOrEmpty(registerDTO.RepeatPassword.Trim()))
             {
-                errorMessages.Add("Введите повторный пароль");
+                errorMessages.Add("Register.EmptyRepeatPassword");
             }
 
             if (errorMessages.Count > 0)
             {
-                errorMessage = string.Join("\n", errorMessages);
                 return false;
             }
 
             if (CalculateAge(registerDTO.Birthdate) < 4)
             {
-                errorMessage = "Вам должно быть не меньше 4 лет";
+                errorMessages.Add("Register.InvalidAge");
                 return false;
             }
 
             if (registerDTO.Password != registerDTO.RepeatPassword)
             {
-                errorMessage = "Пароли должны совпадать";
+                errorMessages.Add("Register.InvalidRepeatPassword");
                 return false;
             }
 
-            if (!_passwordValidator.ValidatePassword(registerDTO.Password, out string passwordErrorMessage))
+            if (!_passwordValidator.ValidatePassword(registerDTO.Password, out List<string> passwordErrorMessage))
             {
-                errorMessage = passwordErrorMessage;
+                errorMessages.AddRange(passwordErrorMessage);
                 return false;
             }
 
-            errorMessage = string.Empty;
             return true;
         }
 

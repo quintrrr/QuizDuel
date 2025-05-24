@@ -10,45 +10,43 @@ namespace QuizDuel.Core.Services
 {
     public class PasswordValidator: IPasswordValidator
     {
-        public bool ValidatePassword(string password, out string errorMessage)
+        public bool ValidatePassword(string password, out List<string> errorMessages)
         {
-            var errorMessages = new List<string>();
+            errorMessages = [];
 
             var hasNumber = new Regex(@"[0-9]+");
             var hasUpperChar = new Regex(@"[A-Z]+");
             var hasMiniMaxChars = new Regex(@".{8,20}");
             var hasLowerChar = new Regex(@"[a-z]+");
             var hasSymbols = new Regex(@"[!@#$%^&*()_+=\[{\]};:<>|./?,-]");
+            var isLatinOnly = new Regex(@"^[\x21-\x7E]+$");
 
             if (!hasMiniMaxChars.IsMatch(password))
             {
-                errorMessages.Add("Пароль должен быть не менее 8 и не более 20 символов.");
+                errorMessages.Add("Password.MinMaxChar");
             }
             if (!hasLowerChar.IsMatch(password))
             {
-                errorMessages.Add("Пароль должен содержать хотя бы одну строчную букву.");
+                errorMessages.Add("Password.HasLowerChar");
             }
             if (!hasUpperChar.IsMatch(password))
             {
-                errorMessages.Add("Пароль должен содержать хотя бы одну заглавную букву.");
+                errorMessages.Add("Password.HasUpperChar");
             }
             if (!hasNumber.IsMatch(password))
             {
-                errorMessages.Add("Пароль должен содержать хотя бы одну цифру.");
+                errorMessages.Add("Password.HasNumber");
             }
             if (!hasSymbols.IsMatch(password))
             {
-                errorMessages.Add("Пароль должен содержать хотя бы один специальный символ.");
+                errorMessages.Add("Password.HasSymbols");
             }
-
-            if (errorMessages.Count > 0)
+            if (!isLatinOnly.IsMatch(password))
             {
-                errorMessage = string.Join("\n", errorMessages);
-                return false;
+                errorMessages.Add("Password.IsLatinOnly");
             }
 
-            errorMessage = string.Empty;
-            return true;
+            return errorMessages.Count == 0;
         }
     }
 }
