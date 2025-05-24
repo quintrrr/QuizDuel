@@ -12,13 +12,13 @@ namespace QuizDuel.Core.Services
 {
     public class AuthService : IAuthService
     {
-        private readonly IErrorService _errorService;
+        private readonly INotificationService _errorService;
         private readonly IRegisterValidator _registerValidator;
         private readonly IUserRepository _userRepository;
         private readonly IPasswordService _passwordService;
 
         public AuthService(
-            IErrorService errorService,
+            INotificationService errorService,
             IRegisterValidator registerValidator,
             IUserRepository userRepository,
             IPasswordService passwordService)
@@ -33,7 +33,7 @@ namespace QuizDuel.Core.Services
         {
             if (!IsUsernameEmpty(loginDTO.Username))
             {
-                _errorService.SendError("Заполните имя пользователя");
+                _errorService.ShowError("Заполните имя пользователя");
                 return;
             }
             try
@@ -42,7 +42,7 @@ namespace QuizDuel.Core.Services
 
                 if (user == null)
                 {
-                    _errorService.SendError("Такого пользователя не существует");
+                    _errorService.ShowError("Такого пользователя не существует");
                     return;
                 }
 
@@ -50,13 +50,13 @@ namespace QuizDuel.Core.Services
 
                 if (inputHash != user.PasswordHash)
                 {
-                    _errorService.SendError("Неверный пароль");
+                    _errorService.ShowError("Неверный пароль");
                     return;
                 }
             }
             catch (Exception ex)
             {
-                _errorService.SendError(ex.Message);
+                _errorService.ShowError(ex.Message);
             }
 
         }
@@ -65,14 +65,14 @@ namespace QuizDuel.Core.Services
         {
             if (!_registerValidator.ValidateInput(registerDTO, out string errorMessage))
             {
-                _errorService.SendError(errorMessage);
+                _errorService.ShowError(errorMessage);
                 return;
             }
             try
             {
                 if (await _userRepository.IsUserExistsByUsername(registerDTO.Username))
                 {
-                    _errorService.SendError("Такой пользователь уже существует.");
+                    _errorService.ShowError("Такой пользователь уже существует.");
                     return;
                 }
 
@@ -91,7 +91,7 @@ namespace QuizDuel.Core.Services
             }
             catch (Exception ex)
             {
-                _errorService.SendError(ex.Message);
+                _errorService.ShowError(ex.Message);
             }
         }        
 

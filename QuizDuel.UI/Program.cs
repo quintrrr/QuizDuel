@@ -37,7 +37,7 @@ namespace QuizDuel.UI
                     services.AddSingleton<IConnectionStringBuilder, ConnectionStringBuilder>();
                     services.AddSingleton<IEnvReader, EnvReader>();
                     services.AddSingleton<IPasswordService, PasswordService>();
-                    services.AddSingleton<IErrorService, WinFormsErrorService>();
+                    services.AddSingleton<INotificationService, WinFormsNotificationService>();
                     services.AddSingleton<IRegisterValidator, RegisterValidator>();
                     services.AddSingleton<IPasswordValidator, PasswordValidator>();
 

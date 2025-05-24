@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 
 namespace QuizDuel.Core.Interfaces
 {
-    public interface IErrorService
+    public interface INotificationService
     {
-        void SendError(string message);
+        void ShowError(string message);
+        void ShowSuccess(string message);
     }
 }
