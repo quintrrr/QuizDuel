@@ -11,7 +11,7 @@ namespace QuizDuel.UI.Classes
     {
         public void ShowError(string message)
         {
-            MessageBox.Show(message, "ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+           MessageBox.Show(message, "ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
         public void ShowSuccess(string message)

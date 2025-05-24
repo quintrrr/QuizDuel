@@ -9,7 +9,7 @@ namespace QuizDuel.Core.Interfaces
 {
     public interface IAuthService
     {
-        Task RegisterAsync(RegisterDTO registerDTO);
-        Task LoginAsync(LoginDTO loginDTO);
+        Task<OperationResultDTO> RegisterAsync(RegisterDTO registerDTO);
+        Task<OperationResultDTO> LoginAsync(LoginDTO loginDTO);
     }
 }

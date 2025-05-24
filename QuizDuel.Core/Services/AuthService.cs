@@ -12,29 +12,28 @@ namespace QuizDuel.Core.Services
 {
     public class AuthService : IAuthService
     {
-        private readonly INotificationService _errorService;
         private readonly IRegisterValidator _registerValidator;
         private readonly IUserRepository _userRepository;
         private readonly IPasswordService _passwordService;
 
         public AuthService(
-            INotificationService errorService,
             IRegisterValidator registerValidator,
             IUserRepository userRepository,
             IPasswordService passwordService)
         {
-            _errorService = errorService;
             _registerValidator = registerValidator;
             _userRepository = userRepository;
             _passwordService = passwordService;
         }
 
-        public async Task LoginAsync(LoginDTO loginDTO)
+        public async Task<OperationResultDTO> LoginAsync(LoginDTO loginDTO)
         {
+            var result = new OperationResultDTO();
+
             if (!IsUsernameEmpty(loginDTO.Username))
             {
-                _errorService.ShowError("Заполните имя пользователя");
-                return;
+                result.MessageKeys.Add("Заполните имя пользователя");
+                return result;
             }
             try
             {
@@ -42,38 +41,43 @@ namespace QuizDuel.Core.Services
 
                 if (user == null)
                 {
-                    _errorService.ShowError("Такого пользователя не существует");
-                    return;
+                    result.MessageKeys.Add("Такого пользователя не существует");
+                    return result;
                 }
 
                 var inputHash = _passwordService.HashPassword(loginDTO.Password, user.Salt);
 
                 if (inputHash != user.PasswordHash)
                 {
-                    _errorService.ShowError("Неверный пароль");
-                    return;
+                    result.MessageKeys.Add("Неверный пароль");
+                    return result;
                 }
+
+                result.Success = true;
+                return result;
             }
             catch (Exception ex)
             {
-                _errorService.ShowError(ex.Message);
+                result.MessageKeys.Add(ex.Message);
+                return result;
             }
-
         }
 
-        public async Task RegisterAsync(RegisterDTO registerDTO)
+        public async Task<OperationResultDTO> RegisterAsync(RegisterDTO registerDTO)
         {
+            var result = new OperationResultDTO();
+
             if (!_registerValidator.ValidateInput(registerDTO, out string errorMessage))
             {
-                _errorService.ShowError(errorMessage);
-                return;
+                result.MessageKeys.Add(errorMessage);
+                return result;
             }
             try
             {
                 if (await _userRepository.IsUserExistsByUsername(registerDTO.Username))
                 {
-                    _errorService.ShowError("Такой пользователь уже существует.");
-                    return;
+                    result.MessageKeys.Add("Такой пользователь уже существует.");
+                    return result;
                 }
 
                 var salt = _passwordService.GenerateSalt();
@@ -88,10 +92,13 @@ namespace QuizDuel.Core.Services
                 };
 
                 await _userRepository.AddUser(newUser);
+                result.Success = true;
+                return result;
             }
             catch (Exception ex)
             {
-                _errorService.ShowError(ex.Message);
+                result.MessageKeys.Add(ex.Message);
+                return result;
             }
         }        
 

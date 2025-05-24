@@ -1,4 +1,4 @@
-using QuizDuel.Core.DTO;
+﻿using QuizDuel.Core.DTO;
 using QuizDuel.Core.Interfaces;
 using QuizDuel.DataAccess;
 using QuizDuel.DataAccess.Repositories;
@@ -9,17 +9,21 @@ namespace QuizDuel.UI
     {
         private readonly AppDbContext _db;
         private readonly IAuthService _authService;
-        
+        private readonly INotificationService _notificationService;
 
-        public Form1(AppDbContext db, IAuthService authService)
+        public Form1(
+            AppDbContext db,
+            IAuthService authService,
+            INotificationService notificationService)
         {
             _db = db;
             _authService = authService;
+            _notificationService = notificationService;
 
             InitializeComponent();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private async void button1_Click(object sender, EventArgs e)
         {
             var registerDTO = new RegisterDTO
             {
@@ -28,7 +32,17 @@ namespace QuizDuel.UI
                 Password = textBox2.Text,
                 RepeatPassword = textBox3.Text,
             };
-            _authService.RegisterAsync(registerDTO);
+
+            var result = await _authService.RegisterAsync(registerDTO);
+
+            if (!result.Success)
+            {
+                _notificationService.ShowError(string.Join("\n", result.MessageKeys));
+            }
+            else
+            {
+                _notificationService.ShowSuccess("Регистрация прошла успешно");
+            }
         }
     }
 }
