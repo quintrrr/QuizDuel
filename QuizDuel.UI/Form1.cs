@@ -1,7 +1,7 @@
-﻿using QuizDuel.Core.DTO;
+﻿using Castle.Core.Logging;
+using QuizDuel.Core.DTO;
 using QuizDuel.Core.Interfaces;
 using QuizDuel.DataAccess;
-using QuizDuel.DataAccess.Repositories;
 
 namespace QuizDuel.UI
 {
@@ -10,21 +10,25 @@ namespace QuizDuel.UI
         private readonly AppDbContext _db;
         private readonly IAuthService _authService;
         private readonly INotificationService _notificationService;
+        private readonly ILogger _logger;
 
         public Form1(
             AppDbContext db,
             IAuthService authService,
-            INotificationService notificationService)
+            INotificationService notificationService,
+            ILogger logger)
         {
             _db = db;
             _authService = authService;
             _notificationService = notificationService;
+            _logger = logger;
 
             InitializeComponent();
         }
 
         private async void button1_Click(object sender, EventArgs e)
         {
+
             var registerDTO = new RegisterDTO
             {
                 Username = textBox1.Text,
@@ -39,10 +43,12 @@ namespace QuizDuel.UI
 
             if (!result.Success)
             {
+                _logger.Info("Успех");
                 _notificationService.ShowError(message);
             }
             else
             {
+                _logger.Info("Не_успех");
                 _notificationService.ShowSuccess(Resources.Register_Successful);
             }
         }

@@ -1,5 +1,7 @@
 using System.Diagnostics;
+using Castle.Facilities.Logging;
 using Castle.MicroKernel.Registration;
+using Castle.Services.Logging.NLogIntegration;
 using Castle.Windsor;
 using Microsoft.EntityFrameworkCore;
 using QuizDuel.Core.Interfaces;
@@ -90,6 +92,10 @@ namespace QuizDuel.UI
 
                 Component.For<Form1>()
                 .LifestyleTransient()
+            );
+
+            container.AddFacility<LoggingFacility>(f => 
+                f.LogUsing<NLogFactory>()
             );
         }
     }
