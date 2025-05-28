@@ -73,15 +73,24 @@ namespace QuizDuel.UI
 
             try
             {
-                var options = new DbContextOptionsBuilder<GameDbContext>()
-                    .UseNpgsql(connectionStringBuilder.CreateConnectionString()).Options;
+                var gameOptions = new DbContextOptionsBuilder<GameDbContext>()
+                    .UseNpgsql(connectionStringBuilder.CreateGameConnectionString()).Options;
+                
+                var questionsOptions = new DbContextOptionsBuilder<QuestionsDbContext>()
+                    .UseNpgsql(connectionStringBuilder.CreateQuestionsConnectionString()).Options;
 
                 container.Register(
                     Component.For<DbContextOptions<GameDbContext>>()
-                    .Instance(options)
+                    .Instance(gameOptions)
                     .LifestyleSingleton(),
 
-                    Component.For<GameDbContext>().LifestyleSingleton()
+                    Component.For<DbContextOptions<QuestionsDbContext>>()
+                    .Instance(questionsOptions)
+                    .LifestyleSingleton(),
+
+                    Component.For<GameDbContext>().LifestyleSingleton(),
+
+                    Component.For<QuestionsDbContext>().LifestyleSingleton()
                 );
             }
             catch (Exception ex)
