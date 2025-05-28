@@ -1,6 +1,6 @@
 ﻿using QuizDuel.DataAccess.Models;
 
-namespace QuizDuel.DataAccess.Repositories
+namespace QuizDuel.DataAccess.Interfaces
 { 
     public interface IUserRepository
     {
