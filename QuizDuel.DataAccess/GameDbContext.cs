@@ -7,7 +7,7 @@ namespace QuizDuel.DataAccess
     /// <summary>
     /// Контекст базы данных приложения, содержащий DbSet и конфигурации сущностей.
     /// </summary>
-    public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(options)
+    public class GameDbContext(DbContextOptions<GameDbContext> options) : DbContext(options)
     {
         public DbSet<User> Users { get; set; }
 

@@ -5,9 +5,9 @@ namespace QuizDuel.DataAccess.Repositories
 {
     public class UserRepository : IUserRepository
     {
-        private readonly AppDbContext _db;
+        private readonly GameDbContext _db;
 
-        public UserRepository(AppDbContext db)
+        public UserRepository(GameDbContext db)
         {
             _db = db;
         }

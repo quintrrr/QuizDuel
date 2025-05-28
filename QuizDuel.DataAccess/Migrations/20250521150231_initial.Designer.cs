@@ -11,7 +11,7 @@ using QuizDuel.DataAccess;
 
 namespace QuizDuel.DataAccess.Migrations
 {
-    [DbContext(typeof(AppDbContext))]
+    [DbContext(typeof(GameDbContext))]
     [Migration("20250521150231_initial")]
     partial class initial
     {

@@ -10,13 +10,13 @@ namespace QuizDuel.UI
     /// </summary>
     public partial class Form1 : Form
     {
-        private readonly AppDbContext _db;
+        private readonly GameDbContext _db;
         private readonly IAuthService _authService;
         private readonly INotificationService _notificationService;
         private readonly ILogger _logger;
 
         public Form1(
-            AppDbContext db,
+            GameDbContext db,
             IAuthService authService,
             INotificationService notificationService,
             ILogger logger)
