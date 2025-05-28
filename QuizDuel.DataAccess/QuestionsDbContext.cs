@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using QuizDuel.DataAccess.Configurations;
 using QuizDuel.DataAccess.Models;
 
 namespace QuizDuel.DataAccess

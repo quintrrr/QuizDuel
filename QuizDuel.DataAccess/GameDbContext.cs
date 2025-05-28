@@ -14,6 +14,10 @@ namespace QuizDuel.DataAccess
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new UserConfiguration());
+            modelBuilder.ApplyConfiguration(new GameConfiguration());
+            modelBuilder.ApplyConfiguration(new PlayerAnswerConfiguration());
+            modelBuilder.ApplyConfiguration(new RoundConfiguration());
+            modelBuilder.ApplyConfiguration(new RoundQuestionConfiguration());
 
             base.OnModelCreating(modelBuilder);
         }

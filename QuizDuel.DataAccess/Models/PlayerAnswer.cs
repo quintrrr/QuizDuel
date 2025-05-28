@@ -7,7 +7,7 @@ namespace QuizDuel.DataAccess.Models
     /// Сущность ответа игрока, представляющая данные из таблицы playerAnswers.
     /// </summary>]
     [Table("playerAnswers")]
-    public class PlayerAnswers
+    public class PlayerAnswer
     {
         [Key]
         [Column("id")]
