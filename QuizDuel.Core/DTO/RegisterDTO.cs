@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace QuizDuel.Core.DTO
+﻿namespace QuizDuel.Core.DTO
 {
+    /// <summary>
+    /// Объект передачи данных для регистрации нового пользователя.
+    /// </summary>
     public class RegisterDTO
     {
         public string Username { get; set; } = string.Empty;

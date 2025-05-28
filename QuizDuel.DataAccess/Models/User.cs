@@ -3,6 +3,9 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace QuizDuel.DataAccess.Models
 {
+    /// <summary>
+    /// Сущность пользователя, представляющая данные из таблицы users.
+    /// </summary>
     [Table("users")]
     public class User
     {

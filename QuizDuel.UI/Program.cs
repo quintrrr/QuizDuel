@@ -1,4 +1,4 @@
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using Castle.Facilities.Logging;
 using Castle.MicroKernel.Registration;
 using Castle.Services.Logging.NLogIntegration;
@@ -14,10 +14,13 @@ using QuizDuel.UI.Classes;
 
 namespace QuizDuel.UI
 {
+    /// <summary>
+    /// Главная точка входа в -приложение.
+    /// </summary>
     internal static class Program
     {
         /// <summary>
-        ///  The main entry point for the application.
+        /// Точка входа приложения.
         /// </summary>
         [STAThread]
         static void Main()
@@ -31,9 +34,15 @@ namespace QuizDuel.UI
             Application.Run(form);
         }
 
-
+        /// <summary>
+        /// Регистрирует все зависимости в контейнере Castle Windsor.
+        /// </summary>
         private static void ConfigureContainer(IWindsorContainer container)
         {
+            container.AddFacility<LoggingFacility>(f => 
+                f.LogUsing<NLogFactory>()
+            );
+
             container.Register(
                 Component.For<IConnectionStringBuilder>()
                 .ImplementedBy<ConnectionStringBuilder>()
@@ -92,10 +101,6 @@ namespace QuizDuel.UI
 
                 Component.For<Form1>()
                 .LifestyleTransient()
-            );
-
-            container.AddFacility<LoggingFacility>(f => 
-                f.LogUsing<NLogFactory>()
             );
         }
     }

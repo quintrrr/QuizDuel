@@ -1,20 +1,30 @@
-﻿using QuizDuel.DataAccess.Interfaces;
+﻿using Castle.Core.Logging;
+using QuizDuel.DataAccess.Interfaces;
 
 namespace QuizDuel.DataAccess.Classes
 {
+    /// <summary>
+    /// Сервис для построения строки подключения к базе данных на основе переменных окружения.
+    /// </summary>
     public class ConnectionStringBuilder : IConnectionStringBuilder
     {
         private readonly IEnvReader _envReader;
+        private readonly ILogger _logger;
 
-        public ConnectionStringBuilder(IEnvReader envReader)
+        public ConnectionStringBuilder(IEnvReader envReader, ILogger logger)
         {
             _envReader = envReader;
+            _logger = logger;
         }
 
+        /// <summary>
+        /// Создаёт строку подключения к базе данных, загружая параметры из файла .env.
+        /// </summary>
         public string CreateConnectionString()
         {
             if (!_envReader.TryLoad("../../../../.env"))
             {
+                _logger.Fatal($"Не удалось загрузить файл .env");
                 throw new Exception("Не удалось загрузить данные из файла .env");
             }
 
@@ -23,6 +33,9 @@ namespace QuizDuel.DataAccess.Classes
             var username = Environment.GetEnvironmentVariable("DB_USER");
             var password = Environment.GetEnvironmentVariable("DB_PASSWORD");
             var database = Environment.GetEnvironmentVariable("DB_NAME");
+
+            _logger.Debug("Переменные окружения успешно загружены из .env.");
+
             return $"Host={host};Port={port};Username={username};" +
                                     $"Password={password};Database={database}";
         }

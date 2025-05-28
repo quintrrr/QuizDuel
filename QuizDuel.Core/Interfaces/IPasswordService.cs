@@ -1,15 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace QuizDuel.Core.Interfaces
+﻿namespace QuizDuel.Core.Interfaces
 {
+    /// <summary>
+    /// Интерфейс сервиса для работы с паролями и хэшированием.
+    /// </summary>
     public interface IPasswordService
     {
+        /// <summary>
+        /// Генерирует криптографическую соль.
+        /// </summary>
         string GenerateSalt();
-
+        /// <summary>
+        /// Вычисляет хэш пароля с использованием указанной соли.
+        /// </summary>
         string HashPassword(string password, string salt);
     }
 }

@@ -1,14 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using QuizDuel.Core.DTO;
+﻿using QuizDuel.Core.DTO;
 
 namespace QuizDuel.Core.Interfaces
 {
+    /// <summary>
+    /// Интерфейс сервиса для проверки данных регистрации пользователя.
+    /// </summary>
     public interface IRegisterValidator
     {
+        /// <summary>
+        /// Проверяет корректность введённых данных при регистрации.
+        /// </summary>
         bool ValidateInput(RegisterDTO registerDTO, out List<string> errorMessage);
     }
 }

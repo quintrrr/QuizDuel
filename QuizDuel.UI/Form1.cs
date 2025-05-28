@@ -5,6 +5,9 @@ using QuizDuel.DataAccess;
 
 namespace QuizDuel.UI
 {
+    /// <summary>
+    /// Главная форма пользовательского интерфейса с обработкой регистрации.
+    /// </summary>
     public partial class Form1 : Form
     {
         private readonly AppDbContext _db;
@@ -26,6 +29,9 @@ namespace QuizDuel.UI
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Обрабатывает нажатие кнопки регистрации.
+        /// </summary>
         private async void button1_Click(object sender, EventArgs e)
         {
 
@@ -43,12 +49,12 @@ namespace QuizDuel.UI
 
             if (!result.Success)
             {
-                _logger.Info("Успех");
+                _logger.Warn("Регистрация не удалась.");
                 _notificationService.ShowError(message);
             }
             else
             {
-                _logger.Info("Не_успех");
+                _logger.Info("Пользователь успешно зарегистрирован.");
                 _notificationService.ShowSuccess(Resources.Register_Successful);
             }
         }
