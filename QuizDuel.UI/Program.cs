@@ -1,7 +1,9 @@
-using System.Diagnostics;
+﻿using System.Diagnostics;
+using Castle.Facilities.Logging;
+using Castle.MicroKernel.Registration;
+using Castle.Services.Logging.NLogIntegration;
+using Castle.Windsor;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
 using QuizDuel.Core.Interfaces;
 using QuizDuel.Core.Services;
 using QuizDuel.DataAccess;
@@ -12,54 +14,94 @@ using QuizDuel.UI.Classes;
 
 namespace QuizDuel.UI
 {
+    /// <summary>
+    /// Главная точка входа в -приложение.
+    /// </summary>
     internal static class Program
     {
         /// <summary>
-        ///  The main entry point for the application.
+        /// Точка входа приложения.
         /// </summary>
         [STAThread]
         static void Main()
         {
             ApplicationConfiguration.Initialize();
 
-            var host = CreateHostBuilder().Build();
-            var form = host.Services.GetRequiredService<Form1>();
-            
+            var container = new WindsorContainer();
+            ConfigureContainer(container);
+            var form = container.Resolve<Form1>();
+
             Application.Run(form);
         }
 
-
-        private static IHostBuilder CreateHostBuilder()
+        /// <summary>
+        /// Регистрирует все зависимости в контейнере Castle Windsor.
+        /// </summary>
+        private static void ConfigureContainer(IWindsorContainer container)
         {
-            return Host.CreateDefaultBuilder()
-                .ConfigureServices((provider, services) =>
-                {
-                    services.AddSingleton<IConnectionStringBuilder, ConnectionStringBuilder>();
-                    services.AddSingleton<IEnvReader, EnvReader>();
-                    services.AddSingleton<IPasswordService, PasswordService>();
-                    services.AddSingleton<INotificationService, WinFormsNotificationService>();
-                    services.AddSingleton<IRegisterValidator, RegisterValidator>();
-                    services.AddSingleton<IPasswordValidator, PasswordValidator>();
+            container.AddFacility<LoggingFacility>(f => 
+                f.LogUsing<NLogFactory>()
+            );
 
-                    services.AddDbContext<AppDbContext>((provider, options) =>
-                    {
-                        var connectionStringBuilder = provider.GetRequiredService<IConnectionStringBuilder>();
+            container.Register(
+                Component.For<IConnectionStringBuilder>()
+                .ImplementedBy<ConnectionStringBuilder>()
+                .LifestyleSingleton(),
 
-                        try
-                        {
-                            options.UseNpgsql(connectionStringBuilder.CreateConnectionString());
-                        }
-                        catch (Exception ex)
-                        {
-                            MessageBox.Show(ex.Message);
-                            Process.GetCurrentProcess().Kill();
-                        }
-                    });
+                Component.For<IEnvReader>()
+                .ImplementedBy<EnvReader>()
+                .LifestyleSingleton(),
 
-                    services.AddTransient<IUserRepository, UserRepository>();
-                    services.AddTransient<IAuthService, AuthService>();
-                    services.AddTransient<Form1>();
-                });
+                Component.For<IPasswordService>()
+                .ImplementedBy<PasswordService>()
+                .LifestyleSingleton(),
+                
+                Component.For<INotificationService>()
+                .ImplementedBy<WinFormsNotificationService>()
+                .LifestyleSingleton(),
+                
+                Component.For<IRegisterValidator>()
+                .ImplementedBy<RegisterValidator>()
+                .LifestyleSingleton(),
+                
+                Component.For<IPasswordValidator>()
+                .ImplementedBy<PasswordValidator>()
+                .LifestyleSingleton()
+            );
+
+            var connectionStringBuilder = container.Resolve<IConnectionStringBuilder>();
+
+            try
+            {
+                var options = new DbContextOptionsBuilder<AppDbContext>()
+                    .UseNpgsql(connectionStringBuilder.CreateConnectionString()).Options;
+
+                container.Register(
+                    Component.For<DbContextOptions<AppDbContext>>()
+                    .Instance(options)
+                    .LifestyleSingleton(),
+
+                    Component.For<AppDbContext>().LifestyleSingleton()
+                );
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                Process.GetCurrentProcess().Kill();
+            }
+
+            container.Register(
+                Component.For<IUserRepository>()
+                .ImplementedBy<UserRepository>()
+                .LifestyleTransient(),
+
+                Component.For<IAuthService>()
+                .ImplementedBy<AuthService>()
+                .LifestyleTransient(),
+
+                Component.For<Form1>()
+                .LifestyleTransient()
+            );
         }
     }
 }

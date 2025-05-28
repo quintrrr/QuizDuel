@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Castle.Core.Logging;
 using QuizDuel.Core.DTO;
 using QuizDuel.Core.Interfaces;
 using QuizDuel.DataAccess.Models;
@@ -10,28 +6,38 @@ using QuizDuel.DataAccess.Repositories;
 
 namespace QuizDuel.Core.Services
 {
+    /// <summary>
+    /// Сервис для регистрации и аутентификации пользователей.
+    /// </summary>
     public class AuthService : IAuthService
     {
         private readonly IRegisterValidator _registerValidator;
         private readonly IUserRepository _userRepository;
         private readonly IPasswordService _passwordService;
+        private readonly ILogger _logger;
 
         public AuthService(
             IRegisterValidator registerValidator,
             IUserRepository userRepository,
-            IPasswordService passwordService)
+            IPasswordService passwordService,
+            ILogger logger)
         {
             _registerValidator = registerValidator;
             _userRepository = userRepository;
             _passwordService = passwordService;
+            _logger = logger;
         }
 
+        /// <summary>
+        /// Выполняет вход пользователя по имени и паролю.
+        /// </summary>
         public async Task<OperationResultDTO> LoginAsync(LoginDTO loginDTO)
         {
             var result = new OperationResultDTO();
 
-            if (!IsUsernameEmpty(loginDTO.Username))
+            if (IsUsernameEmpty(loginDTO.Username))
             {
+                _logger.Warn("Попытка входа с пустым именем пользователя.");
                 result.MessageKeys.Add("Login.EmptyUsername");
                 return result;
             }
@@ -41,6 +47,7 @@ namespace QuizDuel.Core.Services
 
                 if (user == null)
                 {
+                    _logger.Warn($"Пользователь с именем '{loginDTO.Username}' не найден.");
                     result.MessageKeys.Add("Login.NonExistingUser");
                     return result;
                 }
@@ -49,26 +56,34 @@ namespace QuizDuel.Core.Services
 
                 if (inputHash != user.PasswordHash)
                 {
+                    _logger.Warn($"Неверный пароль для пользователя '{loginDTO.Username}'.");
                     result.MessageKeys.Add("Login.WrongPassword");
                     return result;
                 }
 
+                _logger.Info($"Пользователь '{loginDTO.Username}' успешно вошёл в систему.");
                 result.Success = true;
                 return result;
             }
             catch (Exception ex)
             {
+                _logger.Error($"Ошибка при входе пользователя '{loginDTO.Username}': {ex.Message}", ex);
                 result.MessageKeys.Add(ex.Message);
                 return result;
             }
         }
 
+        /// <summary>
+        /// Выполняет регистрацию нового пользователя.
+        /// </summary>
         public async Task<OperationResultDTO> RegisterAsync(RegisterDTO registerDTO)
         {
             var result = new OperationResultDTO();
 
             if (!_registerValidator.ValidateInput(registerDTO, out List<string> errorMessages))
             {
+                _logger.Warn($"Регистрация не прошла валидацию для пользователя '{registerDTO.Username}'." +
+                    $" Ошибки: {string.Join(", ", errorMessages)}");
                 result.MessageKeys.AddRange(errorMessages);
                 return result;
             }
@@ -76,6 +91,8 @@ namespace QuizDuel.Core.Services
             {
                 if (await _userRepository.IsUserExistsByUsername(registerDTO.Username))
                 {
+                    _logger.Warn($"Попытка регистрации с уже существующим " +
+                        $"именем пользователя: '{registerDTO.Username}'.");
                     result.MessageKeys.Add("Register.ExistingUser");
                     return result;
                 }
@@ -92,11 +109,14 @@ namespace QuizDuel.Core.Services
                 };
 
                 await _userRepository.AddUser(newUser);
+                _logger.Info($"Пользователь '{registerDTO.Username}' успешно зарегистрирован.");
                 result.Success = true;
                 return result;
             }
             catch (Exception ex)
             {
+                _logger.Error($"Ошибка при регистрации пользователя " +
+                    $"'{registerDTO.Username}': {ex.Message}", ex);
                 result.MessageKeys.Add(ex.Message);
                 return result;
             }

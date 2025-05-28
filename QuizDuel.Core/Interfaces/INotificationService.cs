@@ -1,14 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace QuizDuel.Core.Interfaces
+﻿namespace QuizDuel.Core.Interfaces
 {
+    /// <summary>
+    /// Интерфейс сервиса отображения уведомлений пользователю.
+    /// </summary>
     public interface INotificationService
     {
+        /// <summary>
+        /// Отображает сообщение об ошибке.
+        /// </summary>
         void ShowError(string message);
+        /// <summary>
+        /// Отображает сообщение об успешной операции.
+        /// </summary>
         void ShowSuccess(string message);
     }
 }

@@ -1,23 +1,26 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Castle.Core.Logging;
 using QuizDuel.Core.DTO;
 using QuizDuel.Core.Interfaces;
-using QuizDuel.DataAccess.Repositories;
 
 namespace QuizDuel.Core.Services
 {
+    /// <summary>
+    /// Сервис для валидации данных при регистрации пользователя.
+    /// </summary>
     public class RegisterValidator : IRegisterValidator
     {
         private readonly IPasswordValidator _passwordValidator;
+        private readonly ILogger _logger;
 
-        public RegisterValidator(IPasswordValidator passwordValidator)
+        public RegisterValidator(IPasswordValidator passwordValidator, ILogger logger)
         {
             _passwordValidator = passwordValidator;
+            _logger = logger;
         }
 
+        /// <summary>
+        /// Проверяет корректность введённых пользователем данных при регистрации.
+        /// </summary>
         public bool ValidateInput(RegisterDTO registerDTO, out List<string> errorMessages)
         {
             errorMessages = [];
@@ -37,33 +40,42 @@ namespace QuizDuel.Core.Services
 
             if (errorMessages.Count > 0)
             {
+                _logger.Warn($"Валидация регистрации не пройдена: {string.Join(", ", errorMessages)}");
                 return false;
             }
 
-            if (CalculateAge(registerDTO.Birthdate) < 4)
+            if (CalculateAge(registerDTO.Birthdate.ToUniversalTime()) < 4)
             {
                 errorMessages.Add("Register.InvalidAge");
+                _logger.Warn("Валидация регистрации: недопустимый возраст.");
                 return false;
             }
 
             if (registerDTO.Password != registerDTO.RepeatPassword)
             {
                 errorMessages.Add("Register.InvalidRepeatPassword");
+                _logger.Warn("Валидация регистрации: пароль и повтор не совпадают.");
                 return false;
             }
 
             if (!_passwordValidator.ValidatePassword(registerDTO.Password, out List<string> passwordErrorMessage))
             {
                 errorMessages.AddRange(passwordErrorMessage);
+                _logger.Warn($"Валидация регистрации: пароль не соответствует требованиям." +
+                    $"Ошибки: {string.Join(", ", passwordErrorMessage)}");
                 return false;
             }
 
+            _logger.Debug("Данные регистрации успешно прошли валидацию.");
             return true;
         }
 
+        /// <summary>
+        /// Вычисляет полный возраст на основе даты рождения.
+        /// </summary>
         private int CalculateAge(DateTime birthdate)
         {
-            DateTime today = DateTime.Today;
+            DateTime today = DateTime.Today.ToUniversalTime();
             int age = today.Year - birthdate.Year;
 
             if (birthdate > today.AddYears(-age))

@@ -1,15 +1,25 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
+﻿using System.Text.RegularExpressions;
+using Castle.Core.Logging;
 using QuizDuel.Core.Interfaces;
 
 namespace QuizDuel.Core.Services
 {
+    /// <summary>
+    /// Сервис для проверки пароля на соответствие требованиям безопасности.
+    /// </summary>
     public class PasswordValidator: IPasswordValidator
     {
+        private readonly ILogger _logger;
+
+        public PasswordValidator(ILogger logger)
+        {
+            _logger = logger;
+        }
+
+        /// <summary>
+        /// Проверяет пароль на наличие всех необходимых признаков:
+        /// длины, регистра, цифр, символов и латинских символов.
+        /// </summary>
         public bool ValidatePassword(string password, out List<string> errorMessages)
         {
             errorMessages = [];
@@ -46,7 +56,14 @@ namespace QuizDuel.Core.Services
                 errorMessages.Add("Password.IsLatinOnly");
             }
 
-            return errorMessages.Count == 0;
+            if (errorMessages.Count == 0)
+            {
+                _logger.Debug("Пароль прошёл проверку.");
+                return true;
+            }
+
+            _logger.Warn($"Пароль не прошёл проверку. Ошибки: {string.Join(", ", errorMessages)}");
+            return false;
         }
     }
 }
