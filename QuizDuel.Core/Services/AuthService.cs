@@ -1,8 +1,8 @@
 ﻿using Castle.Core.Logging;
 using QuizDuel.Core.DTO;
 using QuizDuel.Core.Interfaces;
+using QuizDuel.DataAccess.Interfaces;
 using QuizDuel.DataAccess.Models;
-using QuizDuel.DataAccess.Repositories;
 
 namespace QuizDuel.Core.Services
 {
