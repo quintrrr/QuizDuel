@@ -29,7 +29,7 @@ namespace QuizDuel.UI
 
             var container = new WindsorContainer();
             ConfigureContainer(container);
-            var form = container.Resolve<Form1>();
+            var form = container.Resolve<MainForm>();
 
             Application.Run(form);
         }
@@ -114,6 +114,12 @@ namespace QuizDuel.UI
                 .LifestyleTransient(),
 
                 Component.For<Form1>()
+                .LifestyleTransient(),
+
+                Component.For<LoginForm>()
+                .LifestyleTransient(),
+
+                Component.For<MainForm>()
                 .LifestyleTransient()
             );
         }

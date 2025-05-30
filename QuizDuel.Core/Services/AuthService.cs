@@ -15,17 +15,20 @@ namespace QuizDuel.Core.Services
         private readonly IUserRepository _userRepository;
         private readonly IPasswordService _passwordService;
         private readonly ILogger _logger;
+        private readonly IUserSessionService _userSessionService;
 
         public AuthService(
             IRegisterValidator registerValidator,
             IUserRepository userRepository,
             IPasswordService passwordService,
-            ILogger logger)
+            ILogger logger,
+            IUserSessionService userSessionService)
         {
             _registerValidator = registerValidator;
             _userRepository = userRepository;
             _passwordService = passwordService;
             _logger = logger;
+            _userSessionService = userSessionService;
         }
 
         /// <summary>
@@ -60,6 +63,8 @@ namespace QuizDuel.Core.Services
                     result.MessageKeys.Add("Login.WrongPassword");
                     return result;
                 }
+
+                _userSessionService.SetUser(user.Id);
 
                 _logger.Info($"Пользователь '{loginDTO.Username}' успешно вошёл в систему.");
                 result.Success = true;
