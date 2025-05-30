@@ -66,7 +66,12 @@ namespace QuizDuel.UI
                 
                 Component.For<IPasswordValidator>()
                 .ImplementedBy<PasswordValidator>()
+                .LifestyleSingleton(),
+                
+                Component.For<IUserSessionService>()
+                .ImplementedBy<UserSessionService>()
                 .LifestyleSingleton()
+
             );
 
             var connectionStringBuilder = container.Resolve<IConnectionStringBuilder>();

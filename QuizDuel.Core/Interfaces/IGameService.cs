@@ -6,8 +6,8 @@
     public interface IGameService
     {
         /// <summary>
-        /// Создает новую игру.
+        /// Создает новую игру с одним игроком.
         /// </summary>
-        Task CreateGameAsync(Guid player1Id, Guid player2Id);
+        Task CreateGameAsync(Guid player1Id);
     }
 }

@@ -20,15 +20,14 @@ namespace QuizDuel.Core.Services
         }
 
         /// <summary>
-        /// Создает новую игру и сохраняет ее в базе данных.
+        /// Создает новую игру с одним игроком и сохраняет ее в базе данных.
         /// </summary>
-        public async Task CreateGameAsync(Guid player1Id, Guid player2Id)
+        public async Task CreateGameAsync(Guid player1Id)
         {
             var newGame = new Game
             {
                 Id = Guid.NewGuid(),
                 Player1Id = player1Id,
-                Player2Id = player2Id
             };
             
             for (var i = 0; i < 6; i++)
@@ -45,7 +44,7 @@ namespace QuizDuel.Core.Services
             {
                 await _gameRepository.AddAsync(newGame);
                 _logger.Info($"Создана новая игра с ID {newGame.Id} " +
-                    $"между игроками {player1Id} и {player2Id}.");
+                    $"игроком {player1Id} ");
             }
             catch (Exception ex)
             {
