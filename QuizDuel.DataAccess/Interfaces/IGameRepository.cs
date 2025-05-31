@@ -11,5 +11,12 @@ namespace QuizDuel.DataAccess.Interfaces
         /// Асихронно добавляет игру в базу данных.
         /// </summary>
         Task AddAsync(Game game);
+
+        /// <summary>
+        /// Асихронно удаляет игру из базы данных.
+        /// </summary>
+        Task DeleteAsync(Guid id);
+
+
     }
 }

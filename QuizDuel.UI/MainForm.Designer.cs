@@ -40,6 +40,7 @@
             btnCreateGame.TabIndex = 0;
             btnCreateGame.Text = "Создать игру";
             btnCreateGame.UseVisualStyleBackColor = true;
+            btnCreateGame.Click += BtnCreateGame_Click;
             // 
             // btnJoinGame
             // 
@@ -59,6 +60,7 @@
             Controls.Add(btnCreateGame);
             Name = "MainForm";
             Text = "MainForm";
+            FormClosed += MainForm_FormClosed;
             Load += MainForm_Load;
             ResumeLayout(false);
         }

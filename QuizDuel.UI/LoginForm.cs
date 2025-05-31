@@ -37,6 +37,8 @@ namespace QuizDuel.UI
 
         private async void BtnLogin_ClickAsync(object sender, EventArgs e)
         {
+            btnLogin.Enabled = false;
+
             var loginDTO = new LoginDTO
             {
                 Username = usernameTextBox.Text,
@@ -52,7 +54,6 @@ namespace QuizDuel.UI
             {
                 _logger.Warn("Неудачная попытка входа в аккаунт");
                 _notificationService.ShowError(message);
-
             }
             else
             {
@@ -60,6 +61,8 @@ namespace QuizDuel.UI
                 _logger.Info("Пользователь успешно вошел в аккаут.");
                 _notificationService.ShowSuccess(Resources.Login_Success);
             }
+
+            btnLogin.Enabled = true;
         }
     }
 }

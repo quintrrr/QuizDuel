@@ -120,6 +120,9 @@
   <data name="CreateGameButton" xml:space="preserve">
     <value>Создать игру</value>
   </data>
+  <data name="Game.CreateError" xml:space="preserve">
+    <value>Не удалось создать игру</value>
+  </data>
   <data name="JoinGameButton" xml:space="preserve">
     <value>Присоединиться к игре</value>
   </data>

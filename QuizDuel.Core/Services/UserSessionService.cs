@@ -8,10 +8,10 @@ namespace QuizDuel.Core.Services
     /// </summary>
     public class UserSessionService : IUserSessionService
     {
-        private Guid? _userID;
+        private Guid _userID;
         private readonly ILogger _logger;
 
-        public Guid? UserID => _userID;
+        public Guid UserID => _userID;
 
         public UserSessionService(ILogger logger)
         {

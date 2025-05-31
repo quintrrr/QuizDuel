@@ -10,6 +10,10 @@ namespace QuizDuel.DataAccess
     public class GameDbContext(DbContextOptions<GameDbContext> options) : DbContext(options)
     {
         public DbSet<User> Users { get; set; }
+        public DbSet<Game> Games { get; set; }
+        public DbSet<Round> Rounds { get; set; }
+        public DbSet<RoundQuestion> RoundQuestions { get; set; }
+        public DbSet<PlayerAnswer> PlayerAnswers { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

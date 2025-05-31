@@ -5,7 +5,7 @@
     /// </summary>
     public interface IUserSessionService
     {
-        Guid? UserID { get; }
+        Guid UserID { get; }
 
         /// <summary>
         /// Устанавливает текущего пользователя

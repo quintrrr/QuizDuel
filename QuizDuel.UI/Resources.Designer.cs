@@ -70,6 +70,15 @@ namespace QuizDuel.UI {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Не удалось создать игру.
+        /// </summary>
+        internal static string Game_CreateError {
+            get {
+                return ResourceManager.GetString("Game.CreateError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Присоединиться к игре.
         /// </summary>
         internal static string JoinGameButton {

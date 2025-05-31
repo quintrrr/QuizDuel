@@ -1,4 +1,5 @@
-﻿using QuizDuel.DataAccess.Interfaces;
+﻿using Microsoft.EntityFrameworkCore;
+using QuizDuel.DataAccess.Interfaces;
 using QuizDuel.DataAccess.Models;
 
 namespace QuizDuel.DataAccess.Repositories
@@ -23,5 +24,20 @@ namespace QuizDuel.DataAccess.Repositories
             await _gameDbContext.AddAsync(game);
             await _gameDbContext.SaveChangesAsync();
         }
+
+        /// <summary>
+        /// Асихронно удаляет игру из базы данных.
+        /// </summary>
+        public async Task DeleteAsync(Guid id)
+        {
+            var game = await _gameDbContext.Games.FirstOrDefaultAsync(g => g.Id == id);
+            if (game is not null)
+            {
+                _gameDbContext.Games.Remove(game);
+                await _gameDbContext.SaveChangesAsync();
+            }
+        }
+
+
     }
 }

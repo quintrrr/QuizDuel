@@ -29,9 +29,10 @@ namespace QuizDuel.UI
 
             var container = new WindsorContainer();
             ConfigureContainer(container);
-            var form = container.Resolve<MainForm>();
+            var navigation = container.Resolve<INavigationService>();
+            navigation.NavigateTo<MainForm>();
 
-            Application.Run(form);
+            Application.Run();
         }
 
         /// <summary>
@@ -70,8 +71,15 @@ namespace QuizDuel.UI
                 
                 Component.For<IUserSessionService>()
                 .ImplementedBy<UserSessionService>()
+                .LifestyleSingleton(),
+                
+                Component.For<IGameService>()
+                .ImplementedBy<GameService>()
+                .LifestyleSingleton(),
+                
+                Component.For<INavigationService>()
+                .ImplementedBy<NavigationService>()
                 .LifestyleSingleton()
-
             );
 
             var connectionStringBuilder = container.Resolve<IConnectionStringBuilder>();
@@ -105,8 +113,14 @@ namespace QuizDuel.UI
             }
 
             container.Register(
+                Component.For<IWindsorContainer>().Instance(container),
+
                 Component.For<IUserRepository>()
                 .ImplementedBy<UserRepository>()
+                .LifestyleTransient(),
+
+                Component.For<IGameRepository>()
+                .ImplementedBy<GameRepository>()
                 .LifestyleTransient(),
 
                 Component.For<IAuthService>()
@@ -120,6 +134,9 @@ namespace QuizDuel.UI
                 .LifestyleTransient(),
 
                 Component.For<MainForm>()
+                .LifestyleTransient(),
+
+                Component.For<WaitingForm>()
                 .LifestyleTransient()
             );
         }
