@@ -38,6 +38,14 @@ namespace QuizDuel.DataAccess.Repositories
             }
         }
 
+        /// <summary>
+        /// Асихронно получает игру по id из базы данных.
+        /// </summary>
+        public async Task<Game?> GetGameByIdAsync(Guid id)
+        {
+            return await _gameDbContext.Games.FirstOrDefaultAsync(g => g.Id == id);
+        }
+
 
     }
 }

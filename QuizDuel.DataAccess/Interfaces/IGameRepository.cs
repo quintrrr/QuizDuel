@@ -17,6 +17,9 @@ namespace QuizDuel.DataAccess.Interfaces
         /// </summary>
         Task DeleteAsync(Guid id);
 
-
+        /// <summary>
+        /// Асихронно получает игру по id из базы данных.
+        /// </summary>
+        Task<Game?> GetGameByIdAsync(Guid id);
     }
 }

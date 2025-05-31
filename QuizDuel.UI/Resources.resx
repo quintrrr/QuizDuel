@@ -123,6 +123,15 @@
   <data name="Game.CreateError" xml:space="preserve">
     <value>Не удалось создать игру</value>
   </data>
+  <data name="Game.Finished" xml:space="preserve">
+    <value>Игра уже закончилась.</value>
+  </data>
+  <data name="Game.NotStarted" xml:space="preserve">
+    <value>Второй игрок еще не присоединился.</value>
+  </data>
+  <data name="Game.StateError" xml:space="preserve">
+    <value>Не удалось подключиться к игре.</value>
+  </data>
   <data name="JoinGameButton" xml:space="preserve">
     <value>Присоединиться к игре</value>
   </data>
@@ -170,6 +179,12 @@
   </data>
   <data name="PasswordLabel" xml:space="preserve">
     <value>Пароль</value>
+  </data>
+  <data name="Player1Label" xml:space="preserve">
+    <value>Игрок 1</value>
+  </data>
+  <data name="Player2Label" xml:space="preserve">
+    <value>Игрок 2 </value>
   </data>
   <data name="Register.EmptyPassword" xml:space="preserve">
     <value>Введите пароль</value>

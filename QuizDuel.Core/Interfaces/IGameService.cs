@@ -1,4 +1,6 @@
-﻿namespace QuizDuel.Core.Interfaces
+﻿using QuizDuel.Core.DTO;
+
+namespace QuizDuel.Core.Interfaces
 {
     /// <summary>
     /// Интерфейс сервиса управления игрой.
@@ -24,6 +26,11 @@
         /// <summary>
         /// Возвращает имена пользьзователей игроков.
         /// </summary>
-        Task<(string Player1, string Player2)> GetUsernamesAsync();
+        Task<(string? Player1, string? Player2)> GetUsernamesAsync();
+
+        /// <summary>
+        /// Возвращает статус игры.
+        /// </summary>
+        Task<GameStateDTO> GetGameStateAsync();
     }
 }

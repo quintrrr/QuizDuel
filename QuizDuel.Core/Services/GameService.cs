@@ -1,4 +1,5 @@
 ﻿using Castle.Core.Logging;
+using QuizDuel.Core.DTO;
 using QuizDuel.Core.Interfaces;
 using QuizDuel.DataAccess.Interfaces;
 using QuizDuel.DataAccess.Models;
@@ -11,14 +12,19 @@ namespace QuizDuel.Core.Services
     public class GameService : IGameService
     {
         private readonly IGameRepository _gameRepository;
+        public readonly IUserRepository _userRepository;
         private readonly ILogger _logger;
         private Guid _gameId;
         public Guid GameId => _gameId;
 
-        public GameService(IGameRepository gameRepository, ILogger logger)
+        public GameService(
+            IGameRepository gameRepository,
+            ILogger logger,
+            IUserRepository userRepository)
         {
             _gameRepository = gameRepository;
-            _logger = logger;  
+            _logger = logger; 
+            _userRepository = userRepository;
         }
 
         /// <summary>
@@ -88,9 +94,39 @@ namespace QuizDuel.Core.Services
         /// <summary>
         /// Возвращает имена пользьзователей игроков.
         /// </summary>
-        public async Task<(string Player1, string Player2)> GetUsernamesAsync()
+        public async Task<(string? Player1, string? Player2)> GetUsernamesAsync()
         {
+            var game = await _gameRepository.GetGameByIdAsync(_gameId);
 
+            if (game is null)
+            {
+                return (null, null);
+            }
+            
+            var player1Username = await _userRepository.GetUsernameById(game.Player1Id);
+            var player2Username = await _userRepository.GetUsernameById(game.Player2Id);
+            return (player1Username, player2Username);
+        }
+
+        /// <summary>
+        /// Возвращает статус игры.
+        /// </summary>
+        public async Task<GameStateDTO> GetGameStateAsync()
+        {
+            var game = await _gameRepository.GetGameByIdAsync(_gameId);
+
+            if (game is null)
+            {
+                throw new Exception($"Игра с {_gameId} не найдена.");
+            }
+
+            return new GameStateDTO
+            {
+                CurrentRound = game.CurrentRound,
+                Turn = game.Turn,
+                IsStarted = game.Player1Id != default && game.Player2Id != default,
+                IsFinished = game.FinishedAt is not null,
+            };
         }
     }
 }
