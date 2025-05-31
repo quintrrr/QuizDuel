@@ -46,6 +46,15 @@ namespace QuizDuel.DataAccess.Repositories
             return await _gameDbContext.Games.FirstOrDefaultAsync(g => g.Id == id);
         }
 
-
+        /// <summary>
+        /// Возвращает список неначатых игр.
+        /// </summary>
+        public async Task<List<Game>> GetOpenedGamesAsync()
+        {
+            return await _gameDbContext.Games
+                .Where(g => g.Player2Id == default && g.FinishedAt == null)
+                .OrderByDescending(g => g.CreatedAt)
+                .ToListAsync();
+        }
     }
 }

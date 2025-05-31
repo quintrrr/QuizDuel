@@ -32,5 +32,10 @@ namespace QuizDuel.Core.Interfaces
         /// Возвращает статус игры.
         /// </summary>
         Task<GameStateDTO> GetGameStateAsync();
+
+        /// <summary>
+        /// Возвращает список неначатых игр.
+        /// </summary>
+        Task<List<OpenedGameDTO>> GetOpenedGamesAsync();
     }
 }

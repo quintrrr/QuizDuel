@@ -88,6 +88,15 @@ namespace QuizDuel.UI {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Присоединиться.
+        /// </summary>
+        internal static string Game_JoinButton {
+            get {
+                return ResourceManager.GetString("Game.JoinButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Второй игрок еще не присоединился..
         /// </summary>
         internal static string Game_NotStarted {

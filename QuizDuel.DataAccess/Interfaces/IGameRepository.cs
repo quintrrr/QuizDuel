@@ -21,5 +21,10 @@ namespace QuizDuel.DataAccess.Interfaces
         /// Асихронно получает игру по id из базы данных.
         /// </summary>
         Task<Game?> GetGameByIdAsync(Guid id);
+
+        /// <summary>
+        /// Асихронно возвращает список неначатых игр из базы данных.
+        /// </summary>
+        Task<List<Game>> GetOpenedGamesAsync();
     }
 }

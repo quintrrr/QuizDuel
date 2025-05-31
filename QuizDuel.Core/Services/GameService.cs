@@ -128,5 +128,23 @@ namespace QuizDuel.Core.Services
                 IsFinished = game.FinishedAt is not null,
             };
         }
+
+        /// <summary>
+        /// Возвращает список неначатых игр.
+        /// </summary>
+        public async Task<List<OpenedGameDTO>> GetOpenedGamesAsync()
+        {
+            var openedGames = await _gameRepository.GetOpenedGamesAsync() ?? [];
+            var openedGamesDTO = new List<OpenedGameDTO>();
+            foreach (var game in openedGames)
+            {
+                openedGamesDTO.Add(new OpenedGameDTO
+                {
+                    GameId = game.Id,
+                    HostUsername = await _userRepository.GetUsernameById(game.Player1Id) ?? "",
+                });
+            }
+            return openedGamesDTO;
+        }
     }
 }

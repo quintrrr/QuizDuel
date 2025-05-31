@@ -126,6 +126,9 @@
   <data name="Game.Finished" xml:space="preserve">
     <value>Игра уже закончилась.</value>
   </data>
+  <data name="Game.JoinButton" xml:space="preserve">
+    <value>Присоединиться</value>
+  </data>
   <data name="Game.NotStarted" xml:space="preserve">
     <value>Второй игрок еще не присоединился.</value>
   </data>
