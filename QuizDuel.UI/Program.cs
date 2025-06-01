@@ -137,6 +137,9 @@ namespace QuizDuel.UI
                 .LifestyleTransient(),
 
                 Component.For<WaitingForm>()
+                .LifestyleTransient(),
+
+                Component.For<JoinGameForm>()
                 .LifestyleTransient()
             );
         }

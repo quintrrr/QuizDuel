@@ -37,5 +37,10 @@ namespace QuizDuel.Core.Interfaces
         /// Возвращает список неначатых игр.
         /// </summary>
         Task<List<OpenedGameDTO>> GetOpenedGamesAsync();
+
+        /// <summary>
+        /// Присоединяет второго игрока к игре.
+        /// </summary>
+        Task JoinGameAsync();
     }
 }

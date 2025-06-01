@@ -66,5 +66,10 @@ namespace QuizDuel.UI
         {
             _navigationService.Exit();
         }
+
+        private void BtnJoinGame_Click(object sender, EventArgs e)
+        {
+            _navigationService.NavigateTo<JoinGameForm>();
+        }
     }
 }

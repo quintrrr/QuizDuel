@@ -33,6 +33,7 @@
             // 
             // flowGames
             // 
+            flowGames.AutoScroll = true;
             flowGames.Location = new Point(12, 12);
             flowGames.Name = "flowGames";
             flowGames.Size = new Size(776, 426);
@@ -44,8 +45,10 @@
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
             Controls.Add(flowGames);
+            FormBorderStyle = FormBorderStyle.FixedSingle;
             Name = "JoinGameForm";
             Text = "JoinGameForm";
+            FormClosed += JoinGameForm_FormClosed;
             Load += JoinGameForm_Load;
             ResumeLayout(false);
         }

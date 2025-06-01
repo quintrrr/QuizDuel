@@ -56,5 +56,18 @@ namespace QuizDuel.DataAccess.Repositories
                 .OrderByDescending(g => g.CreatedAt)
                 .ToListAsync();
         }
+
+        /// <summary>
+        /// Асихронно добавляет второго игрока в игру.
+        /// </summary>
+        public async Task AddSecondPlayerToGameAsync(Guid gameId, Guid userId)
+        {
+            var game = await GetGameByIdAsync(gameId);
+            if (game is not null)
+            {
+                game.Player2Id = userId;
+                await _gameDbContext.SaveChangesAsync();
+            }
+        }
     }
 }

@@ -26,5 +26,10 @@ namespace QuizDuel.DataAccess.Interfaces
         /// Асихронно возвращает список неначатых игр из базы данных.
         /// </summary>
         Task<List<Game>> GetOpenedGamesAsync();
+
+        /// <summary>
+        /// Асихронно добавляет второго игрока в игру.
+        /// </summary>
+        Task AddSecondPlayerToGameAsync(Guid gameId, Guid userId);
     }
 }

@@ -36,7 +36,7 @@
             // 
             btnJoin.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Right;
             btnJoin.AutoSize = true;
-            btnJoin.Location = new Point(328, 20);
+            btnJoin.Location = new Point(641, 20);
             btnJoin.Name = "btnJoin";
             btnJoin.Size = new Size(107, 39);
             btnJoin.TabIndex = 0;
@@ -62,7 +62,7 @@
             Controls.Add(hostUsernameLabel);
             Controls.Add(btnJoin);
             Name = "GameCardControl";
-            Size = new Size(453, 73);
+            Size = new Size(766, 73);
             ResumeLayout(false);
             PerformLayout();
         }

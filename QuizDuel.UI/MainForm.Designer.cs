@@ -50,6 +50,7 @@
             btnJoinGame.TabIndex = 1;
             btnJoinGame.Text = "присоединиться к игре";
             btnJoinGame.UseVisualStyleBackColor = true;
+            btnJoinGame.Click += BtnJoinGame_Click;
             // 
             // MainForm
             // 

@@ -12,7 +12,8 @@ namespace QuizDuel.Core.Services
     public class GameService : IGameService
     {
         private readonly IGameRepository _gameRepository;
-        public readonly IUserRepository _userRepository;
+        private readonly IUserRepository _userRepository;
+        private readonly IUserSessionService _userSessionService;
         private readonly ILogger _logger;
         private Guid _gameId;
         public Guid GameId => _gameId;
@@ -20,11 +21,13 @@ namespace QuizDuel.Core.Services
         public GameService(
             IGameRepository gameRepository,
             ILogger logger,
-            IUserRepository userRepository)
+            IUserRepository userRepository,
+            IUserSessionService userSessionService)
         {
             _gameRepository = gameRepository;
             _logger = logger; 
             _userRepository = userRepository;
+            _userSessionService = userSessionService;
         }
 
         /// <summary>
@@ -145,6 +148,21 @@ namespace QuizDuel.Core.Services
                 });
             }
             return openedGamesDTO;
+        }
+
+        /// <summary>
+        /// Присоединяет второго игрока к игре.
+        /// </summary>
+        public async Task JoinGameAsync()
+        {
+            try
+            {
+                await _gameRepository.AddSecondPlayerToGameAsync(_gameId, _userSessionService.UserID);
+            }
+            catch (Exception ex)
+            {
+
+            }
         }
     }
 }
