@@ -9,6 +9,8 @@ namespace QuizDuel.UI
         private readonly INavigationService _navigationService;
         private readonly ILogger _logger;
         private readonly INotificationService _notificationService;
+
+        private bool _isGameStarted;
         
         /// <summary>
         /// Форма начала игры.
@@ -49,19 +51,23 @@ namespace QuizDuel.UI
                     _navigationService.NavigateTo<MainForm>();
                 }
 
+                _isGameStarted = true;
             }
             catch (Exception ex)
             {
                 _logger.Error(ex.Message);
                 _notificationService.ShowError(Resources.Game_StateError);
-                _navigationService.NavigateTo<MainForm>();
+                Close();
             }
         }
 
         private async void WaitingForm_FormClosed(object sender, FormClosedEventArgs e)
         {
-            await _gameService.DeleteGameAsync();
-            _navigationService.NavigateTo<MainForm>();
+            if (!_isGameStarted)
+            {
+                await _gameService.DeleteGameAsync();   
+                _navigationService.NavigateTo<MainForm>();
+            }
         }
 
         private async void UpdateUsernameLabels()

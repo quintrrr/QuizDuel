@@ -8,6 +8,25 @@ namespace QuizDuel.Core.Services
     {
         private readonly IWindsorContainer _container;
         private Form? _currentForm;
+        public Form CurrentForm
+        {
+            set 
+            { 
+                _currentForm = value;
+
+                value.FormClosed += (_, _) =>
+                {
+                    if (_currentForm == value)
+                    {
+                        _currentForm = null;
+                        if (Application.OpenForms.Count == 0)
+                        {
+                            Application.Exit();
+                        }
+                    }
+                };
+            }
+        } 
 
         public NavigationService(IWindsorContainer container)
         {
@@ -22,6 +41,7 @@ namespace QuizDuel.Core.Services
         public void NavigateTo<T>() where T : Form
         {
             var nextForm = _container.Resolve<T>();
+            nextForm.Show();
 
             if (_currentForm is not null && !_currentForm.IsDisposed)
             {
@@ -49,7 +69,6 @@ namespace QuizDuel.Core.Services
                 } 
             };
 
-            nextForm.Show();
         }
 
     }

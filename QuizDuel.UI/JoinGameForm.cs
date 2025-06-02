@@ -31,12 +31,12 @@ namespace QuizDuel.UI
 
         private void JoinGameForm_FormClosed(object sender, FormClosedEventArgs e)
         {
-            _navigationService.NavigateTo<MainForm>();
+            //_navigationService.NavigateTo<MainForm>();
         }
 
         public async void OnJoinButtonClick(object? sender, Guid gameId)
         {
-            _gameService.SetGameId(gameId);
+            _gameService.GameId = gameId;
             await _gameService.JoinGameAsync();
             _navigationService.NavigateTo<WaitingForm>();
         }

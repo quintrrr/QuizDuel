@@ -9,17 +9,20 @@ namespace QuizDuel.UI
         private readonly IAuthService _authService;
         private readonly INotificationService _notificationService;
         private readonly ILogger _logger;
+        private readonly INavigationService _navigationService;
 
         public LoginForm(
             IAuthService authService, 
             INotificationService notificationService,
-            ILogger logger)
+            ILogger logger,
+            INavigationService navigationService)
         {
             InitializeComponent();
             ApplyLocalization();
             _authService = authService;
             _notificationService = notificationService;
             _logger = logger;
+            _navigationService = navigationService;
         }
 
         private void ApplyLocalization()
@@ -57,9 +60,9 @@ namespace QuizDuel.UI
             }
             else
             {
-                DialogResult = DialogResult.OK;
                 _logger.Info("Пользователь успешно вошел в аккаут.");
                 _notificationService.ShowSuccess(Resources.Login_Success);
+                _navigationService.NavigateTo<MainForm>();
             }
 
             btnLogin.Enabled = true;

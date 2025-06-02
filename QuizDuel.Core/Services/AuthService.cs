@@ -64,7 +64,7 @@ namespace QuizDuel.Core.Services
                     return result;
                 }
 
-                _userSessionService.SetUser(user.Id);
+                _userSessionService.UserID = user.Id;
 
                 _logger.Info($"Пользователь '{loginDTO.Username}' успешно вошёл в систему.");
                 result.Success = true;
@@ -85,7 +85,7 @@ namespace QuizDuel.Core.Services
         {
             var result = new OperationResultDTO();
 
-            if (!_registerValidator.ValidateInput(registerDTO, out List<string> errorMessages))
+            if (!_registerValidator.ValidateInput(registerDTO, out var errorMessages))
             {
                 _logger.Warn($"Регистрация не прошла валидацию для пользователя '{registerDTO.Username}'." +
                     $" Ошибки: {string.Join(", ", errorMessages)}");

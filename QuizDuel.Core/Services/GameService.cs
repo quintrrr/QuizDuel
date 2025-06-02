@@ -16,7 +16,23 @@ namespace QuizDuel.Core.Services
         private readonly IUserSessionService _userSessionService;
         private readonly ILogger _logger;
         private Guid _gameId;
-        public Guid GameId => _gameId;
+
+        /// <summary>
+        /// Свойство текущей игры 
+        /// </summary>
+        public Guid GameId
+        { 
+            get
+            {
+                return _gameId;
+            }
+            set
+            {
+                _gameId = value;
+                _logger.Info($"Установлен ID текущей игры: {value}");
+            }
+
+        }
 
         public GameService(
             IGameRepository gameRepository,
@@ -63,15 +79,6 @@ namespace QuizDuel.Core.Services
                 _logger.Error("Ошибка при добавлении игры в базу данных", ex);
                 throw;
             }
-        }
-
-        /// <summary>
-        /// Устанавливает текущий id игры
-        /// </summary>
-        public void SetGameId(Guid gameId)
-        {
-            _gameId = gameId;
-            _logger.Info($"Установлен ID текущей игры: {gameId}");
         }
 
         /// <summary>

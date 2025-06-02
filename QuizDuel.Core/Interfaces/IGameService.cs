@@ -7,16 +7,12 @@ namespace QuizDuel.Core.Interfaces
     /// </summary>
     public interface IGameService
     {
-        Guid GameId { get; }
+        Guid GameId { get; set; }
+
         /// <summary>
         /// Создает новую игру с одним игроком.
         /// </summary>
         Task<Guid> CreateGameAsync(Guid player1Id);
-
-        /// <summary>
-        /// Устанавливает текущий id игры.
-        /// </summary>
-        void SetGameId(Guid gameId);
 
         /// <summary>
         /// Удаляет игру.

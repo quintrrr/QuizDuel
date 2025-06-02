@@ -43,7 +43,9 @@ namespace QuizDuel.DataAccess.Repositories
         /// </summary>
         public async Task<Game?> GetGameByIdAsync(Guid id)
         {
-            return await _gameDbContext.Games.FirstOrDefaultAsync(g => g.Id == id);
+            return await _gameDbContext.Games
+                .AsNoTracking()
+                .FirstOrDefaultAsync(g => g.Id == id);
         }
 
         /// <summary>
@@ -62,7 +64,7 @@ namespace QuizDuel.DataAccess.Repositories
         /// </summary>
         public async Task AddSecondPlayerToGameAsync(Guid gameId, Guid userId)
         {
-            var game = await GetGameByIdAsync(gameId);
+            var game = await _gameDbContext.Games.FirstOrDefaultAsync(g => g.Id == gameId);
             if (game is not null)
             {
                 game.Player2Id = userId;

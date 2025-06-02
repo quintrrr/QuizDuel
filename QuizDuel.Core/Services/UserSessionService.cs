@@ -11,20 +11,25 @@ namespace QuizDuel.Core.Services
         private Guid _userID;
         private readonly ILogger _logger;
 
-        public Guid UserID => _userID;
+        /// <summary>
+        /// Свойство текущего пользователя
+        /// </summary>
+        public Guid UserID
+        {
+            get
+            {
+                return _userID;
+            }
+            set
+            {
+                _userID = value;
+                _logger.Info($"Установлен ID текущего пользователя: {value}");
+            }
+        }
 
         public UserSessionService(ILogger logger)
         {
             _logger = logger;
-        }
-
-        /// <summary>
-        /// Устанавливает текущего пользователя
-        /// </summary>
-        public void SetUser(Guid userID)
-        {
-            _userID = userID;
-            _logger.Info($"Установлен ID текущего пользователя: {userID}");
         }
     }
 }
