@@ -127,9 +127,6 @@ namespace QuizDuel.UI
                 .ImplementedBy<AuthService>()
                 .LifestyleTransient(),
 
-                Component.For<Form1>()
-                .LifestyleTransient(),
-
                 Component.For<LoginForm>()
                 .LifestyleTransient(),
 
@@ -140,6 +137,9 @@ namespace QuizDuel.UI
                 .LifestyleTransient(),
 
                 Component.For<JoinGameForm>()
+                .LifestyleTransient(),
+
+                Component.For<RegistrationForm>()
                 .LifestyleTransient()
             );
         }

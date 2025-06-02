@@ -42,6 +42,7 @@
             usernameTextBox.Name = "usernameTextBox";
             usernameTextBox.Size = new Size(247, 23);
             usernameTextBox.TabIndex = 0;
+            usernameTextBox.Text = "qwertyZXC123!";
             // 
             // passwordTextBox
             // 
@@ -49,6 +50,7 @@
             passwordTextBox.Name = "passwordTextBox";
             passwordTextBox.Size = new Size(247, 23);
             passwordTextBox.TabIndex = 1;
+            passwordTextBox.Text = "qwertyZXC123!";
             passwordTextBox.UseSystemPasswordChar = true;
             // 
             // usernameLabel

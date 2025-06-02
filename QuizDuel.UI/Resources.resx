@@ -117,6 +117,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="BirthdateLabel" xml:space="preserve">
+    <value>Дата рождения</value>
+  </data>
   <data name="CreateGameButton" xml:space="preserve">
     <value>Создать игру</value>
   </data>
@@ -201,6 +204,9 @@
   <data name="Register.ExistingUser" xml:space="preserve">
     <value>Такой пользователь уже существует.</value>
   </data>
+  <data name="Register.HaveAnAccount" xml:space="preserve">
+    <value>Есть аккаунт?</value>
+  </data>
   <data name="Register.InvalidAge" xml:space="preserve">
     <value>Вам должно быть не меньше 4 лет</value>
   </data>
@@ -209,6 +215,12 @@
   </data>
   <data name="Register.Successful" xml:space="preserve">
     <value>Регистрация прошла успешно</value>
+  </data>
+  <data name="RegisterButton" xml:space="preserve">
+    <value>Зарегистрироваться</value>
+  </data>
+  <data name="RepeatPasswordLabel" xml:space="preserve">
+    <value>Повторите пароль</value>
   </data>
   <data name="UsernameLabel" xml:space="preserve">
     <value>Имя пользователя</value>

@@ -61,6 +61,15 @@ namespace QuizDuel.UI {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Дата рождения.
+        /// </summary>
+        internal static string BirthdateLabel {
+            get {
+                return ResourceManager.GetString("BirthdateLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Создать игру.
         /// </summary>
         internal static string CreateGameButton {
@@ -313,6 +322,15 @@ namespace QuizDuel.UI {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Есть аккаунт?.
+        /// </summary>
+        internal static string Register_HaveAnAccount {
+            get {
+                return ResourceManager.GetString("Register.HaveAnAccount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Вам должно быть не меньше 4 лет.
         /// </summary>
         internal static string Register_InvalidAge {
@@ -336,6 +354,24 @@ namespace QuizDuel.UI {
         internal static string Register_Successful {
             get {
                 return ResourceManager.GetString("Register.Successful", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Зарегистрироваться.
+        /// </summary>
+        internal static string RegisterButton {
+            get {
+                return ResourceManager.GetString("RegisterButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Повторите пароль.
+        /// </summary>
+        internal static string RepeatPasswordLabel {
+            get {
+                return ResourceManager.GetString("RepeatPasswordLabel", resourceCulture);
             }
         }
         

@@ -57,5 +57,6 @@ namespace QuizDuel.UI
         {
             _navigationService.NavigateTo<JoinGameForm>();
         }
+
     }
 }

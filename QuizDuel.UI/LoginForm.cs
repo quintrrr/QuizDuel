@@ -25,6 +25,7 @@ namespace QuizDuel.UI
             _navigationService = navigationService;
         }
 
+
         private void ApplyLocalization()
         {
             usernameLabel.Text = Resources.UsernameLabel;
@@ -35,7 +36,7 @@ namespace QuizDuel.UI
 
         private void RegLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-
+            _navigationService.NavigateTo<RegistrationForm>();
         }
 
         private async void BtnLogin_ClickAsync(object sender, EventArgs e)

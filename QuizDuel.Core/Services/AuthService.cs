@@ -114,6 +114,7 @@ namespace QuizDuel.Core.Services
                 };
 
                 await _userRepository.AddUser(newUser);
+                _userSessionService.UserID = newUser.Id; 
                 _logger.Info($"Пользователь '{registerDTO.Username}' успешно зарегистрирован.");
                 result.Success = true;
                 return result;
