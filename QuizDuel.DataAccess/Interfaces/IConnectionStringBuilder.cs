@@ -6,8 +6,13 @@
     public interface IConnectionStringBuilder
     {
         /// <summary>
-        /// Создаёт строку подключения к базе данных.
+        /// Создаёт строку подключения к базе данных игры.
         /// </summary>
-        string CreateConnectionString();
+        string CreateGameConnectionString();
+        
+        /// <summary>
+        /// Создаёт строку подключения к базе данных вопросов.
+        /// </summary>
+        string CreateQuestionsConnectionString();
     }
 }

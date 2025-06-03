@@ -1,8 +1,8 @@
 ﻿using Castle.Core.Logging;
 using QuizDuel.Core.DTO;
 using QuizDuel.Core.Interfaces;
+using QuizDuel.DataAccess.Interfaces;
 using QuizDuel.DataAccess.Models;
-using QuizDuel.DataAccess.Repositories;
 
 namespace QuizDuel.Core.Services
 {
@@ -15,17 +15,20 @@ namespace QuizDuel.Core.Services
         private readonly IUserRepository _userRepository;
         private readonly IPasswordService _passwordService;
         private readonly ILogger _logger;
+        private readonly IUserSessionService _userSessionService;
 
         public AuthService(
             IRegisterValidator registerValidator,
             IUserRepository userRepository,
             IPasswordService passwordService,
-            ILogger logger)
+            ILogger logger,
+            IUserSessionService userSessionService)
         {
             _registerValidator = registerValidator;
             _userRepository = userRepository;
             _passwordService = passwordService;
             _logger = logger;
+            _userSessionService = userSessionService;
         }
 
         /// <summary>
@@ -61,6 +64,8 @@ namespace QuizDuel.Core.Services
                     return result;
                 }
 
+                _userSessionService.UserID = user.Id;
+
                 _logger.Info($"Пользователь '{loginDTO.Username}' успешно вошёл в систему.");
                 result.Success = true;
                 return result;
@@ -80,7 +85,7 @@ namespace QuizDuel.Core.Services
         {
             var result = new OperationResultDTO();
 
-            if (!_registerValidator.ValidateInput(registerDTO, out List<string> errorMessages))
+            if (!_registerValidator.ValidateInput(registerDTO, out var errorMessages))
             {
                 _logger.Warn($"Регистрация не прошла валидацию для пользователя '{registerDTO.Username}'." +
                     $" Ошибки: {string.Join(", ", errorMessages)}");
@@ -109,6 +114,7 @@ namespace QuizDuel.Core.Services
                 };
 
                 await _userRepository.AddUser(newUser);
+                _userSessionService.UserID = newUser.Id; 
                 _logger.Info($"Пользователь '{registerDTO.Username}' успешно зарегистрирован.");
                 result.Success = true;
                 return result;

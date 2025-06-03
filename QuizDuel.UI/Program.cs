@@ -29,9 +29,10 @@ namespace QuizDuel.UI
 
             var container = new WindsorContainer();
             ConfigureContainer(container);
-            var form = container.Resolve<Form1>();
+            var navigation = container.Resolve<INavigationService>();
+            navigation.NavigateTo<LoginForm>();
 
-            Application.Run(form);
+            Application.Run();
         }
 
         /// <summary>
@@ -66,6 +67,18 @@ namespace QuizDuel.UI
                 
                 Component.For<IPasswordValidator>()
                 .ImplementedBy<PasswordValidator>()
+                .LifestyleSingleton(),
+                
+                Component.For<IUserSessionService>()
+                .ImplementedBy<UserSessionService>()
+                .LifestyleSingleton(),
+                
+                Component.For<IGameService>()
+                .ImplementedBy<GameService>()
+                .LifestyleSingleton(),
+                
+                Component.For<INavigationService>()
+                .ImplementedBy<NavigationService>()
                 .LifestyleSingleton()
             );
 
@@ -73,15 +86,24 @@ namespace QuizDuel.UI
 
             try
             {
-                var options = new DbContextOptionsBuilder<AppDbContext>()
-                    .UseNpgsql(connectionStringBuilder.CreateConnectionString()).Options;
+                var gameOptions = new DbContextOptionsBuilder<GameDbContext>()
+                    .UseNpgsql(connectionStringBuilder.CreateGameConnectionString()).Options;
+                
+                var questionsOptions = new DbContextOptionsBuilder<QuestionsDbContext>()
+                    .UseNpgsql(connectionStringBuilder.CreateQuestionsConnectionString()).Options;
 
                 container.Register(
-                    Component.For<DbContextOptions<AppDbContext>>()
-                    .Instance(options)
+                    Component.For<DbContextOptions<GameDbContext>>()
+                    .Instance(gameOptions)
                     .LifestyleSingleton(),
 
-                    Component.For<AppDbContext>().LifestyleSingleton()
+                    Component.For<DbContextOptions<QuestionsDbContext>>()
+                    .Instance(questionsOptions)
+                    .LifestyleSingleton(),
+
+                    Component.For<GameDbContext>().LifestyleSingleton(),
+
+                    Component.For<QuestionsDbContext>().LifestyleSingleton()
                 );
             }
             catch (Exception ex)
@@ -91,15 +113,33 @@ namespace QuizDuel.UI
             }
 
             container.Register(
+                Component.For<IWindsorContainer>().Instance(container),
+
                 Component.For<IUserRepository>()
                 .ImplementedBy<UserRepository>()
+                .LifestyleTransient(),
+
+                Component.For<IGameRepository>()
+                .ImplementedBy<GameRepository>()
                 .LifestyleTransient(),
 
                 Component.For<IAuthService>()
                 .ImplementedBy<AuthService>()
                 .LifestyleTransient(),
 
-                Component.For<Form1>()
+                Component.For<LoginForm>()
+                .LifestyleTransient(),
+
+                Component.For<MainForm>()
+                .LifestyleTransient(),
+
+                Component.For<WaitingForm>()
+                .LifestyleTransient(),
+
+                Component.For<JoinGameForm>()
+                .LifestyleTransient(),
+
+                Component.For<RegistrationForm>()
                 .LifestyleTransient()
             );
         }

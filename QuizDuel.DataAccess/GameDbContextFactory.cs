@@ -4,13 +4,13 @@ using QuizDuel.DataAccess.Classes;
 
 namespace QuizDuel.DataAccess
 {
-    class AppDbContextFactory : IDesignTimeDbContextFactory<AppDbContext>
+    class GameDbContextFactory : IDesignTimeDbContextFactory<GameDbContext>
     {
-        public AppDbContext CreateDbContext(string[] args)
+        public GameDbContext CreateDbContext(string[] args)
         {
-            var optionsBuilder = new DbContextOptionsBuilder<AppDbContext>();
+            var optionsBuilder = new DbContextOptionsBuilder<GameDbContext>();
             optionsBuilder.UseNpgsql(CreateConnectionString());
-            return new AppDbContext(optionsBuilder.Options);
+            return new GameDbContext(optionsBuilder.Options);
         }
 
         
