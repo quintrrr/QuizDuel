@@ -30,6 +30,6 @@ namespace QuizDuel.DataAccess.Interfaces
         /// <summary>
         /// Асихронно добавляет второго игрока в игру.
         /// </summary>
-        Task AddSecondPlayerToGameAsync(Guid gameId, Guid userId);
+        Task AddSecondPlayerToGameAsync(Game game, Guid userId);
     }
 }

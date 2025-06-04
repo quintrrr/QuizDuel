@@ -36,6 +36,7 @@ namespace QuizDuel.UI
 
         private async void BtnCreateGame_Click(object sender, EventArgs e)
         {
+            btnCreateGame.Enabled = false;
             try
             {
                 var gameId = await _gameService.CreateGameAsync(_userSessionService.UserID);
@@ -46,6 +47,7 @@ namespace QuizDuel.UI
             {
                 _notificationService.ShowError(Resources.Game_CreateError);
             }
+            btnCreateGame.Enabled = true;
         }
 
         private void MainForm_FormClosed(object sender, FormClosedEventArgs e)

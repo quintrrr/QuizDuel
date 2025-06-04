@@ -37,6 +37,6 @@ namespace QuizDuel.Core.Interfaces
         /// <summary>
         /// Присоединяет второго игрока к игре.
         /// </summary>
-        Task JoinGameAsync();
+        Task<OperationResultDTO> JoinGameAsync();
     }
 }

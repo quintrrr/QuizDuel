@@ -160,15 +160,37 @@ namespace QuizDuel.Core.Services
         /// <summary>
         /// Присоединяет второго игрока к игре.
         /// </summary>
-        public async Task JoinGameAsync()
+        public async Task<OperationResultDTO> JoinGameAsync()
         {
+            var result = new OperationResultDTO();
             try
             {
-                await _gameRepository.AddSecondPlayerToGameAsync(_gameId, _userSessionService.UserID);
+                var game = await _gameRepository.GetGameByIdAsync(_gameId);
+
+                if (game is null)
+                {
+                    result.MessageKeys.Add("Game.IsNotFound");
+                    _logger.Error($"Игра с {_gameId} не найдена.");
+                    return result;
+                }
+
+                if (game.Player1Id == _userSessionService.UserID)
+                {
+                    result.MessageKeys.Add("Game.SamePlayers");
+                    _logger.Warn($"Подключение игрока {_userSessionService.UserID} к своей игре.");
+                    return result;
+                }
+
+                await _gameRepository
+                    .AddSecondPlayerToGameAsync(game, _userSessionService.UserID);
+                result.Success = true;
+                return result;
             }
             catch (Exception ex)
             {
-
+                _logger.Error($"Ошибка подключения к игре", ex);
+                result.MessageKeys.Add("Game.JoinError");
+                return result;
             }
         }
     }

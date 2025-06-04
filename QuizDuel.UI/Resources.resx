@@ -129,11 +129,20 @@
   <data name="Game.Finished" xml:space="preserve">
     <value>Игра уже закончилась.</value>
   </data>
+  <data name="Game.IsNotFound" xml:space="preserve">
+    <value>Игра не найдена</value>
+  </data>
   <data name="Game.JoinButton" xml:space="preserve">
     <value>Присоединиться</value>
   </data>
+  <data name="Game.JoinError" xml:space="preserve">
+    <value>Ошибка подключения к игре</value>
+  </data>
   <data name="Game.NotStarted" xml:space="preserve">
     <value>Второй игрок еще не присоединился.</value>
+  </data>
+  <data name="Game.SamePlayers" xml:space="preserve">
+    <value>Вы не можете подключиться к своей игре</value>
   </data>
   <data name="Game.StateError" xml:space="preserve">
     <value>Не удалось подключиться к игре.</value>
@@ -146,6 +155,9 @@
   </data>
   <data name="Login.EmptyUsername" xml:space="preserve">
     <value>Заполните имя пользователя</value>
+  </data>
+  <data name="Login.Error" xml:space="preserve">
+    <value>Ошибка при входе в аккаунт</value>
   </data>
   <data name="Login.NoAccount" xml:space="preserve">
     <value>Нет аккаунта? </value>
@@ -200,6 +212,9 @@
   </data>
   <data name="Register.EmptyUsername" xml:space="preserve">
     <value>Введите имя пользователя</value>
+  </data>
+  <data name="Register.Error" xml:space="preserve">
+    <value>Ошибка при регистрации аккаунта</value>
   </data>
   <data name="Register.ExistingUser" xml:space="preserve">
     <value>Такой пользователь уже существует.</value>

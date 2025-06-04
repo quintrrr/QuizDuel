@@ -36,6 +36,7 @@ namespace QuizDuel.UI
         /// </summary>
         private async void BtnPlay_Click(object sender, EventArgs e)
         {
+            btnPlay.Enabled = false;
             try
             {
                 var gameState = await _gameService.GetGameStateAsync();
@@ -52,6 +53,7 @@ namespace QuizDuel.UI
                 }
 
                 _isGameStarted = true;
+                btnPlay.Enabled = true;
             }
             catch (Exception ex)
             {
