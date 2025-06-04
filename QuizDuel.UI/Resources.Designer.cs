@@ -151,6 +151,24 @@ namespace QuizDuel.UI {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Не удалось загрузить игры.
+        /// </summary>
+        internal static string Join_UpdateError {
+            get {
+                return ResourceManager.GetString("Join.UpdateError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Обновить.
+        /// </summary>
+        internal static string Join_UpdateGames {
+            get {
+                return ResourceManager.GetString("Join.UpdateGames", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Присоединиться к игре.
         /// </summary>
         internal static string JoinGameButton {

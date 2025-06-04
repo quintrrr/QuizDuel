@@ -147,6 +147,12 @@
   <data name="Game.StateError" xml:space="preserve">
     <value>Не удалось подключиться к игре.</value>
   </data>
+  <data name="Join.UpdateError" xml:space="preserve">
+    <value>Не удалось загрузить игры</value>
+  </data>
+  <data name="Join.UpdateGames" xml:space="preserve">
+    <value>Обновить</value>
+  </data>
   <data name="JoinGameButton" xml:space="preserve">
     <value>Присоединиться к игре</value>
   </data>

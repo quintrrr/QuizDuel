@@ -74,5 +74,10 @@ namespace QuizDuel.UI
         {
             _navigationService.NavigateTo<LoginForm>();
         }
+
+        private void RegistrationForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Application.Exit();
+        }
     }
 }

@@ -2,7 +2,7 @@
 {
     public interface INavigationService
     {
-        Form CurrentForm { set; }
+        Form? CurrentForm { get;  set; }
 
         void NavigateTo<T>() where T : Form;
 

@@ -62,6 +62,7 @@
             Name = "MainForm";
             Text = "MainForm";
             FormClosed += MainForm_FormClosed;
+            Shown += MainForm_Shown;
             ResumeLayout(false);
         }
 

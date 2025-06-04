@@ -87,7 +87,7 @@ namespace QuizDuel.UI
             Controls.Add(btnPlay);
             Name = "WaitingForm";
             Text = "WaitingForm";
-            FormClosed += this.WaitingForm_FormClosed;
+            FormClosing += WaitingForm_FormClosing;
             ResumeLayout(false);
             PerformLayout();
         }

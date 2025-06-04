@@ -108,6 +108,7 @@
             FormBorderStyle = FormBorderStyle.FixedDialog;
             Name = "LoginForm";
             Text = "LoginForm";
+            FormClosed += LoginForm_FormClosed;
             ResumeLayout(false);
             PerformLayout();
         }

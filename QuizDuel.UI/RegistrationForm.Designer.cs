@@ -146,6 +146,7 @@
             FormBorderStyle = FormBorderStyle.FixedSingle;
             Name = "RegistrationForm";
             Text = "RegistrationForm";
+            FormClosed += RegistrationForm_FormClosed;
             ResumeLayout(false);
             PerformLayout();
         }

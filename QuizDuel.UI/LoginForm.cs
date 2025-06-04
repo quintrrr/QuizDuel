@@ -12,7 +12,7 @@ namespace QuizDuel.UI
         private readonly INavigationService _navigationService;
 
         public LoginForm(
-            IAuthService authService, 
+            IAuthService authService,
             INotificationService notificationService,
             ILogger logger,
             INavigationService navigationService)
@@ -67,6 +67,11 @@ namespace QuizDuel.UI
             }
 
             btnLogin.Enabled = true;
+        }
+
+        private void LoginForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Application.Exit();
         }
     }
 }

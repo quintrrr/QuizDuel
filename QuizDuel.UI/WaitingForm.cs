@@ -11,10 +11,7 @@ namespace QuizDuel.UI
         private readonly INotificationService _notificationService;
 
         private bool _isGameStarted;
-        
-        /// <summary>
-        /// Форма начала игры.
-        /// </summary>
+
         public WaitingForm(
             IGameService gameService,
             INavigationService navigationService,
@@ -29,11 +26,8 @@ namespace QuizDuel.UI
             _notificationService = notificationService;
 
             UpdateUsernameLabels();
-        } 
-        
-        /// <summary>
-        /// Обрабатывает нажатие кнопки запуска игры.
-        /// </summary>
+        }
+
         private async void BtnPlay_Click(object sender, EventArgs e)
         {
             btnPlay.Enabled = false;
@@ -63,21 +57,21 @@ namespace QuizDuel.UI
             }
         }
 
-        private async void WaitingForm_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            if (!_isGameStarted)
-            {
-                await _gameService.DeleteGameAsync();   
-                _navigationService.NavigateTo<MainForm>();
-            }
-        }
-
         private async void UpdateUsernameLabels()
         {
             var usernames = await _gameService.GetUsernamesAsync();
 
             player1NameLabel.Text = usernames.Player1 ?? Resources.Player1Label;
             player2NameLabel.Text = usernames.Player2 ?? Resources.Player2Label;
+        }
+
+        private async void WaitingForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (!_isGameStarted)
+            {
+                await _gameService.DeleteGameAsync();
+                _navigationService.NavigateTo<MainForm>();
+            }
         }
     }
 }

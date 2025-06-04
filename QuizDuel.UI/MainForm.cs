@@ -50,15 +50,23 @@ namespace QuizDuel.UI
             btnCreateGame.Enabled = true;
         }
 
-        private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            _navigationService.Exit();
-        }
-
         private void BtnJoinGame_Click(object sender, EventArgs e)
         {
             _navigationService.NavigateTo<JoinGameForm>();
         }
 
+
+        private void MainForm_Shown(object sender, EventArgs e)
+        {
+            if (_userSessionService.UserID == default)
+            {
+                _navigationService.NavigateTo<LoginForm>();
+            }
+        }
+
+        private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Application.Exit();
+        }
     }
 }

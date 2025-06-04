@@ -30,9 +30,10 @@ namespace QuizDuel.UI
             var container = new WindsorContainer();
             ConfigureContainer(container);
             var navigation = container.Resolve<INavigationService>();
-            navigation.NavigateTo<LoginForm>();
+            var mainForm = container.Resolve<MainForm>();
+            navigation.CurrentForm = mainForm;
 
-            Application.Run();
+            Application.Run(mainForm);
         }
 
         /// <summary>
