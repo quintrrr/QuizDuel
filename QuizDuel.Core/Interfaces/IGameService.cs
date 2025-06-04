@@ -1,4 +1,5 @@
 ﻿using QuizDuel.Core.DTO;
+using QuizDuel.DataAccess.Models;
 
 namespace QuizDuel.Core.Interfaces
 {
@@ -38,5 +39,10 @@ namespace QuizDuel.Core.Interfaces
         /// Присоединяет второго игрока к игре.
         /// </summary>
         Task<OperationResultDTO> JoinGameAsync();
+
+        /// <summary>
+        /// Возвращает список случайных категорий.
+        /// </summary>
+        Task<List<Category>> GetRandomCategoriesAsync(int amount);
     }
 }

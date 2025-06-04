@@ -38,6 +38,7 @@ namespace QuizDuel.UI
                 if (!gameState.IsStarted)
                 {
                     _notificationService.ShowError(Resources.Game_NotStarted);
+                    btnPlay.Enabled = true;
                     return;
                 }
                 else if (gameState.IsFinished)
@@ -47,7 +48,7 @@ namespace QuizDuel.UI
                 }
 
                 _isGameStarted = true;
-                btnPlay.Enabled = true;
+                _navigationService.NavigateTo<GameForm>();
             }
             catch (Exception ex)
             {

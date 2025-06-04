@@ -124,6 +124,10 @@ namespace QuizDuel.UI
                 .ImplementedBy<GameRepository>()
                 .LifestyleTransient(),
 
+                Component.For<ICategoryRepository>()
+                .ImplementedBy<CategoryRepository>()
+                .LifestyleTransient(),
+
                 Component.For<IAuthService>()
                 .ImplementedBy<AuthService>()
                 .LifestyleTransient(),
@@ -141,6 +145,9 @@ namespace QuizDuel.UI
                 .LifestyleTransient(),
 
                 Component.For<RegistrationForm>()
+                .LifestyleTransient(),
+
+                Component.For<GameForm>()
                 .LifestyleTransient()
             );
         }

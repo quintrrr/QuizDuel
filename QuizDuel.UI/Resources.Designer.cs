@@ -124,6 +124,15 @@ namespace QuizDuel.UI {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Ошибка при загрузке категорий.
+        /// </summary>
+        internal static string Game_LoadCategoryError {
+            get {
+                return ResourceManager.GetString("Game.LoadCategoryError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Второй игрок еще не присоединился..
         /// </summary>
         internal static string Game_NotStarted {
@@ -138,6 +147,15 @@ namespace QuizDuel.UI {
         internal static string Game_SamePlayers {
             get {
                 return ResourceManager.GetString("Game.SamePlayers", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Выберите категорию.
+        /// </summary>
+        internal static string Game_SelectCategory {
+            get {
+                return ResourceManager.GetString("Game.SelectCategory", resourceCulture);
             }
         }
         

@@ -14,6 +14,7 @@ namespace QuizDuel.Core.Services
         private readonly IGameRepository _gameRepository;
         private readonly IUserRepository _userRepository;
         private readonly IUserSessionService _userSessionService;
+        private readonly ICategoryRepository _categoryRepository;
         private readonly ILogger _logger;
         private Guid _gameId;
 
@@ -38,12 +39,14 @@ namespace QuizDuel.Core.Services
             IGameRepository gameRepository,
             ILogger logger,
             IUserRepository userRepository,
-            IUserSessionService userSessionService)
+            IUserSessionService userSessionService,
+            ICategoryRepository categoryRepository)
         {
             _gameRepository = gameRepository;
             _logger = logger; 
             _userRepository = userRepository;
             _userSessionService = userSessionService;
+            _categoryRepository = categoryRepository;
         }
 
         /// <summary>
@@ -191,6 +194,22 @@ namespace QuizDuel.Core.Services
                 _logger.Error($"Ошибка подключения к игре", ex);
                 result.MessageKeys.Add("Game.JoinError");
                 return result;
+            }
+        }
+
+        /// <summary>
+        /// Возвращает список случайных категорий.
+        /// </summary>
+        public async Task<List<Category>> GetRandomCategoriesAsync(int amount)
+        {
+            try
+            {
+                return await _categoryRepository.GetRandomCategoriesAsync(amount);
+            }
+            catch (Exception ex)
+            {
+                _logger.Error("Не удалось получить категории", ex);
+                throw;
             }
         }
     }

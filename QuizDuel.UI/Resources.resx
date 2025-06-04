@@ -138,11 +138,17 @@
   <data name="Game.JoinError" xml:space="preserve">
     <value>Ошибка подключения к игре</value>
   </data>
+  <data name="Game.LoadCategoryError" xml:space="preserve">
+    <value>Ошибка при загрузке категорий</value>
+  </data>
   <data name="Game.NotStarted" xml:space="preserve">
     <value>Второй игрок еще не присоединился.</value>
   </data>
   <data name="Game.SamePlayers" xml:space="preserve">
     <value>Вы не можете подключиться к своей игре</value>
+  </data>
+  <data name="Game.SelectCategory" xml:space="preserve">
+    <value>Выберите категорию</value>
   </data>
   <data name="Game.StateError" xml:space="preserve">
     <value>Не удалось подключиться к игре.</value>
