@@ -27,8 +27,6 @@ namespace QuizDuel.UI
             _logger = logger;
             _notificationService = notificationService;
             _userSessionService = userSessionService;
-
-            UpdateUsernameLabels();
         }
 
         private async void BtnPlay_Click(object sender, EventArgs e)
@@ -42,6 +40,7 @@ namespace QuizDuel.UI
                 {
                     _notificationService.ShowError(Resources.Game_NotStarted);
                     btnPlay.Enabled = true;
+                    await UpdateLabels();
                     return;
                 }
                 else if (gameState.IsFinished)
@@ -55,6 +54,7 @@ namespace QuizDuel.UI
                 {
                     _notificationService.ShowInfo(Resources.Game_AnotherTurn);
                     btnPlay.Enabled = true;
+                    await UpdateLabels();
                 }
                 else
                 {
@@ -69,12 +69,22 @@ namespace QuizDuel.UI
             }
         }
 
-        private async void UpdateUsernameLabels()
+        private async Task UpdateLabels()
         {
-            var usernames = await _gameService.GetUsernamesAsync();
+            try
+            {
+                var (player1, player2) = await _gameService.GetUsernamesAsync();
 
-            player1NameLabel.Text = usernames.Player1 ?? Resources.Player1Label;
-            player2NameLabel.Text = usernames.Player2 ?? Resources.Player2Label;
+                player1NameLabel.Text = player1 ?? Resources.Player1Label;
+                player2NameLabel.Text = player2 ?? Resources.Player2Label;
+
+                var (score1, score2) = await _gameService.GetScoresAsync();
+                scoreLabel.Text = $"{score1} : {score2}";
+            } 
+            catch {
+                _notificationService.ShowError(Resources.Game_LoadError);
+                _navigationService.NavigateTo<MainForm>();
+            }
         }
 
         private async void WaitingForm_FormClosing(object sender, FormClosingEventArgs e)
@@ -84,6 +94,11 @@ namespace QuizDuel.UI
                 await _gameService.DeleteGameAsync();
                 _navigationService.NavigateTo<MainForm>();
             }
+        }
+
+        private async void WaitingForm_Load(object sender, EventArgs e)
+        {
+            await UpdateLabels();
         }
     }
 }

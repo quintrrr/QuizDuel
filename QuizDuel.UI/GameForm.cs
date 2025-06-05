@@ -9,6 +9,7 @@ namespace QuizDuel.UI
         private readonly IGameService _gameService;
         private readonly INotificationService _notificationService;
         private readonly INavigationService _navigationService;
+        private readonly IUserSessionService _userSessionService;
         private readonly ILogger _logger;
 
         private List<ShuffledQuestionDTO> _questions = [];
@@ -18,6 +19,7 @@ namespace QuizDuel.UI
             IGameService gameService,
             INotificationService notificationService,
             INavigationService navigationService,
+            IUserSessionService userSessionService,
             ILogger logger)
         {
             InitializeComponent();
@@ -25,6 +27,7 @@ namespace QuizDuel.UI
             _gameService = gameService;
             _notificationService = notificationService;
             _navigationService = navigationService;
+            _userSessionService = userSessionService;
             _logger = logger;
 
             selectCategoryLabel.Text = Resources.Game_SelectCategory;
@@ -51,12 +54,48 @@ namespace QuizDuel.UI
                 _notificationService.ShowError(Resources.Game_LoadCategoryError);
                 _navigationService.NavigateTo<WaitingForm>();
             }
-
         }
 
-        private void ButtonAnswer_Click(object sender, EventArgs e)
+        private async void ButtonAnswer_Click(object sender, EventArgs e)
         {
+            try
+            {
+                gamePanel.Enabled = false;
+                var button = sender as Button;
+                if (!int.TryParse(button.Tag.ToString(), out var selectedIndex)) {
+                    throw new Exception("Ошибка при преобразовании button.Tag в int");
+                }
 
+                var question = _questions[_currentQuestionIndex];
+
+                var answerDto = new SubmittedAnswerDTO
+                {
+                    Id = question.QuestionId,
+                    Answers = question.Answers,
+                    SelectedIndex = selectedIndex
+                };
+
+                var result = await _gameService.SubmitAnswerAsync(_userSessionService.UserID, answerDto);
+
+                HighlightAnswers(selectedIndex, result.CorrectOptionIndex);
+
+                await Task.Delay(1500);
+
+                _currentQuestionIndex++;
+                if (_currentQuestionIndex < _questions.Count){
+                    await ShowQuestion();
+                }
+                else
+                {
+                    _notificationService.ShowInfo("Раунд завершён!");
+                    await PassTurnAsync();
+                    _navigationService.NavigateTo<WaitingForm>();
+                }
+            } catch
+            {
+                _notificationService.ShowError(Resources.Game_AnswerError);
+                _navigationService.NavigateTo<WaitingForm>();
+            }
         }
 
         private async void ButtonCategory_Click(object sender, EventArgs e)
@@ -85,26 +124,7 @@ namespace QuizDuel.UI
 
         private async void GameForm_Load(object sender, EventArgs e)
         {
-            try
-            {
-                var gameState = await _gameService.GetGameStateAsync();
-
-                if (gameState.Turn == 0 && gameState.CurrentRound % 2 == 0
-                    || gameState.Turn == 1 && gameState.CurrentRound % 2 != 0)
-                {
-                    await ShowCategorySelectionAsync();
-                }
-                else
-                {
-                    await LoadQuestions();
-                }
-            }
-            catch (Exception ex)
-            {
-                _logger.Error("Не удалось загрузить игру", ex);
-                _notificationService.ShowError(Resources.Game_LoadError);
-                _navigationService.NavigateTo<WaitingForm>();
-            }
+            await ContinueGameAsync();
         }
 
         private async Task LoadQuestions()
@@ -113,11 +133,10 @@ namespace QuizDuel.UI
             {
                 _questions = await _gameService.GetShuffledQuestionsAsync(3);
                 _currentQuestionIndex = 0;
-                ShowQuestion();
+                await ShowQuestion();
             } 
-            catch (Exception ex)
+            catch 
             {
-                _logger.Error("Не удалось загрузить вопросы", ex);
                 _notificationService.ShowError(Resources.Game_LoadQuestionsError);
                 _navigationService.NavigateTo<WaitingForm>();
             }
@@ -137,6 +156,7 @@ namespace QuizDuel.UI
 
             categoryPanel.Visible = false;
             gamePanel.Visible = true;
+            gamePanel.Enabled = true;
 
             await StartTimerAsync(10);
         }
@@ -163,6 +183,65 @@ namespace QuizDuel.UI
             }
 
             //TimeExpired();
+        }
+
+        private void HighlightAnswers(int selected, int correct)
+        {
+            var buttons = new[] { btnAnswer1, btnAnswer2, btnAnswer3, btnAnswer4 };
+            for (int i = 0; i < buttons.Length; i++)
+            {
+                if (i == correct)
+                    buttons[i].BackColor = Color.LightGreen;
+                else if (i == selected)
+                    buttons[i].BackColor = Color.IndianRed;
+                else
+                    buttons[i].BackColor = SystemColors.Control;
+            }
+        }
+
+        private async Task PassTurnAsync()
+        {
+            try
+            {
+                await _gameService.PassTurnAsync();
+            } catch
+            {
+                _notificationService.ShowError(Resources.Game_PasTurnError);
+                _navigationService.NavigateTo<WaitingForm>();
+            }
+        }
+
+        private async Task ContinueGameAsync()
+        {
+            try
+            {
+                var gameState = await _gameService.GetGameStateAsync();
+
+                if (gameState.IsFinished)
+                {
+                    var winner = await _gameService.GetWinnerIdAsync();
+                    _notificationService.ShowInfo(
+                        winner == null ? Resources.Game_Draw : $"{Resources.Game_PlayerWon}: {winner}");
+                    _navigationService.NavigateTo<MainForm>();
+                    return;
+                }
+
+                if (gameState.Turn == 0 && gameState.CurrentRound % 2 == 0
+                    || gameState.Turn == 1 && gameState.CurrentRound % 2 != 0)
+                {
+                    await ShowCategorySelectionAsync();
+                }
+                else
+                {
+                    await LoadQuestions();
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.Error("Не удалось загрузить игру", ex);
+                _notificationService.ShowError(Resources.Game_LoadError);
+                _navigationService.NavigateTo<WaitingForm>();
+            }
         }
     }
 }

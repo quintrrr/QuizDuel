@@ -55,6 +55,24 @@ namespace QuizDuel.Core.Interfaces
         /// </summary>
         Task<List<ShuffledQuestionDTO>> GetShuffledQuestionsAsync(int amount);
 
+        /// <summary>
+        /// Подтверждает ответ пользователя.
+        /// </summary>
+        Task<AnswerResultDTO> SubmitAnswerAsync(Guid userId, SubmittedAnswerDTO answer);
 
+        /// <summary>
+        /// Возвращает счет игроков
+        /// </summary>
+        Task<(int player1Score, int player2Score)> GetScoresAsync();
+
+        /// <summary>
+        /// Передает ход следующему игроку
+        /// </summary>
+        Task PassTurnAsync();
+
+        /// <summary>
+        /// Возвращает id победителя
+        /// </summary>
+        Task<Guid?> GetWinnerIdAsync();
     }
 }

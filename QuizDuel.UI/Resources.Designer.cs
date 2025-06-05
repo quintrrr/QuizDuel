@@ -88,11 +88,29 @@ namespace QuizDuel.UI {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Ошибка при ответе на вопрос.
+        /// </summary>
+        internal static string Game_AnswerError {
+            get {
+                return ResourceManager.GetString("Game.AnswerError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Не удалось создать игру.
         /// </summary>
         internal static string Game_CreateError {
             get {
                 return ResourceManager.GetString("Game.CreateError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ничья.
+        /// </summary>
+        internal static string Game_Draw {
+            get {
+                return ResourceManager.GetString("Game.Draw", resourceCulture);
             }
         }
         
@@ -165,6 +183,24 @@ namespace QuizDuel.UI {
         internal static string Game_NotStarted {
             get {
                 return ResourceManager.GetString("Game.NotStarted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ошибка при передаче хода.
+        /// </summary>
+        internal static string Game_PasTurnError {
+            get {
+                return ResourceManager.GetString("Game.PasTurnError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Победил игрок.
+        /// </summary>
+        internal static string Game_PlayerWon {
+            get {
+                return ResourceManager.GetString("Game.PlayerWon", resourceCulture);
             }
         }
         

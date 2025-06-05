@@ -41,5 +41,10 @@ namespace QuizDuel.DataAccess.Interfaces
         /// Асихронно получает игру по id c раундами и вопросами из базы данных.
         /// </summary>
         Task<Game?> GetGameByIdIncludeRoundsAndQuestionsAsync(Guid id);
+
+        /// <summary>
+        /// Асихронно получает игру по id c раундами и ответами из базы данных.
+        /// </summary>
+        Task<Game?> GetGameByIdIncludeRoundsAndAnswersAsync(Guid id);
     }
 }

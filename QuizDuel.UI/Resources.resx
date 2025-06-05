@@ -126,8 +126,14 @@
   <data name="Game.AnotherTurn" xml:space="preserve">
     <value>Сейчас ход другого игрока</value>
   </data>
+  <data name="Game.AnswerError" xml:space="preserve">
+    <value>Ошибка при ответе на вопрос</value>
+  </data>
   <data name="Game.CreateError" xml:space="preserve">
     <value>Не удалось создать игру</value>
+  </data>
+  <data name="Game.Draw" xml:space="preserve">
+    <value>Ничья</value>
   </data>
   <data name="Game.Finished" xml:space="preserve">
     <value>Игра уже закончилась.</value>
@@ -152,6 +158,12 @@
   </data>
   <data name="Game.NotStarted" xml:space="preserve">
     <value>Второй игрок еще не присоединился.</value>
+  </data>
+  <data name="Game.PasTurnError" xml:space="preserve">
+    <value>Ошибка при передаче хода</value>
+  </data>
+  <data name="Game.PlayerWon" xml:space="preserve">
+    <value>Победил игрок</value>
   </data>
   <data name="Game.SamePlayers" xml:space="preserve">
     <value>Вы не можете подключиться к своей игре</value>

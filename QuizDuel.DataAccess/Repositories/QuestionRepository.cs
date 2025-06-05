@@ -14,6 +14,16 @@ namespace QuizDuel.DataAccess.Repositories
         }
 
         /// <summary>
+        /// Возвращает вопрос по id.
+        /// </summary>
+        public async Task<Question?> GetByIdAsync(Guid id)
+        {
+            return await _questionsDbContext.Questions
+               .FirstOrDefaultAsync(q => q.Id == id);
+        }
+
+
+        /// <summary>
         /// Возвращает список вопросов по их id.
         /// </summary>
         public async Task<List<Question>> GetQuestionsByIdsAsync(List<Guid> ids)

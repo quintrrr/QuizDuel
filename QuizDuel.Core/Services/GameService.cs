@@ -27,7 +27,7 @@ namespace QuizDuel.Core.Services
         /// Свойство текущей игры 
         /// </summary>
         public Guid GameId
-        { 
+        {
             get
             {
                 return _gameId;
@@ -51,7 +51,7 @@ namespace QuizDuel.Core.Services
             GameDbContext gameDbContext)
         {
             _gameRepository = gameRepository;
-            _logger = logger; 
+            _logger = logger;
             _userRepository = userRepository;
             _userSessionService = userSessionService;
             _categoryRepository = categoryRepository;
@@ -70,7 +70,7 @@ namespace QuizDuel.Core.Services
                 Id = Guid.NewGuid(),
                 Player1Id = player1Id,
             };
-            
+
             for (var i = 0; i < 6; i++)
             {
                 newGame.Rounds.Add(new Round
@@ -103,7 +103,7 @@ namespace QuizDuel.Core.Services
             try
             {
                 await _gameRepository.DeleteAsync(_gameId);
-                _logger.Info($"Удалена игра с ID: {_gameId}");  
+                _logger.Info($"Удалена игра с ID: {_gameId}");
             }
             catch (Exception ex)
             {
@@ -126,7 +126,7 @@ namespace QuizDuel.Core.Services
             {
                 return (null, null);
             }
-            
+
             var player1Username = await _userRepository.GetUsernameById(game.Player1Id);
             var player2Username = await _userRepository.GetUsernameById(game.Player2Id);
             return (player1Username, player2Username);
@@ -301,6 +301,67 @@ namespace QuizDuel.Core.Services
             }
             catch (Exception ex)
             {
+                _logger.Error("Ошибка при получении вопросов", ex);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Подтверждает ответ пользователя.
+        /// </summary>
+        public async Task<AnswerResultDTO> SubmitAnswerAsync(Guid playerId, SubmittedAnswerDTO answer)
+        {
+            try
+            {
+                var game = await _gameRepository.GetGameByIdIncludeRoundsAndAnswersAsync(_gameId);
+
+                if (game is null)
+                {
+                    throw new Exception($"Игра с {_gameId} не найдена.");
+                }
+
+                var round = game.Rounds.FirstOrDefault(r => r.Index == game.CurrentRound);
+
+                if (round is null)
+                {
+                    throw new Exception("Раунд не найден");
+                }
+
+                if (round.PlayerAnswers.Any(a => a.UserId == playerId && a.QuestionId == answer.Id))
+                {
+                    throw new Exception("Игрок уже ответил на этот вопрос");
+                }
+
+                var question = await _questionRepository.GetByIdAsync(answer.Id);
+                if (question == null)
+                    throw new Exception("Вопрос не найден");
+
+                var correctAnswer = question.CorrectAnswer;
+                var correctIndex = answer.Answers.FindIndex(o => o == correctAnswer);
+                var isCorrect = correctIndex == answer.SelectedIndex;
+
+                var roundAnswer = new PlayerAnswer
+                {
+                    Id = Guid.NewGuid(),
+                    RoundId = round.Id,
+                    UserId = playerId,
+                    QuestionId = answer.Id,
+                    Selected = answer.SelectedIndex,
+                    IsCorrect = isCorrect,
+                };
+
+                await _gameDbContext.PlayerAnswers.AddAsync(roundAnswer);
+                await _gameDbContext.SaveChangesAsync();
+
+                return new AnswerResultDTO
+                {
+                    IsCorrect = isCorrect,
+                    CorrectOptionIndex = correctIndex
+                };
+            }
+            catch (Exception ex)
+            {
+                _logger.Error("Ошибка при ответе на вопрос", ex);
                 throw;
             }
         }
@@ -324,6 +385,124 @@ namespace QuizDuel.Core.Services
                 Answers = shuffled.Select(a => a.Text).ToList(),
                 CorrectAnswerIndex = shuffled.FindIndex(a => a.IsCorrect)
             };
+        }
+
+        /// <summary>
+        /// Возвращает счет игроков
+        /// </summary>
+        public async Task<(int player1Score, int player2Score)> GetScoresAsync()
+        {
+            try
+            {
+                var game = await _gameRepository.GetGameByIdIncludeRoundsAndAnswersAsync(_gameId);
+
+                if (game == null) throw new Exception("Игра не найдена");
+
+                int p1 = 0, p2 = 0;
+
+                foreach (var round in game.Rounds)
+                {
+                    p1 += round.PlayerAnswers.Count(a => a.UserId == game.Player1Id && a.IsCorrect);
+                    p2 += round.PlayerAnswers.Count(a => a.UserId == game.Player2Id && a.IsCorrect);
+                }
+
+                return (p1, p2);
+            }
+            catch (Exception ex)
+            {
+                _logger.Error("Ошибка при получении счета", ex);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Передает ход следующему игроку
+        /// </summary>
+        public async Task PassTurnAsync()
+        {
+            try
+            {
+                var game = await _gameRepository.GetGameByIdAsync(_gameId);
+                if (game == null) throw new Exception("Игра не найдена");
+
+                if (game.FinishedAt != null) throw new Exception("Игра уже завершена");
+
+                bool isEvenRound = game.CurrentRound % 2 == 0;
+
+                if (game.Turn == 0)
+                {
+                    if (isEvenRound)
+                    {
+                        game.Turn = 1;
+                    }
+                    else
+                    {
+                        game.CurrentRound++;
+                    }
+                }
+                else
+                {
+                    if (isEvenRound)
+                    {
+                        game.CurrentRound++;
+                    }
+                    else
+                    {
+                        game.Turn = 0;
+
+                        if (game.CurrentRound >= 6)
+                        {
+                            game.FinishedAt = DateTime.UtcNow.ToUniversalTime();
+                        }
+                    }
+                }
+
+                await _gameDbContext.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+                {
+                    _logger.Error("Ошибка при передачи хода", ex);
+                    throw;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Возвращает id победителя
+        /// </summary>
+        public async Task<Guid?> GetWinnerIdAsync()
+        {
+            try
+            {
+                var game = await _gameRepository.GetGameByIdIncludeRoundsAndAnswersAsync(_gameId);
+
+                if (game == null)
+                    throw new Exception("Игра не найдена");
+
+                int player1Score = 0;
+                int player2Score = 0;
+
+                foreach (var round in game.Rounds)
+                {
+                    player1Score += round.PlayerAnswers
+                        .Count(a => a.UserId == game.Player1Id && a.IsCorrect);
+                    player2Score += round.PlayerAnswers
+                        .Count(a => a.UserId == game.Player2Id && a.IsCorrect);
+                }
+
+                if (player1Score > player2Score)
+                    return game.Player1Id;
+                else if (player2Score > player1Score)
+                    return game.Player2Id;
+                else
+                    return null;
+            }
+            catch (Exception ex)
+            {
+                _logger.Error("Ошибка при выявлении победителя", ex);
+                throw;
+            }
         }
     }
 }

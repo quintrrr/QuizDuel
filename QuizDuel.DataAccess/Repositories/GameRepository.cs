@@ -91,5 +91,16 @@ namespace QuizDuel.DataAccess.Repositories
                 .FirstOrDefaultAsync(g => g.Id == id);
         }
 
+        /// <summary>
+        /// Асихронно получает игру по id c раундами и ответами из базы данных.
+        /// </summary>
+        public async Task<Game?> GetGameByIdIncludeRoundsAndAnswersAsync(Guid id)
+        {
+            _gameDbContext.ChangeTracker.Clear();
+            return await _gameDbContext.Games
+                .Include(g => g.Rounds)
+                .ThenInclude(r => r.PlayerAnswers)
+                .FirstOrDefaultAsync(g => g.Id == id);
+        }
     }
 }
