@@ -44,5 +44,17 @@ namespace QuizDuel.Core.Interfaces
         /// Возвращает список случайных категорий.
         /// </summary>
         Task<List<Category>> GetRandomCategoriesAsync(int amount);
+
+        /// <summary>
+        /// Выбирает категорию.
+        /// </summary>
+        Task SelectCategoryAsync(Guid categoryId);
+
+        /// <summary>
+        /// Возвращает список вопросов с перемешанными ответами. 
+        /// </summary>
+        Task<List<ShuffledQuestionDTO>> GetShuffledQuestionsAsync(int amount);
+
+
     }
 }

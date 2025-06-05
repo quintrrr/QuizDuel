@@ -206,6 +206,7 @@
             FormBorderStyle = FormBorderStyle.FixedSingle;
             Name = "GameForm";
             Text = "GameForm";
+            Load += GameForm_Load;
             categoryPanel.ResumeLayout(false);
             gamePanel.ResumeLayout(false);
             ResumeLayout(false);

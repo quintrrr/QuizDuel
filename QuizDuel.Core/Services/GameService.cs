@@ -1,6 +1,7 @@
 ﻿using Castle.Core.Logging;
 using QuizDuel.Core.DTO;
 using QuizDuel.Core.Interfaces;
+using QuizDuel.DataAccess;
 using QuizDuel.DataAccess.Interfaces;
 using QuizDuel.DataAccess.Models;
 
@@ -15,7 +16,11 @@ namespace QuizDuel.Core.Services
         private readonly IUserRepository _userRepository;
         private readonly IUserSessionService _userSessionService;
         private readonly ICategoryRepository _categoryRepository;
+        private readonly IQuestionRepository _questionRepository;
+        private readonly IRoundQuestionRepository _roundQuestionRepository;
         private readonly ILogger _logger;
+        private readonly GameDbContext _gameDbContext;
+
         private Guid _gameId;
 
         /// <summary>
@@ -40,13 +45,19 @@ namespace QuizDuel.Core.Services
             ILogger logger,
             IUserRepository userRepository,
             IUserSessionService userSessionService,
-            ICategoryRepository categoryRepository)
+            ICategoryRepository categoryRepository,
+            IQuestionRepository questionRepository,
+            IRoundQuestionRepository roundQuestionRepository,
+            GameDbContext gameDbContext)
         {
             _gameRepository = gameRepository;
             _logger = logger; 
             _userRepository = userRepository;
             _userSessionService = userSessionService;
             _categoryRepository = categoryRepository;
+            _questionRepository = questionRepository;
+            _roundQuestionRepository = roundQuestionRepository;
+            _gameDbContext = gameDbContext;
         }
 
         /// <summary>
@@ -137,6 +148,7 @@ namespace QuizDuel.Core.Services
             {
                 CurrentRound = game.CurrentRound,
                 CurrentTurnPlayerId = game.Turn == 0 ? game.Player1Id : game.Player2Id,
+                Turn = game.Turn,
                 IsStarted = game.Player1Id != default && game.Player2Id != default,
                 IsFinished = game.FinishedAt is not null,
             };
@@ -211,6 +223,107 @@ namespace QuizDuel.Core.Services
                 _logger.Error("Не удалось получить категории", ex);
                 throw;
             }
+        }
+
+        /// <summary>
+        /// Выбирает категорию.
+        /// </summary>
+        public async Task SelectCategoryAsync(Guid categoryId)
+        {
+            try
+            {
+                var game = await _gameRepository.GetGameByIdIncludeRoundsAsync(_gameId);
+                if (game is null)
+                {
+                    throw new Exception($"Игра с {_gameId} не найдена.");
+                }
+
+                var round = game.Rounds.FirstOrDefault(r => r.Index == game.CurrentRound);
+
+                if (round is null)
+                {
+                    throw new Exception("Раунд не найден");
+                }
+
+                round.CategoryId = categoryId;
+                await _gameDbContext.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+                _logger.Error("Не удалось выбрать категорию", ex);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Возвращает список вопросов с перемешанными ответами. 
+        /// </summary>
+        public async Task<List<ShuffledQuestionDTO>> GetShuffledQuestionsAsync(int amount)
+        {
+            try
+            {
+                var game = await _gameRepository.GetGameByIdIncludeRoundsAndQuestionsAsync(_gameId);
+
+                if (game is null)
+                {
+                    throw new Exception($"Игра с {_gameId} не найдена.");
+                }
+
+                var round = game.Rounds.FirstOrDefault(r => r.Index == game.CurrentRound);
+
+                if (round is null)
+                {
+                    throw new Exception("Раунд не найден");
+                }
+
+                if (round.RoundQuestions.Count != 0)
+                {
+                    var ids = round.RoundQuestions.Select(q => q.QuestionId).ToList();
+                    var questions = await _questionRepository.GetQuestionsByIdsAsync(ids);
+                    return questions.Select(q => ShuffleAnswers(q)).OrderBy(q => q.QuestionId).ToList();
+                }
+
+                var newQuestions = await _questionRepository.GetRandomByCategoryIdAsync(round.CategoryId, 3);
+                var newRoundQuestions = newQuestions.Select((q, index) => new RoundQuestion
+                {
+                    Id = Guid.NewGuid(),
+                    RoundId = round.Id,
+                    QuestionId = q.Id,
+                    QuestionIndex = index,
+                }).ToList();
+
+                foreach (var roundQuestion in newRoundQuestions)
+                {
+                    await _roundQuestionRepository.AddAsync(roundQuestion);
+                }
+
+                return newQuestions.Select(q => ShuffleAnswers(q)).OrderBy(q => q.QuestionId).ToList();
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
+        private static ShuffledQuestionDTO ShuffleAnswers(Question question)
+        {
+            var answers = new List<AnswerDTO>
+            {
+                new AnswerDTO { Text =  question.CorrectAnswer, IsCorrect = true },
+                new AnswerDTO { Text =  question.Incorrect1 },
+                new AnswerDTO { Text =  question.Incorrect2 },
+                new AnswerDTO { Text =  question.Incorrect3 },
+            };
+
+            var shuffled = answers.OrderBy(a => Guid.NewGuid()).ToList();
+
+            return new ShuffledQuestionDTO
+            {
+                QuestionId = question.Id,
+                Text = question.Text,
+                Answers = shuffled.Select(a => a.Text).ToList(),
+                CorrectAnswerIndex = shuffled.FindIndex(a => a.IsCorrect)
+            };
         }
     }
 }

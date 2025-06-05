@@ -67,5 +67,29 @@ namespace QuizDuel.DataAccess.Repositories
             game.Player2Id = userId;
             await _gameDbContext.SaveChangesAsync();
         }
+
+        /// <summary>
+        /// Асихронно получает игру по id c раундами из базы данных.
+        /// </summary>
+        public async Task<Game?> GetGameByIdIncludeRoundsAsync(Guid id)
+        {
+            _gameDbContext.ChangeTracker.Clear();
+            return await _gameDbContext.Games
+                .Include(g => g.Rounds)
+                .FirstOrDefaultAsync(g => g.Id == id);
+        }
+
+        /// <summary>
+        /// Асихронно получает игру по id c раундами и вопросами из базы данных.
+        /// </summary>
+        public async Task<Game?> GetGameByIdIncludeRoundsAndQuestionsAsync(Guid id)
+        {
+            _gameDbContext.ChangeTracker.Clear();
+            return await _gameDbContext.Games
+                .Include(g => g.Rounds)
+                .ThenInclude(r => r.RoundQuestions)
+                .FirstOrDefaultAsync(g => g.Id == id);
+        }
+
     }
 }

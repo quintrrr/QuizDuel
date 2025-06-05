@@ -9,6 +9,8 @@
 
         public Guid CurrentTurnPlayerId { get; set; }
 
+        public int Turn { get; set; }
+
         public bool IsStarted { get; set; }
 
         public bool IsFinished { get; set; }
