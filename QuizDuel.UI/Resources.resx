@@ -144,6 +144,12 @@
   <data name="Game.LoadCategoryError" xml:space="preserve">
     <value>Ошибка при загрузке категорий</value>
   </data>
+  <data name="Game.LoadError" xml:space="preserve">
+    <value>Не удалось загрузить игру</value>
+  </data>
+  <data name="Game.LoadQuestionsError" xml:space="preserve">
+    <value>Не удалось загрузить вопросы</value>
+  </data>
   <data name="Game.NotStarted" xml:space="preserve">
     <value>Второй игрок еще не присоединился.</value>
   </data>

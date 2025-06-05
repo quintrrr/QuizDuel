@@ -12,6 +12,7 @@ namespace QuizDuel.UI
         private readonly ILogger _logger;
 
         private List<ShuffledQuestionDTO> _questions = [];
+        private int _currentQuestionIndex = 0;
 
         public GameForm(
             IGameService gameService,
@@ -27,8 +28,6 @@ namespace QuizDuel.UI
             _logger = logger;
 
             selectCategoryLabel.Text = Resources.Game_SelectCategory;
-
-            
         }
 
         private async Task ShowCategorySelectionAsync()
@@ -73,11 +72,13 @@ namespace QuizDuel.UI
 
                 await _gameService.SelectCategoryAsync(categoryId);
 
+                await LoadQuestions();
+
                 categoryPanel.Enabled = true;
             }
             catch (Exception ex)
             {
-                _logger.Error("Ошибка при выборе категории");
+                _logger.Error("Ошибка при выборе категории", ex);
                 _navigationService.NavigateTo<WaitingForm>();
             }
         }
@@ -87,6 +88,7 @@ namespace QuizDuel.UI
             try
             {
                 var gameState = await _gameService.GetGameStateAsync();
+
                 if (gameState.Turn == 0 && gameState.CurrentRound % 2 == 0
                     || gameState.Turn == 1 && gameState.CurrentRound % 2 != 0)
                 {
@@ -94,18 +96,73 @@ namespace QuizDuel.UI
                 }
                 else
                 {
-
+                    await LoadQuestions();
                 }
             }
             catch (Exception ex)
             {
-
+                _logger.Error("Не удалось загрузить игру", ex);
+                _notificationService.ShowError(Resources.Game_LoadError);
+                _navigationService.NavigateTo<WaitingForm>();
             }
         }
 
         private async Task LoadQuestions()
         {
+            try
+            {
+                _questions = await _gameService.GetShuffledQuestionsAsync(3);
+                _currentQuestionIndex = 0;
+                ShowQuestion();
+            } 
+            catch (Exception ex)
+            {
+                _logger.Error("Не удалось загрузить вопросы", ex);
+                _notificationService.ShowError(Resources.Game_LoadQuestionsError);
+                _navigationService.NavigateTo<WaitingForm>();
+            }
+        }
 
+        private async Task ShowQuestion()
+        {
+            var question = _questions[_currentQuestionIndex];
+            questionLabel.Text = question.Text;
+
+            btnAnswer1.Text = question.Answers[0];
+            btnAnswer2.Text = question.Answers[1];
+            btnAnswer3.Text = question.Answers[2];
+            btnAnswer4.Text = question.Answers[3];
+
+            ResetButtonStyles();
+
+            categoryPanel.Visible = false;
+            gamePanel.Visible = true;
+
+            await StartTimerAsync(10);
+        }
+
+        private void ResetButtonStyles()
+        {
+            foreach (var btn in new[] { btnAnswer1, btnAnswer2, btnAnswer3, btnAnswer4 })
+            {
+                btn.BackColor = SystemColors.Control;
+            }
+        }
+
+        private async Task StartTimerAsync(int seconds)
+        {
+            int total = seconds * 100;
+            questionTimer.Maximum = total;
+            questionTimer.Value = total;
+
+            for (int i = total; i >= 0; i--)
+            {
+                questionTimer.Value = i;
+
+                await Task.Delay(10); 
+            }
+
+            //TimeExpired();
         }
     }
 }

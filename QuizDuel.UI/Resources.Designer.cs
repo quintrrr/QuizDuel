@@ -142,6 +142,24 @@ namespace QuizDuel.UI {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Не удалось загрузить игру.
+        /// </summary>
+        internal static string Game_LoadError {
+            get {
+                return ResourceManager.GetString("Game.LoadError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Не удалось загрузить вопросы.
+        /// </summary>
+        internal static string Game_LoadQuestionsError {
+            get {
+                return ResourceManager.GetString("Game.LoadQuestionsError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Второй игрок еще не присоединился..
         /// </summary>
         internal static string Game_NotStarted {
