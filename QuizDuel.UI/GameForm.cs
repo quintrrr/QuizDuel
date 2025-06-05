@@ -2,7 +2,7 @@
 
 namespace QuizDuel.UI
 {
-    public partial class GameForm: Form
+    public partial class GameForm : Form
     {
         private readonly IGameService _gameService;
         private readonly INotificationService _notificationService;
@@ -44,7 +44,17 @@ namespace QuizDuel.UI
                 _notificationService.ShowError(Resources.Game_LoadCategoryError);
                 _navigationService.NavigateTo<WaitingForm>();
             }
-            
+
+        }
+
+        private void ButtonAnswer_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void ButtonCategory_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

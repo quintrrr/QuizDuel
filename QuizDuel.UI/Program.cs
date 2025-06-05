@@ -80,6 +80,9 @@ namespace QuizDuel.UI
                 
                 Component.For<INavigationService>()
                 .ImplementedBy<NavigationService>()
+                .LifestyleSingleton(),
+
+                Component.For<MainForm>()
                 .LifestyleSingleton()
             );
 
@@ -133,9 +136,6 @@ namespace QuizDuel.UI
                 .LifestyleTransient(),
 
                 Component.For<LoginForm>()
-                .LifestyleTransient(),
-
-                Component.For<MainForm>()
                 .LifestyleTransient(),
 
                 Component.For<WaitingForm>()

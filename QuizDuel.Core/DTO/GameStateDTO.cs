@@ -7,7 +7,7 @@
     {
         public int CurrentRound { get; set; }
 
-        public int Turn { get; set; }
+        public Guid CurrentTurnPlayerId { get; set; }
 
         public bool IsStarted { get; set; }
 

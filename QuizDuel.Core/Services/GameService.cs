@@ -136,7 +136,7 @@ namespace QuizDuel.Core.Services
             return new GameStateDTO
             {
                 CurrentRound = game.CurrentRound,
-                Turn = game.Turn,
+                CurrentTurnPlayerId = game.Turn == 0 ? game.Player1Id : game.Player2Id,
                 IsStarted = game.Player1Id != default && game.Player2Id != default,
                 IsFinished = game.FinishedAt is not null,
             };

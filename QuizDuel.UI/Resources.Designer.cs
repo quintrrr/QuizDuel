@@ -79,6 +79,15 @@ namespace QuizDuel.UI {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Сейчас ход другого игрока.
+        /// </summary>
+        internal static string Game_AnotherTurn {
+            get {
+                return ResourceManager.GetString("Game.AnotherTurn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Не удалось создать игру.
         /// </summary>
         internal static string Game_CreateError {
@@ -264,6 +273,15 @@ namespace QuizDuel.UI {
         internal static string Notification_Error {
             get {
                 return ResourceManager.GetString("Notification.Error", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Информация.
+        /// </summary>
+        internal static string Notification_Info {
+            get {
+                return ResourceManager.GetString("Notification.Info", resourceCulture);
             }
         }
         

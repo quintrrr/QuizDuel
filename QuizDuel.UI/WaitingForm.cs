@@ -9,6 +9,7 @@ namespace QuizDuel.UI
         private readonly INavigationService _navigationService;
         private readonly ILogger _logger;
         private readonly INotificationService _notificationService;
+        private readonly IUserSessionService _userSessionService;
 
         private bool _isGameStarted;
 
@@ -16,7 +17,8 @@ namespace QuizDuel.UI
             IGameService gameService,
             INavigationService navigationService,
             ILogger logger,
-            INotificationService notificationService)
+            INotificationService notificationService,
+            IUserSessionService userSessionService)
         {
             InitializeComponent();
 
@@ -24,6 +26,7 @@ namespace QuizDuel.UI
             _navigationService = navigationService;
             _logger = logger;
             _notificationService = notificationService;
+            _userSessionService = userSessionService;
 
             UpdateUsernameLabels();
         }
@@ -48,7 +51,15 @@ namespace QuizDuel.UI
                 }
 
                 _isGameStarted = true;
-                _navigationService.NavigateTo<GameForm>();
+                if (gameState.CurrentTurnPlayerId != _userSessionService.UserID)
+                {
+                    _notificationService.ShowInfo(Resources.Game_AnotherTurn);
+                    btnPlay.Enabled = true;
+                }
+                else
+                {
+                    _navigationService.NavigateTo<GameForm>();
+                }
             }
             catch (Exception ex)
             {

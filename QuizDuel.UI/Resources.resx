@@ -123,6 +123,9 @@
   <data name="CreateGameButton" xml:space="preserve">
     <value>Создать игру</value>
   </data>
+  <data name="Game.AnotherTurn" xml:space="preserve">
+    <value>Сейчас ход другого игрока</value>
+  </data>
   <data name="Game.CreateError" xml:space="preserve">
     <value>Не удалось создать игру</value>
   </data>
@@ -185,6 +188,9 @@
   </data>
   <data name="Notification.Error" xml:space="preserve">
     <value>Уведомление об ошибке</value>
+  </data>
+  <data name="Notification.Info" xml:space="preserve">
+    <value>Информация</value>
   </data>
   <data name="Notification.Success" xml:space="preserve">
     <value>Успешная операция</value>
