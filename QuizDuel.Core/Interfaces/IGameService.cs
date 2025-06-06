@@ -71,8 +71,15 @@ namespace QuizDuel.Core.Interfaces
         Task PassTurnAsync();
 
         /// <summary>
-        /// Возвращает id победителя
+        /// Возвращает победителя
         /// </summary>
-        Task<Guid?> GetWinnerIdAsync();
+        Task<string?> GetWinnerAsync();
+
+        /// <summary>
+        /// Возвращает текущую категорию
+        /// </summary>
+        Task<(string category, int round)> GetCurrentCategoryAndRoundAsync();
+
+        Task<List<LeaderboardEntryDTO>> GetLeaderboardAsync();
     }
 }

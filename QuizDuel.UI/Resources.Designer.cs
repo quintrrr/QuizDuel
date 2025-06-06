@@ -196,6 +196,15 @@ namespace QuizDuel.UI {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Играть.
+        /// </summary>
+        internal static string Game_Play {
+            get {
+                return ResourceManager.GetString("Game.Play", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Победил игрок.
         /// </summary>
         internal static string Game_PlayerWon {
@@ -255,6 +264,34 @@ namespace QuizDuel.UI {
         internal static string JoinGameButton {
             get {
                 return ResourceManager.GetString("JoinGameButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap leaderboard {
+            get {
+                object obj = ResourceManager.GetObject("leaderboard", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to правильных ответов.
+        /// </summary>
+        internal static string Leaderboard_Answers {
+            get {
+                return ResourceManager.GetString("Leaderboard.Answers", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Таблица лидеров.
+        /// </summary>
+        internal static string Leaderboard_Label {
+            get {
+                return ResourceManager.GetString("Leaderboard.Label", resourceCulture);
             }
         }
         

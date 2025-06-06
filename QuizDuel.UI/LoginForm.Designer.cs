@@ -34,6 +34,7 @@
             passwordLabel = new Label();
             regLabel = new LinkLabel();
             btnLogin = new Button();
+            toolStrip = new ToolStrip();
             SuspendLayout();
             // 
             // usernameTextBox
@@ -94,11 +95,20 @@
             btnLogin.UseVisualStyleBackColor = true;
             btnLogin.Click += BtnLogin_ClickAsync;
             // 
+            // toolStrip
+            // 
+            toolStrip.Location = new Point(0, 0);
+            toolStrip.Name = "toolStrip";
+            toolStrip.Size = new Size(474, 25);
+            toolStrip.TabIndex = 6;
+            toolStrip.Text = "toolStrip1";
+            // 
             // LoginForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(474, 432);
+            Controls.Add(toolStrip);
             Controls.Add(btnLogin);
             Controls.Add(regLabel);
             Controls.Add(passwordLabel);
@@ -121,5 +131,6 @@
         private Label passwordLabel;
         private LinkLabel regLabel;
         private Button btnLogin;
+        private ToolStrip toolStrip;
     }
 }

@@ -1,4 +1,5 @@
-﻿using Castle.Core.Logging;
+﻿using System.Globalization;
+using Castle.Core.Logging;
 using QuizDuel.Core.Interfaces;
 
 namespace QuizDuel.UI
@@ -26,6 +27,9 @@ namespace QuizDuel.UI
             _logger = logger;
             _notificationService = notificationService;
             _navigationService = navigationService;
+
+            toolStrip.Items.Add(new ToolStripButton("RU", null, (_, _) => SetLanguage("ru")));
+            toolStrip.Items.Add(new ToolStripButton("EN", null, (_, _) => SetLanguage("en")));
         }
 
         private void ApplyLocalization()
@@ -67,6 +71,18 @@ namespace QuizDuel.UI
         private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
         {
             Application.Exit();
+        }
+
+        public void SetLanguage(string langCode)
+        {
+            Thread.CurrentThread.CurrentUICulture = new CultureInfo(langCode);
+
+            ApplyLocalization();
+        }
+
+        private void PictureBox1_Click(object sender, EventArgs e)
+        {
+            _navigationService.NavigateTo<LeaderboardForm>();
         }
     }
 }

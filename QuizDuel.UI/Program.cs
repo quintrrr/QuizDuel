@@ -156,6 +156,9 @@ namespace QuizDuel.UI
                 .LifestyleTransient(),
 
                 Component.For<GameForm>()
+                .LifestyleTransient(),
+
+                Component.For<LeaderboardForm>()
                 .LifestyleTransient()
             );
         }
