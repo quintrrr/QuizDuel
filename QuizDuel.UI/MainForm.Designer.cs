@@ -30,6 +30,7 @@
         {
             btnCreateGame = new Button();
             btnJoinGame = new Button();
+            toolStrip = new ToolStrip();
             SuspendLayout();
             // 
             // btnCreateGame
@@ -52,11 +53,20 @@
             btnJoinGame.UseVisualStyleBackColor = true;
             btnJoinGame.Click += BtnJoinGame_Click;
             // 
+            // toolStrip
+            // 
+            toolStrip.Location = new Point(0, 0);
+            toolStrip.Name = "toolStrip";
+            toolStrip.Size = new Size(800, 25);
+            toolStrip.TabIndex = 3;
+            toolStrip.Text = "toolStrip1";
+            // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(toolStrip);
             Controls.Add(btnJoinGame);
             Controls.Add(btnCreateGame);
             Name = "MainForm";
@@ -64,11 +74,13 @@
             FormClosed += MainForm_FormClosed;
             Shown += MainForm_Shown;
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
 
         private Button btnCreateGame;
         private Button btnJoinGame;
+        private ToolStrip toolStrip;
     }
 }

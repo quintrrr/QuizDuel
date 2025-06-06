@@ -196,6 +196,15 @@ namespace QuizDuel.UI {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Играть.
+        /// </summary>
+        internal static string Game_Play {
+            get {
+                return ResourceManager.GetString("Game.Play", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Победил игрок.
         /// </summary>
         internal static string Game_PlayerWon {

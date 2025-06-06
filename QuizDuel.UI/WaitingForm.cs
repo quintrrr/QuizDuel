@@ -23,12 +23,18 @@ namespace QuizDuel.UI
             IUserSessionService userSessionService)
         {
             InitializeComponent();
+            ApplyLocalization();
 
             _gameService = gameService;
             _navigationService = navigationService;
             _logger = logger;
             _notificationService = notificationService;
             _userSessionService = userSessionService;
+        }
+
+        private void ApplyLocalization()
+        {
+            btnPlay.Text = Resources.Game_Play;
         }
 
         private async Task GetGameState()
