@@ -117,21 +117,153 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="BirthdateLabel" xml:space="preserve">
+    <value>Дата рождения</value>
+  </data>
+  <data name="ConfirmExitGameMessage" xml:space="preserve">
+    <value>Вы действительно хотите выйти из игры?</value>
+  </data>
+  <data name="ConformExitGame" xml:space="preserve">
+    <value>Подтверждение выхода</value>
+  </data>
+  <data name="CreateGameButton" xml:space="preserve">
+    <value>Создать игру</value>
+  </data>
+  <data name="Game.AnotherTurn" xml:space="preserve">
+    <value>Сейчас ход другого игрока</value>
+  </data>
+  <data name="Game.AnswerError" xml:space="preserve">
+    <value>Ошибка при ответе на вопрос</value>
+  </data>
+  <data name="Game.CreateError" xml:space="preserve">
+    <value>Не удалось создать игру</value>
+  </data>
+  <data name="Game.Draw" xml:space="preserve">
+    <value>Ничья</value>
+  </data>
+  <data name="Game.Finished" xml:space="preserve">
+    <value>Игра уже закончилась.</value>
+  </data>
+  <data name="Game.IsNotFound" xml:space="preserve">
+    <value>Игра не найдена</value>
+  </data>
+  <data name="Game.JoinButton" xml:space="preserve">
+    <value>Присоединиться</value>
+  </data>
+  <data name="Game.JoinError" xml:space="preserve">
+    <value>Ошибка подключения к игре</value>
+  </data>
+  <data name="Game.LoadCategoryError" xml:space="preserve">
+    <value>Ошибка при загрузке категорий</value>
+  </data>
+  <data name="Game.LoadError" xml:space="preserve">
+    <value>Не удалось загрузить игру</value>
+  </data>
+  <data name="Game.LoadQuestionsError" xml:space="preserve">
+    <value>Не удалось загрузить вопросы</value>
+  </data>
+  <data name="Game.NotStarted" xml:space="preserve">
+    <value>Второй игрок еще не присоединился.</value>
+  </data>
+  <data name="Game.PasTurnError" xml:space="preserve">
+    <value>Ошибка при передаче хода</value>
+  </data>
+  <data name="Game.Play" xml:space="preserve">
+    <value>Играть</value>
+  </data>
+  <data name="Game.PlayerWon" xml:space="preserve">
+    <value>Победил игрок</value>
+  </data>
   <data name="Game.SamePlayers" xml:space="preserve">
     <value>Вы не можете подключиться к своей игре</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="leaderboard" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>assets\images\leaderboard.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="Game.SelectCategory" xml:space="preserve">
+    <value>Выберите категорию</value>
   </data>
   <data name="Game.StateError" xml:space="preserve">
     <value>Не удалось подключиться к игре.</value>
   </data>
+  <data name="Join.UpdateError" xml:space="preserve">
+    <value>Не удалось загрузить игры</value>
+  </data>
   <data name="Join.UpdateGames" xml:space="preserve">
     <value>Обновить</value>
   </data>
-  <data name="Game.CreateError" xml:space="preserve">
-    <value>Не удалось создать игру</value>
+  <data name="JoinGameButton" xml:space="preserve">
+    <value>Присоединиться к игре</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="leaderboard" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>assets\images\leaderboard.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Leaderboard.Answers" xml:space="preserve">
+    <value>правильных ответов</value>
+  </data>
+  <data name="Leaderboard.Label" xml:space="preserve">
+    <value>Таблица лидеров</value>
+  </data>
+  <data name="Login.BtnLogin" xml:space="preserve">
+    <value>Войти</value>
+  </data>
+  <data name="Login.EmptyUsername" xml:space="preserve">
+    <value>Заполните имя пользователя</value>
+  </data>
+  <data name="Login.Error" xml:space="preserve">
+    <value>Ошибка при входе в аккаунт</value>
+  </data>
+  <data name="Login.NoAccount" xml:space="preserve">
+    <value>Нет аккаунта? </value>
+  </data>
+  <data name="Login.NonExistingUser" xml:space="preserve">
+    <value>Такого пользователя не существует</value>
+  </data>
+  <data name="Login.Success" xml:space="preserve">
+    <value>Успешный вход в аккаунт</value>
+  </data>
+  <data name="Login.WrongPassword" xml:space="preserve">
+    <value>Неверный пароль</value>
+  </data>
+  <data name="Notification.Error" xml:space="preserve">
+    <value>Уведомление об ошибке</value>
+  </data>
+  <data name="Notification.Info" xml:space="preserve">
+    <value>Информация</value>
+  </data>
+  <data name="Notification.Success" xml:space="preserve">
+    <value>Успешная операция</value>
+  </data>
+  <data name="Password.HasLowerChar" xml:space="preserve">
+    <value>Пароль должен содержать хотя бы одну строчную букву</value>
+  </data>
+  <data name="Password.HasNumber" xml:space="preserve">
+    <value>Пароль должен содержать хотя бы одну цифру</value>
+  </data>
+  <data name="Password.HasSymbols" xml:space="preserve">
+    <value>Пароль должен содержать хотя бы один специальный символ</value>
+  </data>
+  <data name="Password.HasUpperChar" xml:space="preserve">
+    <value>Пароль должен содержать хотя бы одну заглавную букву</value>
+  </data>
+  <data name="Password.IsLatinOnly" xml:space="preserve">
+    <value>Пароль должен содержать только латинские буквы</value>
+  </data>
+  <data name="Password.MinMaxChar" xml:space="preserve">
+    <value>Пароль должен быть не менее 8 и не более 20 символов</value>
+  </data>
+  <data name="PasswordLabel" xml:space="preserve">
+    <value>Пароль</value>
+  </data>
+  <data name="Player1Label" xml:space="preserve">
+    <value>Игрок 1</value>
+  </data>
+  <data name="Player2Label" xml:space="preserve">
+    <value>Игрок 2 </value>
+  </data>
+  <data name="Register.EmptyPassword" xml:space="preserve">
+    <value>Введите пароль</value>
+  </data>
+  <data name="Register.EmptyRepeatPassword" xml:space="preserve">
+    <value>Введите повторный пароль</value>
   </data>
   <data name="Register.EmptyUsername" xml:space="preserve">
     <value>Введите имя пользователя</value>
@@ -139,157 +271,28 @@
   <data name="Register.Error" xml:space="preserve">
     <value>Ошибка при регистрации аккаунта</value>
   </data>
-  <data name="Password.HasSymbols" xml:space="preserve">
-    <value>Пароль должен содержать хотя бы один специальный символ</value>
-  </data>
-  <data name="Login.BtnLogin" xml:space="preserve">
-    <value>Войти</value>
-  </data>
-  <data name="Password.HasLowerChar" xml:space="preserve">
-    <value>Пароль должен содержать хотя бы одну строчную букву</value>
-  </data>
-  <data name="Game.LoadQuestionsError" xml:space="preserve">
-    <value>Не удалось загрузить вопросы</value>
-  </data>
-  <data name="BirthdateLabel" xml:space="preserve">
-    <value>Дата рождения</value>
-  </data>
-  <data name="Password.HasUpperChar" xml:space="preserve">
-    <value>Пароль должен содержать хотя бы одну заглавную букву</value>
-  </data>
-  <data name="Register.InvalidRepeatPassword" xml:space="preserve">
-    <value>Пароли должны совпадать</value>
-  </data>
-  <data name="Game.AnotherTurn" xml:space="preserve">
-    <value>Сейчас ход другого игрока</value>
-  </data>
-  <data name="Notification.Success" xml:space="preserve">
-    <value>Успешная операция</value>
-  </data>
-  <data name="Login.NonExistingUser" xml:space="preserve">
-    <value>Такого пользователя не существует</value>
-  </data>
-  <data name="Game.IsNotFound" xml:space="preserve">
-    <value>Игра не найдена</value>
-  </data>
-  <data name="UsernameLabel" xml:space="preserve">
-    <value>Имя пользователя</value>
-  </data>
-  <data name="Register.InvalidAge" xml:space="preserve">
-    <value>Вам должно быть не меньше 4 лет</value>
-  </data>
   <data name="Register.ExistingUser" xml:space="preserve">
     <value>Такой пользователь уже существует.</value>
-  </data>
-  <data name="PasswordLabel" xml:space="preserve">
-    <value>Пароль</value>
-  </data>
-  <data name="Game.JoinButton" xml:space="preserve">
-    <value>Присоединиться</value>
-  </data>
-  <data name="Game.Play" xml:space="preserve">
-    <value>Играть</value>
-  </data>
-  <data name="JoinGameButton" xml:space="preserve">
-    <value>Присоединиться к игре</value>
-  </data>
-  <data name="Game.JoinError" xml:space="preserve">
-    <value>Ошибка подключения к игре</value>
-  </data>
-  <data name="Game.SelectCategory" xml:space="preserve">
-    <value>Выберите категорию</value>
-  </data>
-  <data name="Leaderboard.Answers" xml:space="preserve">
-    <value>правильных ответов</value>
-  </data>
-  <data name="Notification.Info" xml:space="preserve">
-    <value>Информация</value>
-  </data>
-  <data name="RegisterButton" xml:space="preserve">
-    <value>Зарегистрироваться</value>
-  </data>
-  <data name="Notification.Error" xml:space="preserve">
-    <value>Уведомление об ошибке</value>
-  </data>
-  <data name="Player2Label" xml:space="preserve">
-    <value>Игрок 2 </value>
-  </data>
-  <data name="RepeatPasswordLabel" xml:space="preserve">
-    <value>Повторите пароль</value>
-  </data>
-  <data name="Register.EmptyPassword" xml:space="preserve">
-    <value>Введите пароль</value>
-  </data>
-  <data name="Game.LoadError" xml:space="preserve">
-    <value>Не удалось загрузить игру</value>
-  </data>
-  <data name="Game.AnswerError" xml:space="preserve">
-    <value>Ошибка при ответе на вопрос</value>
-  </data>
-  <data name="Login.Error" xml:space="preserve">
-    <value>Ошибка при входе в аккаунт</value>
-  </data>
-  <data name="Game.LoadCategoryError" xml:space="preserve">
-    <value>Ошибка при загрузке категорий</value>
-  </data>
-  <data name="Game.NotStarted" xml:space="preserve">
-    <value>Второй игрок еще не присоединился.</value>
   </data>
   <data name="Register.HaveAnAccount" xml:space="preserve">
     <value>Есть аккаунт?</value>
   </data>
-  <data name="CreateGameButton" xml:space="preserve">
-    <value>Создать игру</value>
+  <data name="Register.InvalidAge" xml:space="preserve">
+    <value>Вам должно быть не меньше 4 лет</value>
   </data>
-  <data name="Game.Finished" xml:space="preserve">
-    <value>Игра уже закончилась.</value>
-  </data>
-  <data name="Password.IsLatinOnly" xml:space="preserve">
-    <value>Пароль должен содержать только латинские буквы</value>
-  </data>
-  <data name="Player1Label" xml:space="preserve">
-    <value>Игрок 1</value>
-  </data>
-  <data name="Game.PasTurnError" xml:space="preserve">
-    <value>Ошибка при передаче хода</value>
-  </data>
-  <data name="Login.WrongPassword" xml:space="preserve">
-    <value>Неверный пароль</value>
-  </data>
-  <data name="Login.Success" xml:space="preserve">
-    <value>Успешный вход в аккаунт</value>
-  </data>
-  <data name="Leaderboard.Label" xml:space="preserve">
-    <value>Таблица лидеров</value>
-  </data>
-  <data name="Game.PlayerWon" xml:space="preserve">
-    <value>Победил игрок</value>
-  </data>
-  <data name="Password.HasNumber" xml:space="preserve">
-    <value>Пароль должен содержать хотя бы одну цифру</value>
-  </data>
-  <data name="Login.NoAccount" xml:space="preserve">
-    <value>Нет аккаунта? </value>
+  <data name="Register.InvalidRepeatPassword" xml:space="preserve">
+    <value>Пароли должны совпадать</value>
   </data>
   <data name="Register.Successful" xml:space="preserve">
     <value>Регистрация прошла успешно</value>
   </data>
-  <data name="Join.UpdateError" xml:space="preserve">
-    <value>Не удалось загрузить игры</value>
+  <data name="RegisterButton" xml:space="preserve">
+    <value>Зарегистрироваться</value>
   </data>
-  <data name="Password.MinMaxChar" xml:space="preserve">
-    <value>Пароль должен быть не менее 8 и не более 20 символов</value>
+  <data name="RepeatPasswordLabel" xml:space="preserve">
+    <value>Повторите пароль</value>
   </data>
-  <data name="Game.Draw" xml:space="preserve">
-    <value>Ничья</value>
-  </data>
-  <data name="Register.EmptyRepeatPassword" xml:space="preserve">
-    <value>Введите повторный пароль</value>
-  </data>
-  <data name="Login.EmptyUsername" xml:space="preserve">
-    <value>Заполните имя пользователя</value>
-  </data>
-  <data name="leaderboard" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>assets\images\leaderboard.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="UsernameLabel" xml:space="preserve">
+    <value>Имя пользователя</value>
   </data>
 </root>

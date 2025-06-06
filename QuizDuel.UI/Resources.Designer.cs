@@ -70,6 +70,24 @@ namespace QuizDuel.UI {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Вы действительно хотите выйти из игры?.
+        /// </summary>
+        internal static string ConfirmExitGameMessage {
+            get {
+                return ResourceManager.GetString("ConfirmExitGameMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Подтверждение выхода.
+        /// </summary>
+        internal static string ConformExitGame {
+            get {
+                return ResourceManager.GetString("ConformExitGame", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Создать игру.
         /// </summary>
         internal static string CreateGameButton {

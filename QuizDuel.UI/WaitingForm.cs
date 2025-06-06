@@ -63,7 +63,6 @@ namespace QuizDuel.UI
                     return;
                 }
 
-                _isGameStarted = true;
                 if (_gameState.CurrentTurnPlayerId != _userSessionService.UserID)
                 {
                     _notificationService.ShowInfo(Resources.Game_AnotherTurn);
@@ -72,6 +71,7 @@ namespace QuizDuel.UI
                 }
                 else
                 {
+                    _isGameStarted = true;
                     _navigationService.NavigateTo<GameForm>();
                 }
             }
@@ -116,6 +116,22 @@ namespace QuizDuel.UI
 
         private async void WaitingForm_FormClosing(object sender, FormClosingEventArgs e)
         {
+            if (e.CloseReason == CloseReason.UserClosing)
+            {
+                var result = MessageBox.Show(
+                    Resources.ConfirmExitGameMessage,
+                    Resources.ConformExitGame,
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Question
+                );
+
+                if (result == DialogResult.No)
+                {
+                    e.Cancel = true;
+                    return;
+                }
+            }
+
             if (!_isGameStarted)
             {
                 await _gameService.DeleteGameAsync();

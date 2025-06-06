@@ -55,7 +55,6 @@ namespace QuizDuel.UI
             {
                 _notificationService.ShowError(Resources.Game_LoadCategoryError);
                 _isGameContinued = true;
-                _isAnswered = true;
                 _navigationService.NavigateTo<WaitingForm>();
             }
         }
@@ -105,7 +104,6 @@ namespace QuizDuel.UI
             {
                 _notificationService.ShowError(Resources.Game_AnswerError);
                 _isGameContinued = true;
-                _isAnswered = true;
                 _navigationService.NavigateTo<WaitingForm>();
             }
         }
@@ -131,7 +129,6 @@ namespace QuizDuel.UI
             {
                 _logger.Error("Ошибка при выборе категории", ex);
                 _isGameContinued = true;
-                _isAnswered = true;
                 _navigationService.NavigateTo<WaitingForm>();
             }
         }
@@ -154,7 +151,6 @@ namespace QuizDuel.UI
             {
                 _notificationService.ShowError(Resources.Game_LoadQuestionsError);
                 _isGameContinued = true;
-                _isAnswered = true;
                 _navigationService.NavigateTo<WaitingForm>();
             }
         }
@@ -253,7 +249,6 @@ namespace QuizDuel.UI
             {
                 _notificationService.ShowError(Resources.Game_AnswerError);
                 _isGameContinued = true;
-                _isAnswered = true;
                 _navigationService.NavigateTo<WaitingForm>();
             }
         }
@@ -282,7 +277,6 @@ namespace QuizDuel.UI
             {
                 _notificationService.ShowError(Resources.Game_PasTurnError);
                 _isGameContinued = true;
-                _isAnswered = true;
                 _navigationService.NavigateTo<WaitingForm>();
             }
         }
@@ -315,17 +309,32 @@ namespace QuizDuel.UI
                 _logger.Error("Не удалось загрузить игру", ex);
                 _notificationService.ShowError(Resources.Game_LoadError);
                 _isGameContinued = true;
-                _isAnswered = true;
                 _navigationService.NavigateTo<WaitingForm>();
             }
         }
 
         private async void GameForm_FormClosing(object sender, FormClosingEventArgs e)
         {
+            if (e.CloseReason == CloseReason.UserClosing)
+            {
+                var result = MessageBox.Show(
+                    Resources.ConfirmExitGameMessage,
+                    Resources.ConformExitGame,
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Question
+                );
+
+                if (result == DialogResult.No)
+                {
+                    e.Cancel = true;
+                    return;
+                }
+            }
+
+            _isAnswered = true;
             if (!_isGameContinued)
             {
                 await _gameService.DeleteGameAsync();
-                _isAnswered = true;
                 _navigationService.NavigateTo<MainForm>();
             }
         }
