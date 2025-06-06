@@ -79,7 +79,7 @@ namespace QuizDuel.UI
             {
                 _logger.Error(ex.Message);
                 _notificationService.ShowError(Resources.Game_StateError);
-                Close();
+                _navigationService.NavigateTo<MainForm>();
             }
         }
 
@@ -119,6 +119,9 @@ namespace QuizDuel.UI
             if (!_isGameStarted)
             {
                 await _gameService.DeleteGameAsync();
+                _navigationService.NavigateTo<MainForm>();
+            }
+            else if (_gameState.IsFinished) { 
                 _navigationService.NavigateTo<MainForm>();
             }
         }

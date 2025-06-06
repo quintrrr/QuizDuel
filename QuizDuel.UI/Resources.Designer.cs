@@ -268,6 +268,34 @@ namespace QuizDuel.UI {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap leaderboard {
+            get {
+                object obj = ResourceManager.GetObject("leaderboard", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to правильных ответов.
+        /// </summary>
+        internal static string Leaderboard_Answers {
+            get {
+                return ResourceManager.GetString("Leaderboard.Answers", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Таблица лидеров.
+        /// </summary>
+        internal static string Leaderboard_Label {
+            get {
+                return ResourceManager.GetString("Leaderboard.Label", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Войти.
         /// </summary>
         internal static string Login_BtnLogin {

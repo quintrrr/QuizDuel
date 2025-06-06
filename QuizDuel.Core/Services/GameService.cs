@@ -551,5 +551,28 @@ namespace QuizDuel.Core.Services
                 throw;
             }
         }
+
+        public async Task<List<LeaderboardEntryDTO>> GetLeaderboardAsync()
+        {
+            return await _gameDbContext.PlayerAnswers
+                .Where(a => a.IsCorrect)
+                .GroupBy(a => a.UserId)
+                .Select(g => new
+                {
+                    UserId = g.Key,
+                    CorrectAnswers = g.Count()
+                })
+                .Join(_gameDbContext.Users,
+                    g => g.UserId,
+                    u => u.Id,
+                    (g, u) => new LeaderboardEntryDTO
+                    {
+                        Username = u.Username,
+                        CorrectAnswers = g.CorrectAnswers
+                    })
+                .OrderByDescending(x => x.CorrectAnswers)
+                .Take(100)
+                .ToListAsync();
+        }
     }
 }

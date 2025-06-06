@@ -79,5 +79,7 @@ namespace QuizDuel.Core.Interfaces
         /// Возвращает текущую категорию
         /// </summary>
         Task<(string category, int round)> GetCurrentCategoryAndRoundAsync();
+
+        Task<List<LeaderboardEntryDTO>> GetLeaderboardAsync();
     }
 }

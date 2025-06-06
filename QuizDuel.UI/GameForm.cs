@@ -14,6 +14,8 @@ namespace QuizDuel.UI
 
         private List<ShuffledQuestionDTO> _questions = [];
         private int _currentQuestionIndex = 0;
+        private bool _isGameContinued;
+        private bool _isAnswered;
 
         public GameForm(
             IGameService gameService,
@@ -52,6 +54,8 @@ namespace QuizDuel.UI
             catch
             {
                 _notificationService.ShowError(Resources.Game_LoadCategoryError);
+                _isGameContinued = true;
+                _isAnswered = true;
                 _navigationService.NavigateTo<WaitingForm>();
             }
         }
@@ -62,7 +66,8 @@ namespace QuizDuel.UI
             {
                 gamePanel.Enabled = false;
                 var button = sender as Button;
-                if (!int.TryParse(button.Tag.ToString(), out var selectedIndex)) {
+                if (!int.TryParse(button.Tag.ToString(), out var selectedIndex))
+                {
                     throw new Exception("Ошибка при преобразовании button.Tag в int");
                 }
 
@@ -75,6 +80,8 @@ namespace QuizDuel.UI
                     SelectedIndex = selectedIndex
                 };
 
+                _isAnswered = true;
+
                 var result = await _gameService.SubmitAnswerAsync(_userSessionService.UserID, answerDto);
 
                 HighlightAnswers(selectedIndex, result.CorrectOptionIndex);
@@ -82,18 +89,23 @@ namespace QuizDuel.UI
                 await Task.Delay(1500);
 
                 _currentQuestionIndex++;
-                if (_currentQuestionIndex < _questions.Count){
+                if (_currentQuestionIndex < _questions.Count)
+                {
                     await ShowQuestion();
                 }
                 else
                 {
                     _notificationService.ShowInfo("Раунд завершён!");
                     await PassTurnAsync();
+                    _isGameContinued = true;
                     _navigationService.NavigateTo<WaitingForm>();
                 }
-            } catch
+            }
+            catch
             {
                 _notificationService.ShowError(Resources.Game_AnswerError);
+                _isGameContinued = true;
+                _isAnswered = true;
                 _navigationService.NavigateTo<WaitingForm>();
             }
         }
@@ -118,6 +130,8 @@ namespace QuizDuel.UI
             catch (Exception ex)
             {
                 _logger.Error("Ошибка при выборе категории", ex);
+                _isGameContinued = true;
+                _isAnswered = true;
                 _navigationService.NavigateTo<WaitingForm>();
             }
         }
@@ -135,16 +149,19 @@ namespace QuizDuel.UI
                 _currentQuestionIndex = 0;
                 await ShowRoundInfo();
                 await ShowQuestion();
-            } 
-            catch 
+            }
+            catch
             {
                 _notificationService.ShowError(Resources.Game_LoadQuestionsError);
+                _isGameContinued = true;
+                _isAnswered = true;
                 _navigationService.NavigateTo<WaitingForm>();
             }
         }
 
         private async Task ShowQuestion()
         {
+            _isAnswered = false;
             var question = _questions[_currentQuestionIndex];
             questionLabel.Text = question.Text;
 
@@ -185,12 +202,60 @@ namespace QuizDuel.UI
 
             for (int i = total; i >= 0; i--)
             {
+                if (_isAnswered)
+                {
+                    return;
+                }
+
                 questionTimer.Value = i;
 
-                await Task.Delay(10); 
+                await Task.Delay(10);
             }
 
-            //TimeExpired();
+            await TimeExpired();
+        }
+
+        private async Task TimeExpired()
+        {
+            try
+            {
+                gamePanel.Enabled = false;
+
+                var question = _questions[_currentQuestionIndex];
+
+                var answerDto = new SubmittedAnswerDTO
+                {
+                    Id = question.QuestionId,
+                    Answers = question.Answers,
+                    SelectedIndex = -1
+                };
+
+                var result = await _gameService.SubmitAnswerAsync(_userSessionService.UserID, answerDto);
+
+                HighlightAnswers(-1, result.CorrectOptionIndex);
+
+                await Task.Delay(1500);
+
+                _currentQuestionIndex++;
+                if (_currentQuestionIndex < _questions.Count)
+                {
+                    await ShowQuestion();
+                }
+                else
+                {
+                    _notificationService.ShowInfo("Раунд завершён!");
+                    await PassTurnAsync();
+                    _isGameContinued = true;
+                    _navigationService.NavigateTo<WaitingForm>();
+                }
+            }
+            catch
+            {
+                _notificationService.ShowError(Resources.Game_AnswerError);
+                _isGameContinued = true;
+                _isAnswered = true;
+                _navigationService.NavigateTo<WaitingForm>();
+            }
         }
 
         private void HighlightAnswers(int selected, int correct)
@@ -212,9 +277,12 @@ namespace QuizDuel.UI
             try
             {
                 await _gameService.PassTurnAsync();
-            } catch
+            }
+            catch
             {
                 _notificationService.ShowError(Resources.Game_PasTurnError);
+                _isGameContinued = true;
+                _isAnswered = true;
                 _navigationService.NavigateTo<WaitingForm>();
             }
         }
@@ -227,6 +295,7 @@ namespace QuizDuel.UI
 
                 if (gameState.IsFinished)
                 {
+                    _isGameContinued = true;
                     _navigationService.NavigateTo<WaitingForm>();
                     return;
                 }
@@ -245,7 +314,19 @@ namespace QuizDuel.UI
             {
                 _logger.Error("Не удалось загрузить игру", ex);
                 _notificationService.ShowError(Resources.Game_LoadError);
+                _isGameContinued = true;
+                _isAnswered = true;
                 _navigationService.NavigateTo<WaitingForm>();
+            }
+        }
+
+        private async void GameForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (!_isGameContinued)
+            {
+                await _gameService.DeleteGameAsync();
+                _isAnswered = true;
+                _navigationService.NavigateTo<MainForm>();
             }
         }
     }

@@ -28,9 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             btnCreateGame = new Button();
             btnJoinGame = new Button();
             toolStrip = new ToolStrip();
+            pictureBox1 = new PictureBox();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
             // btnCreateGame
@@ -61,11 +64,26 @@
             toolStrip.TabIndex = 3;
             toolStrip.Text = "toolStrip1";
             // 
+            // pictureBox1
+            // 
+            pictureBox1.BackgroundImageLayout = ImageLayout.Zoom;
+            pictureBox1.Cursor = Cursors.Hand;
+            pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
+            pictureBox1.InitialImage = null;
+            pictureBox1.Location = new Point(718, 12);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(70, 70);
+            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox1.TabIndex = 4;
+            pictureBox1.TabStop = false;
+            pictureBox1.Click += PictureBox1_Click;
+            // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(pictureBox1);
             Controls.Add(toolStrip);
             Controls.Add(btnJoinGame);
             Controls.Add(btnCreateGame);
@@ -73,6 +91,7 @@
             Text = "MainForm";
             FormClosed += MainForm_FormClosed;
             Shown += MainForm_Shown;
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -82,5 +101,6 @@
         private Button btnCreateGame;
         private Button btnJoinGame;
         private ToolStrip toolStrip;
+        private PictureBox pictureBox1;
     }
 }

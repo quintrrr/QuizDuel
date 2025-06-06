@@ -79,5 +79,10 @@ namespace QuizDuel.UI
 
             ApplyLocalization();
         }
+
+        private void PictureBox1_Click(object sender, EventArgs e)
+        {
+            _navigationService.NavigateTo<LeaderboardForm>();
+        }
     }
 }
