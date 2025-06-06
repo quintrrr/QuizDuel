@@ -36,13 +36,12 @@
             // timeAgoLabel
             // 
             timeAgoLabel.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            timeAgoLabel.AutoSize = true;
-            timeAgoLabel.Location = new Point(57, 0);
+            timeAgoLabel.Location = new Point(-57, 0);
             timeAgoLabel.Name = "timeAgoLabel";
-            timeAgoLabel.Size = new Size(38, 15);
+            timeAgoLabel.Size = new Size(156, 24);
             timeAgoLabel.TabIndex = 0;
             timeAgoLabel.Text = "label1";
-            timeAgoLabel.TextAlign = ContentAlignment.TopRight;
+            timeAgoLabel.TextAlign = ContentAlignment.MiddleRight;
             // 
             // resultLabel
             // 
@@ -71,10 +70,10 @@
             Controls.Add(opponentLabel);
             Controls.Add(resultLabel);
             Controls.Add(timeAgoLabel);
+            Margin = new Padding(16, 3, 16, 3);
             Name = "GameHistoryItemControl";
             Size = new Size(98, 98);
             ResumeLayout(false);
-            PerformLayout();
         }
 
         #endregion

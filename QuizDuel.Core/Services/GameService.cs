@@ -490,23 +490,14 @@ namespace QuizDuel.Core.Services
                 if (game == null)
                     throw new Exception("Игра не найдена");
 
-                int player1Score = 0;
-                int player2Score = 0;
+                var winnerId = GetWinnerId(game);
 
-                foreach (var round in game.Rounds)
+                if (winnerId == null)
                 {
-                    player1Score += round.PlayerAnswers
-                        .Count(a => a.UserId == game.Player1Id && a.IsCorrect);
-                    player2Score += round.PlayerAnswers
-                        .Count(a => a.UserId == game.Player2Id && a.IsCorrect);
+                    return null;
                 }
 
-                if (player1Score > player2Score)
-                    return await _userRepository.GetUsernameById(game.Player1Id);
-                else if (player2Score > player1Score)
-                    return await _userRepository.GetUsernameById(game.Player2Id);
-                else
-                    return null;
+                return await _userRepository.GetUsernameById(winnerId.Value);
             }
             catch (Exception ex)
             {
@@ -552,6 +543,9 @@ namespace QuizDuel.Core.Services
             }
         }
 
+        /// <summary>
+        /// Возвращает список лидеров
+        /// </summary>
         public async Task<List<LeaderboardEntryDTO>> GetLeaderboardAsync()
         {
             return await _gameDbContext.PlayerAnswers
@@ -573,6 +567,70 @@ namespace QuizDuel.Core.Services
                 .OrderByDescending(x => x.CorrectAnswers)
                 .Take(100)
                 .ToListAsync();
+        }
+
+        /// <summary>
+        /// Возвращает историю игр
+        /// </summary>
+        public async Task<List<GameHistoryDTO>> GetGameHistoryAsync(int amount)
+        {
+            try
+            {
+                var games = await _gameRepository.GetLastFinishedGamesAsync(_userSessionService.UserID, amount);
+
+                List<GameHistoryDTO> gameHistory = [];
+
+                foreach (var game in games)
+                {
+                    var opponentId = _userSessionService.UserID == game.Player1Id
+                        ? game.Player2Id
+                        : game.Player1Id;
+
+                    var opponentUsername = await _userRepository
+                        .GetUsernameById(opponentId)
+                        ?? string.Empty;
+
+                    gameHistory.Add(new GameHistoryDTO
+                    {
+                        EndTime = game.FinishedAt!.Value,
+                        WinnerId = GetWinnerId(game),
+                        OpponentUsername = opponentUsername
+                    });
+                }
+
+                return gameHistory;
+            }
+            catch (Exception ex) {
+                _logger.Error("Ошибка при загрузке истории игр", ex);
+                throw;
+            }
+        }
+
+        private static Guid? GetWinnerId(Game game)
+        {
+            int player1Score = 0;
+            int player2Score = 0;
+
+            foreach (var round in game.Rounds)
+            {
+                player1Score += round.PlayerAnswers
+                    .Count(a => a.UserId == game.Player1Id && a.IsCorrect);
+                player2Score += round.PlayerAnswers
+                    .Count(a => a.UserId == game.Player2Id && a.IsCorrect);
+            }
+
+            if (player1Score > player2Score)
+            {
+                return game.Player1Id;
+            } 
+            else if (player1Score < player2Score)
+            {
+                return game.Player2Id;
+            } 
+            else
+            {
+                return null;
+            }
         }
     }
 }

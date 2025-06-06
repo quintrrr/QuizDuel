@@ -35,16 +35,16 @@
             // flowLeaders
             // 
             flowLeaders.AutoScroll = true;
-            flowLeaders.Location = new Point(12, 61);
+            flowLeaders.Location = new Point(12, 83);
             flowLeaders.Name = "flowLeaders";
-            flowLeaders.Size = new Size(776, 364);
+            flowLeaders.Size = new Size(776, 342);
             flowLeaders.TabIndex = 1;
             // 
             // leaderboardLabel
             // 
-            leaderboardLabel.Location = new Point(227, 9);
+            leaderboardLabel.Location = new Point(153, 12);
             leaderboardLabel.Name = "leaderboardLabel";
-            leaderboardLabel.Size = new Size(349, 49);
+            leaderboardLabel.Size = new Size(510, 49);
             leaderboardLabel.TabIndex = 2;
             leaderboardLabel.Text = "label1";
             leaderboardLabel.TextAlign = ContentAlignment.MiddleCenter;

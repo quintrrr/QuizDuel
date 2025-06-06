@@ -196,6 +196,15 @@ namespace QuizDuel.UI {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Поражение.
+        /// </summary>
+        internal static string Game_Lose {
+            get {
+                return ResourceManager.GetString("Game.Lose", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Второй игрок еще не присоединился..
         /// </summary>
         internal static string Game_NotStarted {
@@ -273,6 +282,42 @@ namespace QuizDuel.UI {
         internal static string Game_StateError {
             get {
                 return ResourceManager.GetString("Game.StateError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Победа.
+        /// </summary>
+        internal static string Game_Win {
+            get {
+                return ResourceManager.GetString("Game.Win", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to История игр.
+        /// </summary>
+        internal static string GameHistoryLabel {
+            get {
+                return ResourceManager.GetString("GameHistoryLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Не удалось загрузить историю игр.
+        /// </summary>
+        internal static string GameHistoryLoadError {
+            get {
+                return ResourceManager.GetString("GameHistoryLoadError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ч.
+        /// </summary>
+        internal static string Hours {
+            get {
+                return ResourceManager.GetString("Hours", resourceCulture);
             }
         }
         
@@ -400,6 +445,15 @@ namespace QuizDuel.UI {
         internal static string Login_WrongPassword {
             get {
                 return ResourceManager.GetString("Login.WrongPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to мин.
+        /// </summary>
+        internal static string Minutes {
+            get {
+                return ResourceManager.GetString("Minutes", resourceCulture);
             }
         }
         

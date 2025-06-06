@@ -36,6 +36,8 @@ namespace QuizDuel.UI
             toolStrip = new ToolStrip();
             pictureBox1 = new PictureBox();
             titleLabel = new Label();
+            flowGameHistory = new FlowLayoutPanel();
+            gameHistoryLabel = new Label();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
@@ -91,11 +93,31 @@ namespace QuizDuel.UI
             titleLabel.Text = "QuizDuel";
             titleLabel.TextAlign = ContentAlignment.MiddleCenter;
             // 
+            // flowGameHistory
+            // 
+            flowGameHistory.AutoScroll = true;
+            flowGameHistory.Location = new Point(71, 321);
+            flowGameHistory.Name = "flowGameHistory";
+            flowGameHistory.Size = new Size(660, 124);
+            flowGameHistory.TabIndex = 6;
+            flowGameHistory.WrapContents = false;
+            // 
+            // gameHistoryLabel
+            // 
+            gameHistoryLabel.Location = new Point(71, 289);
+            gameHistoryLabel.Name = "gameHistoryLabel";
+            gameHistoryLabel.Size = new Size(173, 29);
+            gameHistoryLabel.TabIndex = 7;
+            gameHistoryLabel.Text = "label1";
+            gameHistoryLabel.TextAlign = ContentAlignment.MiddleLeft;
+            // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(gameHistoryLabel);
+            Controls.Add(flowGameHistory);
             Controls.Add(titleLabel);
             Controls.Add(pictureBox1);
             Controls.Add(toolStrip);
@@ -106,6 +128,7 @@ namespace QuizDuel.UI
             Text = "QuizDuel";
             FormClosed += MainForm_FormClosed;
             Shown += MainForm_Shown;
+            VisibleChanged += MainForm_VisibleChanged;
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
             PerformLayout();
@@ -118,5 +141,7 @@ namespace QuizDuel.UI
         private ToolStrip toolStrip;
         private PictureBox pictureBox1;
         private Label titleLabel;
+        private FlowLayoutPanel flowGameHistory;
+        private Label gameHistoryLabel;
     }
 }

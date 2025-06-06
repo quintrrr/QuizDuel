@@ -1,6 +1,7 @@
 ﻿using System.Globalization;
 using Castle.Core.Logging;
 using QuizDuel.Core.Interfaces;
+using QuizDuel.UI.UserControls;
 
 namespace QuizDuel.UI
 {
@@ -39,6 +40,27 @@ namespace QuizDuel.UI
         {
             btnCreateGame.Text = Resources.CreateGameButton;
             btnJoinGame.Text = Resources.JoinGameButton;
+            gameHistoryLabel.Text = Resources.GameHistoryLabel;
+        }
+
+        private async Task LoadGameHistory()
+        {
+            flowGameHistory.Controls.Clear();
+
+            var games = await _gameService.GetGameHistoryAsync(10);
+
+            foreach (var game in games)
+            {
+                var item = new GameHistoryItemControl
+                {
+                    OpponentName = game.OpponentUsername,
+                    GameEndTime = game.EndTime
+                };
+                item.RefreshTimeAgo();
+                item.SetResult(game.WinnerId, _userSessionService.UserID);
+
+                flowGameHistory.Controls.Add(item);
+            }
         }
 
         private async void BtnCreateGame_Click(object sender, EventArgs e)
@@ -68,6 +90,7 @@ namespace QuizDuel.UI
             if (_userSessionService.UserID == default)
             {
                 _navigationService.NavigateTo<LoginForm>();
+                return;
             }
         }
 
@@ -76,16 +99,37 @@ namespace QuizDuel.UI
             Application.Exit();
         }
 
-        public void SetLanguage(string langCode)
+        public async void SetLanguage(string langCode)
         {
             Thread.CurrentThread.CurrentUICulture = new CultureInfo(langCode);
 
             ApplyLocalization();
+            Enabled = false;
+            await LoadGameHistory();
+            Enabled = true;
         }
 
         private void PictureBox1_Click(object sender, EventArgs e)
         {
             _navigationService.NavigateTo<LeaderboardForm>();
+        }
+
+        private async void MainForm_VisibleChanged(object sender, EventArgs e)
+        {
+            if (Visible && _navigationService.CurrentForm is not MainForm)
+            {
+                Enabled = false;
+                try
+                {
+                    await LoadGameHistory();
+                }
+                catch
+                {
+                    _notificationService.ShowError(Resources.GameHistoryLoadError);
+                }
+
+                Enabled = true;
+            }
         }
     }
 }

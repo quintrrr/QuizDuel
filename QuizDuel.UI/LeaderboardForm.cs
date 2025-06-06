@@ -14,6 +14,7 @@ namespace QuizDuel.UI
             _gameService = gameService;
             _navigationService = navigationService;
 
+            leaderboardLabel.Font = FontManager.GetCustomFont(40f);
         }
 
         private async void LeaderboardForm_Load(object sender, EventArgs e)

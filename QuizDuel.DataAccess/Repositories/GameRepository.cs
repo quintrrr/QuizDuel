@@ -102,5 +102,21 @@ namespace QuizDuel.DataAccess.Repositories
                 .ThenInclude(r => r.PlayerAnswers)
                 .FirstOrDefaultAsync(g => g.Id == id);
         }
+
+        /// <summary>
+        /// Получает последние завершенные игры по id пользователя.
+        /// </summary>
+        public async Task<List<Game>> GetLastFinishedGamesAsync(Guid userId, int amount)
+        {
+            return await _gameDbContext.Games
+                .Where(g => g.FinishedAt != null
+                         && (g.Player1Id == userId || g.Player2Id == userId))
+                .OrderByDescending(g => g.FinishedAt)
+                .Include(g => g.Rounds)
+                .ThenInclude(r => r.PlayerAnswers)
+                .AsNoTracking()
+                .Take(amount)
+                .ToListAsync();
+        }
     }
 }

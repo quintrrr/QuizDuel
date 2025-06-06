@@ -162,6 +162,9 @@
   <data name="Game.LoadQuestionsError" xml:space="preserve">
     <value>Failed to load questions</value>
   </data>
+  <data name="Game.Lose" xml:space="preserve">
+    <value>Lose</value>
+  </data>
   <data name="Game.NotStarted" xml:space="preserve">
     <value>The second player hasn't joined yet</value>
   </data>
@@ -188,6 +191,9 @@
   </data>
   <data name="Game.StateError" xml:space="preserve">
     <value>Could not join game</value>
+  </data>
+  <data name="Game.Win" xml:space="preserve">
+    <value>Win</value>
   </data>
   <data name="Join.UpdateError" xml:space="preserve">
     <value>Failed to load games</value>
@@ -304,7 +310,19 @@
   <data name="RepeatPasswordLabel" xml:space="preserve">
     <value>Repeat Password</value>
   </data>
+  <data name="Minutes" xml:space="preserve">
+    <value>min</value>
+  </data>
   <data name="UsernameLabel" xml:space="preserve">
     <value>Username</value>
+  </data>
+  <data name="Hours" xml:space="preserve">
+    <value>h</value>
+  </data>
+  <data name="GameHistoryLoadError" xml:space="preserve">
+    <value>Failed to load game history</value>
+  </data>
+  <data name="GameHistoryLabel" xml:space="preserve">
+    <value>Game history</value>
   </data>
 </root>

@@ -80,6 +80,14 @@ namespace QuizDuel.Core.Interfaces
         /// </summary>
         Task<(string category, int round)> GetCurrentCategoryAndRoundAsync();
 
+        /// <summary>
+        /// Возвращает список лидеров
+        /// </summary>
         Task<List<LeaderboardEntryDTO>> GetLeaderboardAsync();
+
+        /// <summary>
+        /// Возвращает историю игр
+        /// </summary>
+        Task<List<GameHistoryDTO>> GetGameHistoryAsync(int amount);
     }
 }

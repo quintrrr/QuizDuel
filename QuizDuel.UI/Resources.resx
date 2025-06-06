@@ -162,6 +162,9 @@
   <data name="Game.LoadQuestionsError" xml:space="preserve">
     <value>Не удалось загрузить вопросы</value>
   </data>
+  <data name="Game.Lose" xml:space="preserve">
+    <value>Поражение</value>
+  </data>
   <data name="Game.NotStarted" xml:space="preserve">
     <value>Второй игрок еще не присоединился.</value>
   </data>
@@ -188,6 +191,9 @@
   </data>
   <data name="Game.StateError" xml:space="preserve">
     <value>Не удалось подключиться к игре.</value>
+  </data>
+  <data name="Game.Win" xml:space="preserve">
+    <value>Победа</value>
   </data>
   <data name="Join.UpdateError" xml:space="preserve">
     <value>Не удалось загрузить игры</value>
@@ -304,7 +310,19 @@
   <data name="RepeatPasswordLabel" xml:space="preserve">
     <value>Повторите пароль</value>
   </data>
+  <data name="Minutes" xml:space="preserve">
+    <value>мин</value>
+  </data>
   <data name="UsernameLabel" xml:space="preserve">
     <value>Имя пользователя</value>
+  </data>
+  <data name="Hours" xml:space="preserve">
+    <value>ч</value>
+  </data>
+  <data name="GameHistoryLoadError" xml:space="preserve">
+    <value>Не удалось загрузить историю игр</value>
+  </data>
+  <data name="GameHistoryLabel" xml:space="preserve">
+    <value>История игр</value>
   </data>
 </root>
