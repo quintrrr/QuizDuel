@@ -79,11 +79,38 @@ namespace QuizDuel.UI {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Сейчас ход другого игрока.
+        /// </summary>
+        internal static string Game_AnotherTurn {
+            get {
+                return ResourceManager.GetString("Game.AnotherTurn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ошибка при ответе на вопрос.
+        /// </summary>
+        internal static string Game_AnswerError {
+            get {
+                return ResourceManager.GetString("Game.AnswerError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Не удалось создать игру.
         /// </summary>
         internal static string Game_CreateError {
             get {
                 return ResourceManager.GetString("Game.CreateError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ничья.
+        /// </summary>
+        internal static string Game_Draw {
+            get {
+                return ResourceManager.GetString("Game.Draw", resourceCulture);
             }
         }
         
@@ -97,11 +124,56 @@ namespace QuizDuel.UI {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Игра не найдена.
+        /// </summary>
+        internal static string Game_IsNotFound {
+            get {
+                return ResourceManager.GetString("Game.IsNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Присоединиться.
         /// </summary>
         internal static string Game_JoinButton {
             get {
                 return ResourceManager.GetString("Game.JoinButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ошибка подключения к игре.
+        /// </summary>
+        internal static string Game_JoinError {
+            get {
+                return ResourceManager.GetString("Game.JoinError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ошибка при загрузке категорий.
+        /// </summary>
+        internal static string Game_LoadCategoryError {
+            get {
+                return ResourceManager.GetString("Game.LoadCategoryError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Не удалось загрузить игру.
+        /// </summary>
+        internal static string Game_LoadError {
+            get {
+                return ResourceManager.GetString("Game.LoadError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Не удалось загрузить вопросы.
+        /// </summary>
+        internal static string Game_LoadQuestionsError {
+            get {
+                return ResourceManager.GetString("Game.LoadQuestionsError", resourceCulture);
             }
         }
         
@@ -115,6 +187,51 @@ namespace QuizDuel.UI {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Ошибка при передаче хода.
+        /// </summary>
+        internal static string Game_PasTurnError {
+            get {
+                return ResourceManager.GetString("Game.PasTurnError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Играть.
+        /// </summary>
+        internal static string Game_Play {
+            get {
+                return ResourceManager.GetString("Game.Play", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Победил игрок.
+        /// </summary>
+        internal static string Game_PlayerWon {
+            get {
+                return ResourceManager.GetString("Game.PlayerWon", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Вы не можете подключиться к своей игре.
+        /// </summary>
+        internal static string Game_SamePlayers {
+            get {
+                return ResourceManager.GetString("Game.SamePlayers", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Выберите категорию.
+        /// </summary>
+        internal static string Game_SelectCategory {
+            get {
+                return ResourceManager.GetString("Game.SelectCategory", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Не удалось подключиться к игре..
         /// </summary>
         internal static string Game_StateError {
@@ -124,11 +241,57 @@ namespace QuizDuel.UI {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Не удалось загрузить игры.
+        /// </summary>
+        internal static string Join_UpdateError {
+            get {
+                return ResourceManager.GetString("Join.UpdateError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Обновить.
+        /// </summary>
+        internal static string Join_UpdateGames {
+            get {
+                return ResourceManager.GetString("Join.UpdateGames", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Присоединиться к игре.
         /// </summary>
         internal static string JoinGameButton {
             get {
                 return ResourceManager.GetString("JoinGameButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap leaderboard {
+            get {
+                object obj = ResourceManager.GetObject("leaderboard", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to правильных ответов.
+        /// </summary>
+        internal static string Leaderboard_Answers {
+            get {
+                return ResourceManager.GetString("Leaderboard.Answers", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Таблица лидеров.
+        /// </summary>
+        internal static string Leaderboard_Label {
+            get {
+                return ResourceManager.GetString("Leaderboard.Label", resourceCulture);
             }
         }
         
@@ -147,6 +310,15 @@ namespace QuizDuel.UI {
         internal static string Login_EmptyUsername {
             get {
                 return ResourceManager.GetString("Login.EmptyUsername", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ошибка при входе в аккаунт.
+        /// </summary>
+        internal static string Login_Error {
+            get {
+                return ResourceManager.GetString("Login.Error", resourceCulture);
             }
         }
         
@@ -192,6 +364,15 @@ namespace QuizDuel.UI {
         internal static string Notification_Error {
             get {
                 return ResourceManager.GetString("Notification.Error", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Информация.
+        /// </summary>
+        internal static string Notification_Info {
+            get {
+                return ResourceManager.GetString("Notification.Info", resourceCulture);
             }
         }
         
@@ -309,6 +490,15 @@ namespace QuizDuel.UI {
         internal static string Register_EmptyUsername {
             get {
                 return ResourceManager.GetString("Register.EmptyUsername", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ошибка при регистрации аккаунта.
+        /// </summary>
+        internal static string Register_Error {
+            get {
+                return ResourceManager.GetString("Register.Error", resourceCulture);
             }
         }
         

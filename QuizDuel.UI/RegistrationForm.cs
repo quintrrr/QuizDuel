@@ -1,4 +1,5 @@
-﻿using Castle.Core.Logging;
+﻿using System.Globalization;
+using Castle.Core.Logging;
 using QuizDuel.Core.DTO;
 using QuizDuel.Core.Interfaces;
 
@@ -25,6 +26,9 @@ namespace QuizDuel.UI
             _notificationService = notificationService;
             _logger = logger;
             _navigationService = navigationService;
+
+            toolStrip.Items.Add(new ToolStripButton("RU", null, (_, _) => SetLanguage("ru")));
+            toolStrip.Items.Add(new ToolStripButton("EN", null, (_, _) => SetLanguage("en")));
         }
 
         private void ApplyLocalization()
@@ -35,6 +39,12 @@ namespace QuizDuel.UI
             repeatPasswordLabel.Text = Resources.RepeatPasswordLabel;
             btnRegister.Text = Resources.RegisterButton;
             haveAccountLinkLabel.Text = Resources.Register_HaveAnAccount;
+        }
+        public void SetLanguage(string langCode)
+        {
+            Thread.CurrentThread.CurrentUICulture = new CultureInfo(langCode);
+
+            ApplyLocalization();
         }
 
         /// <summary>
@@ -73,6 +83,11 @@ namespace QuizDuel.UI
         private void HaveAccountLinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             _navigationService.NavigateTo<LoginForm>();
+        }
+
+        private void RegistrationForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Application.Exit();
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using Castle.Core.Logging;
+﻿using System.Globalization;
+using Castle.Core.Logging;
 using QuizDuel.Core.DTO;
 using QuizDuel.Core.Interfaces;
 
@@ -12,7 +13,7 @@ namespace QuizDuel.UI
         private readonly INavigationService _navigationService;
 
         public LoginForm(
-            IAuthService authService, 
+            IAuthService authService,
             INotificationService notificationService,
             ILogger logger,
             INavigationService navigationService)
@@ -23,6 +24,9 @@ namespace QuizDuel.UI
             _notificationService = notificationService;
             _logger = logger;
             _navigationService = navigationService;
+
+            toolStrip.Items.Add(new ToolStripButton("RU", null, (_, _) => SetLanguage("ru")));
+            toolStrip.Items.Add(new ToolStripButton("EN", null, (_, _) => SetLanguage("en")));
         }
 
 
@@ -32,6 +36,13 @@ namespace QuizDuel.UI
             passwordLabel.Text = Resources.PasswordLabel;
             btnLogin.Text = Resources.Login_BtnLogin;
             regLabel.Text = Resources.Login_NoAccount;
+        }
+
+        public void SetLanguage(string langCode)
+        {
+            Thread.CurrentThread.CurrentUICulture = new CultureInfo(langCode);
+
+            ApplyLocalization();
         }
 
         private void RegLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -67,6 +78,11 @@ namespace QuizDuel.UI
             }
 
             btnLogin.Enabled = true;
+        }
+
+        private void LoginForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Application.Exit();
         }
     }
 }

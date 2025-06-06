@@ -37,9 +37,10 @@ namespace QuizDuel.UI
             // 
             // btnPlay
             // 
-            btnPlay.Location = new Point(274, 362);
+            btnPlay.Location = new Point(391, 603);
+            btnPlay.Margin = new Padding(4, 5, 4, 5);
             btnPlay.Name = "btnPlay";
-            btnPlay.Size = new Size(257, 52);
+            btnPlay.Size = new Size(367, 87);
             btnPlay.TabIndex = 2;
             btnPlay.Text = "Играть";
             btnPlay.UseVisualStyleBackColor = true;
@@ -49,9 +50,10 @@ namespace QuizDuel.UI
             // 
             player1NameLabel.AutoSize = true;
             player1NameLabel.Font = new Font("Segoe UI", 12F);
-            player1NameLabel.Location = new Point(131, 65);
+            player1NameLabel.Location = new Point(187, 108);
+            player1NameLabel.Margin = new Padding(4, 0, 4, 0);
             player1NameLabel.Name = "player1NameLabel";
-            player1NameLabel.Size = new Size(63, 21);
+            player1NameLabel.Size = new Size(94, 32);
             player1NameLabel.TabIndex = 3;
             player1NameLabel.Text = "Игрок1";
             // 
@@ -60,9 +62,10 @@ namespace QuizDuel.UI
             player2NameLabel.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             player2NameLabel.AutoSize = true;
             player2NameLabel.Font = new Font("Segoe UI", 12F);
-            player2NameLabel.Location = new Point(631, 65);
+            player2NameLabel.Location = new Point(901, 108);
+            player2NameLabel.Margin = new Padding(4, 0, 4, 0);
             player2NameLabel.Name = "player2NameLabel";
-            player2NameLabel.Size = new Size(63, 21);
+            player2NameLabel.Size = new Size(94, 32);
             player2NameLabel.TabIndex = 4;
             player2NameLabel.Text = "Игрок2";
             // 
@@ -70,24 +73,27 @@ namespace QuizDuel.UI
             // 
             scoreLabel.AutoSize = true;
             scoreLabel.Font = new Font("Segoe UI", 18F);
-            scoreLabel.Location = new Point(376, 48);
+            scoreLabel.Location = new Point(537, 80);
+            scoreLabel.Margin = new Padding(4, 0, 4, 0);
             scoreLabel.Name = "scoreLabel";
-            scoreLabel.Size = new Size(50, 32);
+            scoreLabel.Size = new Size(72, 48);
             scoreLabel.TabIndex = 5;
             scoreLabel.Text = "0-0";
             // 
             // WaitingForm
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(1143, 750);
             Controls.Add(scoreLabel);
             Controls.Add(player2NameLabel);
             Controls.Add(player1NameLabel);
             Controls.Add(btnPlay);
+            Margin = new Padding(4, 5, 4, 5);
             Name = "WaitingForm";
             Text = "WaitingForm";
-            FormClosed += this.WaitingForm_FormClosed;
+            FormClosing += WaitingForm_FormClosing;
+            Load += WaitingForm_Load;
             ResumeLayout(false);
             PerformLayout();
         }

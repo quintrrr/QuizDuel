@@ -1,6 +1,5 @@
 ﻿using Castle.Windsor;
 using QuizDuel.Core.Interfaces;
-using QuizDuel.UI;
 
 namespace QuizDuel.Core.Services
 {
@@ -8,23 +7,15 @@ namespace QuizDuel.Core.Services
     {
         private readonly IWindsorContainer _container;
         private Form? _currentForm;
-        public Form CurrentForm
+        public Form? CurrentForm
         {
+            get
+            {
+                return _currentForm;
+            }
             set 
             { 
                 _currentForm = value;
-
-                value.FormClosed += (_, _) =>
-                {
-                    if (_currentForm == value)
-                    {
-                        _currentForm = null;
-                        if (Application.OpenForms.Count == 0)
-                        {
-                            Application.Exit();
-                        }
-                    }
-                };
             }
         } 
 
@@ -43,32 +34,12 @@ namespace QuizDuel.Core.Services
             var nextForm = _container.Resolve<T>();
             nextForm.Show();
 
-            if (_currentForm is not null && !_currentForm.IsDisposed)
+            if (_currentForm is not null && !_currentForm.IsDisposed && !_currentForm.Disposing)
             {
-                if (_currentForm is MainForm)
-                {
-                    _currentForm.Hide();
-                }
-                else
-                {
-                    _currentForm.Close();
-                }
+                _currentForm.Hide();
             }
 
             _currentForm = nextForm;
-
-            nextForm.FormClosed += (_, _) =>
-            { 
-                if (_currentForm == nextForm)
-                {
-                    _currentForm = null;
-                    if (Application.OpenForms.Count == 0)
-                    {
-                        Application.Exit();
-                    } 
-                } 
-            };
-
         }
 
     }

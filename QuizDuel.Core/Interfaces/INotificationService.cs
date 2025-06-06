@@ -13,5 +13,10 @@
         /// Отображает сообщение об успешной операции.
         /// </summary>
         void ShowSuccess(string message);
+
+        /// <summary>
+        /// Отобращает сообщение с информацией для пользователя.
+        /// </summary>
+        void ShowInfo(string message);
     }
 }

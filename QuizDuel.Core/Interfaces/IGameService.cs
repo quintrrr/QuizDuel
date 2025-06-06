@@ -1,4 +1,5 @@
 ﻿using QuizDuel.Core.DTO;
+using QuizDuel.DataAccess.Models;
 
 namespace QuizDuel.Core.Interfaces
 {
@@ -37,6 +38,48 @@ namespace QuizDuel.Core.Interfaces
         /// <summary>
         /// Присоединяет второго игрока к игре.
         /// </summary>
-        Task JoinGameAsync();
+        Task<OperationResultDTO> JoinGameAsync();
+
+        /// <summary>
+        /// Возвращает список случайных категорий.
+        /// </summary>
+        Task<List<Category>> GetRandomCategoriesAsync(int amount);
+
+        /// <summary>
+        /// Выбирает категорию.
+        /// </summary>
+        Task SelectCategoryAsync(Guid categoryId);
+
+        /// <summary>
+        /// Возвращает список вопросов с перемешанными ответами. 
+        /// </summary>
+        Task<List<ShuffledQuestionDTO>> GetShuffledQuestionsAsync(int amount);
+
+        /// <summary>
+        /// Подтверждает ответ пользователя.
+        /// </summary>
+        Task<AnswerResultDTO> SubmitAnswerAsync(Guid userId, SubmittedAnswerDTO answer);
+
+        /// <summary>
+        /// Возвращает счет игроков
+        /// </summary>
+        Task<(int player1Score, int player2Score)> GetScoresAsync();
+
+        /// <summary>
+        /// Передает ход следующему игроку
+        /// </summary>
+        Task PassTurnAsync();
+
+        /// <summary>
+        /// Возвращает победителя
+        /// </summary>
+        Task<string?> GetWinnerAsync();
+
+        /// <summary>
+        /// Возвращает текущую категорию
+        /// </summary>
+        Task<(string category, int round)> GetCurrentCategoryAndRoundAsync();
+
+        Task<List<LeaderboardEntryDTO>> GetLeaderboardAsync();
     }
 }

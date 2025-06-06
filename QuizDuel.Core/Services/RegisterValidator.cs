@@ -75,8 +75,8 @@ namespace QuizDuel.Core.Services
         /// </summary>
         private int CalculateAge(DateTime birthdate)
         {
-            DateTime today = DateTime.Today.ToUniversalTime();
-            int age = today.Year - birthdate.Year;
+            var today = DateTime.Today.ToUniversalTime();
+            var age = today.Year - birthdate.Year;
 
             if (birthdate > today.AddYears(-age))
             {

@@ -30,9 +30,10 @@ namespace QuizDuel.UI
             var container = new WindsorContainer();
             ConfigureContainer(container);
             var navigation = container.Resolve<INavigationService>();
-            navigation.NavigateTo<LoginForm>();
+            var mainForm = container.Resolve<MainForm>();
+            navigation.CurrentForm = mainForm;
 
-            Application.Run();
+            Application.Run(mainForm);
         }
 
         /// <summary>
@@ -79,6 +80,9 @@ namespace QuizDuel.UI
                 
                 Component.For<INavigationService>()
                 .ImplementedBy<NavigationService>()
+                .LifestyleSingleton(),
+
+                Component.For<MainForm>()
                 .LifestyleSingleton()
             );
 
@@ -123,14 +127,23 @@ namespace QuizDuel.UI
                 .ImplementedBy<GameRepository>()
                 .LifestyleTransient(),
 
+                Component.For<IQuestionRepository>()
+                .ImplementedBy<QuestionRepository>()
+                .LifestyleTransient(),
+
+                Component.For<ICategoryRepository>()
+                .ImplementedBy<CategoryRepository>()
+                .LifestyleTransient(),
+
+                Component.For<IRoundQuestionRepository>()
+                .ImplementedBy<RoundQuestionRepository>()
+                .LifestyleTransient(),
+
                 Component.For<IAuthService>()
                 .ImplementedBy<AuthService>()
                 .LifestyleTransient(),
 
                 Component.For<LoginForm>()
-                .LifestyleTransient(),
-
-                Component.For<MainForm>()
                 .LifestyleTransient(),
 
                 Component.For<WaitingForm>()
@@ -140,6 +153,12 @@ namespace QuizDuel.UI
                 .LifestyleTransient(),
 
                 Component.For<RegistrationForm>()
+                .LifestyleTransient(),
+
+                Component.For<GameForm>()
+                .LifestyleTransient(),
+
+                Component.For<LeaderboardForm>()
                 .LifestyleTransient()
             );
         }

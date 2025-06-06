@@ -73,7 +73,7 @@ namespace QuizDuel.Core.Services
             catch (Exception ex)
             {
                 _logger.Error($"Ошибка при входе пользователя '{loginDTO.Username}': {ex.Message}", ex);
-                result.MessageKeys.Add(ex.Message);
+                result.MessageKeys.Add("Login.Error");
                 return result;
             }
         }
@@ -123,7 +123,7 @@ namespace QuizDuel.Core.Services
             {
                 _logger.Error($"Ошибка при регистрации пользователя " +
                     $"'{registerDTO.Username}': {ex.Message}", ex);
-                result.MessageKeys.Add(ex.Message);
+                result.MessageKeys.Add("Register.Error");
                 return result;
             }
         }        

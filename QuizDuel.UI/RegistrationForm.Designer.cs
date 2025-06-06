@@ -38,18 +38,19 @@
             repeatPasswordLabel = new Label();
             btnRegister = new Button();
             haveAccountLinkLabel = new LinkLabel();
+            toolStrip = new ToolStrip();
             SuspendLayout();
             // 
             // usernameTextBox
             // 
-            usernameTextBox.Location = new Point(87, 46);
+            usernameTextBox.Location = new Point(87, 53);
             usernameTextBox.Name = "usernameTextBox";
             usernameTextBox.Size = new Size(287, 23);
             usernameTextBox.TabIndex = 0;
             // 
             // passwordTextBox
             // 
-            passwordTextBox.Location = new Point(86, 177);
+            passwordTextBox.Location = new Point(86, 184);
             passwordTextBox.Name = "passwordTextBox";
             passwordTextBox.Size = new Size(288, 23);
             passwordTextBox.TabIndex = 1;
@@ -57,7 +58,7 @@
             // 
             // repeatPasswordTextBox
             // 
-            repeatPasswordTextBox.Location = new Point(86, 242);
+            repeatPasswordTextBox.Location = new Point(86, 249);
             repeatPasswordTextBox.Name = "repeatPasswordTextBox";
             repeatPasswordTextBox.Size = new Size(288, 23);
             repeatPasswordTextBox.TabIndex = 2;
@@ -65,7 +66,7 @@
             // 
             // birthdatePicker
             // 
-            birthdatePicker.Location = new Point(86, 112);
+            birthdatePicker.Location = new Point(86, 119);
             birthdatePicker.Name = "birthdatePicker";
             birthdatePicker.Size = new Size(287, 23);
             birthdatePicker.TabIndex = 3;
@@ -73,7 +74,7 @@
             // usernameLabel
             // 
             usernameLabel.AutoSize = true;
-            usernameLabel.Location = new Point(87, 28);
+            usernameLabel.Location = new Point(87, 35);
             usernameLabel.Name = "usernameLabel";
             usernameLabel.Size = new Size(38, 15);
             usernameLabel.TabIndex = 4;
@@ -82,7 +83,7 @@
             // birthdateLabel
             // 
             birthdateLabel.AutoSize = true;
-            birthdateLabel.Location = new Point(87, 94);
+            birthdateLabel.Location = new Point(87, 101);
             birthdateLabel.Name = "birthdateLabel";
             birthdateLabel.Size = new Size(38, 15);
             birthdateLabel.TabIndex = 5;
@@ -91,7 +92,7 @@
             // passwordLabel
             // 
             passwordLabel.AutoSize = true;
-            passwordLabel.Location = new Point(86, 159);
+            passwordLabel.Location = new Point(86, 166);
             passwordLabel.Name = "passwordLabel";
             passwordLabel.Size = new Size(38, 15);
             passwordLabel.TabIndex = 6;
@@ -100,7 +101,7 @@
             // repeatPasswordLabel
             // 
             repeatPasswordLabel.AutoSize = true;
-            repeatPasswordLabel.Location = new Point(86, 224);
+            repeatPasswordLabel.Location = new Point(86, 231);
             repeatPasswordLabel.Name = "repeatPasswordLabel";
             repeatPasswordLabel.Size = new Size(38, 15);
             repeatPasswordLabel.TabIndex = 7;
@@ -108,7 +109,7 @@
             // 
             // btnRegister
             // 
-            btnRegister.Location = new Point(136, 311);
+            btnRegister.Location = new Point(136, 318);
             btnRegister.Name = "btnRegister";
             btnRegister.Size = new Size(188, 53);
             btnRegister.TabIndex = 8;
@@ -128,11 +129,20 @@
             haveAccountLinkLabel.TextAlign = ContentAlignment.MiddleCenter;
             haveAccountLinkLabel.LinkClicked += HaveAccountLinkLabel_LinkClicked;
             // 
+            // toolStrip
+            // 
+            toolStrip.Location = new Point(0, 0);
+            toolStrip.Name = "toolStrip";
+            toolStrip.Size = new Size(474, 25);
+            toolStrip.TabIndex = 10;
+            toolStrip.Text = "toolStrip1";
+            // 
             // RegistrationForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(474, 432);
+            Controls.Add(toolStrip);
             Controls.Add(haveAccountLinkLabel);
             Controls.Add(btnRegister);
             Controls.Add(repeatPasswordLabel);
@@ -146,6 +156,7 @@
             FormBorderStyle = FormBorderStyle.FixedSingle;
             Name = "RegistrationForm";
             Text = "RegistrationForm";
+            FormClosed += RegistrationForm_FormClosed;
             ResumeLayout(false);
             PerformLayout();
         }
@@ -162,5 +173,6 @@
         private Label repeatPasswordLabel;
         private Button btnRegister;
         private LinkLabel haveAccountLinkLabel;
+        private ToolStrip toolStrip;
     }
 }

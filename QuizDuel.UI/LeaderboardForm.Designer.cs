@@ -1,6 +1,6 @@
 ﻿namespace QuizDuel.UI
 {
-    partial class JoinGameForm
+    partial class LeaderboardForm
     {
         /// <summary>
         /// Required designer variable.
@@ -28,46 +28,46 @@
         /// </summary>
         private void InitializeComponent()
         {
-            flowGames = new FlowLayoutPanel();
-            btnUpdateGames = new Button();
+            flowLeaders = new FlowLayoutPanel();
+            leaderboardLabel = new Label();
             SuspendLayout();
             // 
-            // flowGames
+            // flowLeaders
             // 
-            flowGames.AutoScroll = true;
-            flowGames.Location = new Point(12, 39);
-            flowGames.Name = "flowGames";
-            flowGames.Size = new Size(776, 399);
-            flowGames.TabIndex = 0;
+            flowLeaders.AutoScroll = true;
+            flowLeaders.Location = new Point(12, 61);
+            flowLeaders.Name = "flowLeaders";
+            flowLeaders.Size = new Size(776, 364);
+            flowLeaders.TabIndex = 1;
             // 
-            // btnUpdateGames
+            // leaderboardLabel
             // 
-            btnUpdateGames.Location = new Point(12, 4);
-            btnUpdateGames.Name = "btnUpdateGames";
-            btnUpdateGames.Size = new Size(125, 29);
-            btnUpdateGames.TabIndex = 1;
-            btnUpdateGames.Text = "button1";
-            btnUpdateGames.UseVisualStyleBackColor = true;
-            btnUpdateGames.Click += BtnUpdateGames_Click;
+            leaderboardLabel.Font = new Font("Segoe UI", 20F);
+            leaderboardLabel.Location = new Point(227, 9);
+            leaderboardLabel.Name = "leaderboardLabel";
+            leaderboardLabel.Size = new Size(349, 49);
+            leaderboardLabel.TabIndex = 2;
+            leaderboardLabel.Text = "label1";
+            leaderboardLabel.TextAlign = ContentAlignment.MiddleCenter;
             // 
-            // JoinGameForm
+            // LeaderboardForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
-            Controls.Add(btnUpdateGames);
-            Controls.Add(flowGames);
+            Controls.Add(leaderboardLabel);
+            Controls.Add(flowLeaders);
             FormBorderStyle = FormBorderStyle.FixedSingle;
-            Name = "JoinGameForm";
-            Text = "JoinGameForm";
-            FormClosing += JoinGameForm_FormClosing;
-            Load += JoinGameForm_Load;
+            Name = "LeaderboardForm";
+            Text = "LeaderboardForm";
+            FormClosing += LeaderboardForm_FormClosing;
+            Load += LeaderboardForm_Load;
             ResumeLayout(false);
         }
 
         #endregion
 
-        private FlowLayoutPanel flowGames;
-        private Button btnUpdateGames;
+        private FlowLayoutPanel flowLeaders;
+        private Label leaderboardLabel;
     }
 }

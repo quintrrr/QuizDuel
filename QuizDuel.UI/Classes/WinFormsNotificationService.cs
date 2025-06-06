@@ -22,5 +22,13 @@ namespace QuizDuel.UI.Classes
         {
             MessageBox.Show(message, Resources.Notification_Success, MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
+
+        /// <summary>
+        /// Отобращает сообщение с информацией для пользователя.
+        /// </summary>
+        public void ShowInfo(string message)
+        {
+            MessageBox.Show(message, Resources.Notification_Info, MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
     }
 }

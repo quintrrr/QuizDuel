@@ -30,7 +30,7 @@ namespace QuizDuel.DataAccess.Repositories
         /// </summary>
         public async Task DeleteAsync(Guid id)
         {
-            var game = await _gameDbContext.Games.FirstOrDefaultAsync(g => g.Id == id);
+            var game = await GetGameByIdAsync(id);
             if (game is not null)
             {
                 _gameDbContext.Games.Remove(game);
@@ -43,8 +43,8 @@ namespace QuizDuel.DataAccess.Repositories
         /// </summary>
         public async Task<Game?> GetGameByIdAsync(Guid id)
         {
+            _gameDbContext.ChangeTracker.Clear();
             return await _gameDbContext.Games
-                .AsNoTracking()
                 .FirstOrDefaultAsync(g => g.Id == id);
         }
 
@@ -62,14 +62,45 @@ namespace QuizDuel.DataAccess.Repositories
         /// <summary>
         /// Асихронно добавляет второго игрока в игру.
         /// </summary>
-        public async Task AddSecondPlayerToGameAsync(Guid gameId, Guid userId)
+        public async Task AddSecondPlayerToGameAsync(Game game, Guid userId)
         {
-            var game = await _gameDbContext.Games.FirstOrDefaultAsync(g => g.Id == gameId);
-            if (game is not null)
-            {
-                game.Player2Id = userId;
-                await _gameDbContext.SaveChangesAsync();
-            }
+            game.Player2Id = userId;
+            await _gameDbContext.SaveChangesAsync();
+        }
+
+        /// <summary>
+        /// Асихронно получает игру по id c раундами из базы данных.
+        /// </summary>
+        public async Task<Game?> GetGameByIdIncludeRoundsAsync(Guid id)
+        {
+            _gameDbContext.ChangeTracker.Clear();
+            return await _gameDbContext.Games
+                .Include(g => g.Rounds)
+                .FirstOrDefaultAsync(g => g.Id == id);
+        }
+
+        /// <summary>
+        /// Асихронно получает игру по id c раундами и вопросами из базы данных.
+        /// </summary>
+        public async Task<Game?> GetGameByIdIncludeRoundsAndQuestionsAsync(Guid id)
+        {
+            _gameDbContext.ChangeTracker.Clear();
+            return await _gameDbContext.Games
+                .Include(g => g.Rounds)
+                .ThenInclude(r => r.RoundQuestions)
+                .FirstOrDefaultAsync(g => g.Id == id);
+        }
+
+        /// <summary>
+        /// Асихронно получает игру по id c раундами и ответами из базы данных.
+        /// </summary>
+        public async Task<Game?> GetGameByIdIncludeRoundsAndAnswersAsync(Guid id)
+        {
+            _gameDbContext.ChangeTracker.Clear();
+            return await _gameDbContext.Games
+                .Include(g => g.Rounds)
+                .ThenInclude(r => r.PlayerAnswers)
+                .FirstOrDefaultAsync(g => g.Id == id);
         }
     }
 }

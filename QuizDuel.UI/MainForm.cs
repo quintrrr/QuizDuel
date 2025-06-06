@@ -1,4 +1,5 @@
-﻿using Castle.Core.Logging;
+﻿using System.Globalization;
+using Castle.Core.Logging;
 using QuizDuel.Core.Interfaces;
 
 namespace QuizDuel.UI
@@ -26,6 +27,9 @@ namespace QuizDuel.UI
             _logger = logger;
             _notificationService = notificationService;
             _navigationService = navigationService;
+
+            toolStrip.Items.Add(new ToolStripButton("RU", null, (_, _) => SetLanguage("ru")));
+            toolStrip.Items.Add(new ToolStripButton("EN", null, (_, _) => SetLanguage("en")));
         }
 
         private void ApplyLocalization()
@@ -36,6 +40,7 @@ namespace QuizDuel.UI
 
         private async void BtnCreateGame_Click(object sender, EventArgs e)
         {
+            btnCreateGame.Enabled = false;
             try
             {
                 var gameId = await _gameService.CreateGameAsync(_userSessionService.UserID);
@@ -46,11 +51,7 @@ namespace QuizDuel.UI
             {
                 _notificationService.ShowError(Resources.Game_CreateError);
             }
-        }
-
-        private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            _navigationService.Exit();
+            btnCreateGame.Enabled = true;
         }
 
         private void BtnJoinGame_Click(object sender, EventArgs e)
@@ -58,5 +59,30 @@ namespace QuizDuel.UI
             _navigationService.NavigateTo<JoinGameForm>();
         }
 
+
+        private void MainForm_Shown(object sender, EventArgs e)
+        {
+            if (_userSessionService.UserID == default)
+            {
+                _navigationService.NavigateTo<LoginForm>();
+            }
+        }
+
+        private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Application.Exit();
+        }
+
+        public void SetLanguage(string langCode)
+        {
+            Thread.CurrentThread.CurrentUICulture = new CultureInfo(langCode);
+
+            ApplyLocalization();
+        }
+
+        private void PictureBox1_Click(object sender, EventArgs e)
+        {
+            _navigationService.NavigateTo<LeaderboardForm>();
+        }
     }
 }

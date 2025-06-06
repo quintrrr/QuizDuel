@@ -30,6 +30,21 @@ namespace QuizDuel.DataAccess.Interfaces
         /// <summary>
         /// Асихронно добавляет второго игрока в игру.
         /// </summary>
-        Task AddSecondPlayerToGameAsync(Guid gameId, Guid userId);
+        Task AddSecondPlayerToGameAsync(Game game, Guid userId);
+
+        /// <summary>
+        /// Асихронно получает игру по id c раундами из базы данных.
+        /// </summary>
+        Task<Game?> GetGameByIdIncludeRoundsAsync(Guid id);
+
+        /// <summary>
+        /// Асихронно получает игру по id c раундами и вопросами из базы данных.
+        /// </summary>
+        Task<Game?> GetGameByIdIncludeRoundsAndQuestionsAsync(Guid id);
+
+        /// <summary>
+        /// Асихронно получает игру по id c раундами и ответами из базы данных.
+        /// </summary>
+        Task<Game?> GetGameByIdIncludeRoundsAndAnswersAsync(Guid id);
     }
 }

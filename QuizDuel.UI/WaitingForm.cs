@@ -1,4 +1,5 @@
 ﻿using Castle.Core.Logging;
+using QuizDuel.Core.DTO;
 using QuizDuel.Core.Interfaces;
 
 namespace QuizDuel.UI
@@ -9,73 +10,125 @@ namespace QuizDuel.UI
         private readonly INavigationService _navigationService;
         private readonly ILogger _logger;
         private readonly INotificationService _notificationService;
+        private readonly IUserSessionService _userSessionService;
 
         private bool _isGameStarted;
-        
-        /// <summary>
-        /// Форма начала игры.
-        /// </summary>
+        private GameStateDTO _gameState;
+
         public WaitingForm(
             IGameService gameService,
             INavigationService navigationService,
             ILogger logger,
-            INotificationService notificationService)
+            INotificationService notificationService,
+            IUserSessionService userSessionService)
         {
             InitializeComponent();
+            ApplyLocalization();
 
             _gameService = gameService;
             _navigationService = navigationService;
             _logger = logger;
             _notificationService = notificationService;
+            _userSessionService = userSessionService;
+        }
 
-            UpdateUsernameLabels();
-        } 
-        
-        /// <summary>
-        /// Обрабатывает нажатие кнопки запуска игры.
-        /// </summary>
+        private void ApplyLocalization()
+        {
+            btnPlay.Text = Resources.Game_Play;
+        }
+
+        private async Task GetGameState()
+        {
+            _gameState = await _gameService.GetGameStateAsync();
+        }
+
         private async void BtnPlay_Click(object sender, EventArgs e)
         {
+            btnPlay.Enabled = false;
             try
             {
-                var gameState = await _gameService.GetGameStateAsync();
+                await GetGameState();
 
-                if (!gameState.IsStarted)
+                if (!_gameState.IsStarted)
                 {
                     _notificationService.ShowError(Resources.Game_NotStarted);
+                    await UpdateLabels();
+                    btnPlay.Enabled = true;
                     return;
                 }
-                else if (gameState.IsFinished)
+                else if (_gameState.IsFinished)
                 {
                     _notificationService.ShowError(Resources.Game_Finished);
-                    _navigationService.NavigateTo<MainForm>();
+                    await UpdateLabels();
+                    return;
                 }
 
                 _isGameStarted = true;
+                if (_gameState.CurrentTurnPlayerId != _userSessionService.UserID)
+                {
+                    _notificationService.ShowInfo(Resources.Game_AnotherTurn);
+                    await UpdateLabels();
+                    btnPlay.Enabled = true;
+                }
+                else
+                {
+                    _navigationService.NavigateTo<GameForm>();
+                }
             }
             catch (Exception ex)
             {
                 _logger.Error(ex.Message);
                 _notificationService.ShowError(Resources.Game_StateError);
-                Close();
-            }
-        }
-
-        private async void WaitingForm_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            if (!_isGameStarted)
-            {
-                await _gameService.DeleteGameAsync();   
                 _navigationService.NavigateTo<MainForm>();
             }
         }
 
-        private async void UpdateUsernameLabels()
+        private async Task UpdateLabels()
         {
-            var usernames = await _gameService.GetUsernamesAsync();
+            try
+            {
+                if (_gameState is null)
+                {
+                    await GetGameState();
+                }
 
-            player1NameLabel.Text = usernames.Player1 ?? Resources.Player1Label;
-            player2NameLabel.Text = usernames.Player2 ?? Resources.Player2Label;
+                var (player1, player2) = await _gameService.GetUsernamesAsync();
+
+                player1NameLabel.Text = player1 ?? Resources.Player1Label;
+                player2NameLabel.Text = player2 ?? Resources.Player2Label;
+
+                var (score1, score2) = await _gameService.GetScoresAsync();
+                scoreLabel.Text = $"{score1} : {score2}";
+
+                if (_gameState.IsFinished)
+                {
+                    var winner = await _gameService.GetWinnerAsync();
+                    _notificationService.ShowInfo(
+                        winner == null ? Resources.Game_Draw : $"{Resources.Game_PlayerWon}: {winner}");
+                    _navigationService.NavigateTo<MainForm>();
+                }
+            } 
+            catch {
+                _notificationService.ShowError(Resources.Game_LoadError);
+                _navigationService.NavigateTo<MainForm>();
+            }
+        }
+
+        private async void WaitingForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (!_isGameStarted)
+            {
+                await _gameService.DeleteGameAsync();
+                _navigationService.NavigateTo<MainForm>();
+            }
+            else if (_gameState.IsFinished) { 
+                _navigationService.NavigateTo<MainForm>();
+            }
+        }
+
+        private async void WaitingForm_Load(object sender, EventArgs e)
+        {
+            await UpdateLabels();
         }
     }
 }
