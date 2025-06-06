@@ -31,6 +31,7 @@ namespace QuizDuel.UI
 
             toolStrip.Items.Add(new ToolStripButton("RU", null, (_, _) => SetLanguage("ru")));
             toolStrip.Items.Add(new ToolStripButton("EN", null, (_, _) => SetLanguage("en")));
+            toolStrip.Items.Add(new ToolStripButton("TT", null, (_, _) => SetLanguage("tt")));
 
             Font = FontManager.GetCustomFont(15f);
             titleLabel.Font = FontManager.GetCustomFont(40f);
@@ -99,14 +100,14 @@ namespace QuizDuel.UI
             Application.Exit();
         }
 
-        public async void SetLanguage(string langCode)
+        public void SetLanguage(string langCode)
         {
             Thread.CurrentThread.CurrentUICulture = new CultureInfo(langCode);
 
             ApplyLocalization();
-            Enabled = false;
-            await LoadGameHistory();
-            Enabled = true;
+            _navigationService.CurrentForm = null;
+            Hide();
+            _navigationService.NavigateTo<MainForm>();
         }
 
         private void PictureBox1_Click(object sender, EventArgs e)

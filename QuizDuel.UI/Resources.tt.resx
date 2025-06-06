@@ -1,0 +1,270 @@
+<?xml version='1.0' encoding='utf-8'?>
+<root xmlns:ns1="urn:schemas-microsoft-com:xml-msdata" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  
+  <xs:schema id="root">
+    <xs:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xs:element name="root" ns1:IsDataSet="true">
+      <xs:complexType>
+        <xs:choice maxOccurs="unbounded">
+          <xs:element name="metadata">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="value" type="xsd:string" minOccurs="0" />
+              </xs:sequence>
+              <xs:attribute name="name" use="required" type="xsd:string" />
+              <xs:attribute name="type" type="xsd:string" />
+              <xs:attribute name="mimetype" type="xsd:string" />
+              <xs:attribute ref="xml:space" />
+            </xs:complexType>
+          </xs:element>
+          <xs:element name="assembly">
+            <xs:complexType>
+              <xs:attribute name="alias" type="xsd:string" />
+              <xs:attribute name="name" type="xsd:string" />
+            </xs:complexType>
+          </xs:element>
+          <xs:element name="data">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="value" type="xsd:string" minOccurs="0" ns1:Ordinal="1" />
+                <xs:element name="comment" type="xsd:string" minOccurs="0" ns1:Ordinal="2" />
+              </xs:sequence>
+              <xs:attribute name="name" type="xsd:string" use="required" ns1:Ordinal="1" />
+              <xs:attribute name="type" type="xsd:string" ns1:Ordinal="3" />
+              <xs:attribute name="mimetype" type="xsd:string" ns1:Ordinal="4" />
+              <xs:attribute ref="xml:space" />
+            </xs:complexType>
+          </xs:element>
+          <xs:element name="resheader">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="value" type="xsd:string" minOccurs="0" ns1:Ordinal="1" />
+              </xs:sequence>
+              <xs:attribute name="name" type="xsd:string" use="required" />
+            </xs:complexType>
+          </xs:element>
+        </xs:choice>
+      </xs:complexType>
+    </xs:element>
+  </xs:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="BirthdateLabel" xml:space="preserve">
+    <value>Туган көн</value>
+  </data>
+  <data name="ConfirmExitGameMessage" xml:space="preserve">
+    <value>Уйныннан чынлап та чыгарга телисезме?</value>
+  </data>
+  <data name="ConformExitGame" xml:space="preserve">
+    <value>Чыгуны раслау</value>
+  </data>
+  <data name="CreateGameButton" xml:space="preserve">
+    <value>Уен булдыру</value>
+  </data>
+  <data name="Game.AnotherTurn" xml:space="preserve">
+    <value>Хәзер башка уенчының ходы</value>
+  </data>
+  <data name="Game.AnswerError" xml:space="preserve">
+    <value>Сорауга җавап биргәндә хата чыкты</value>
+  </data>
+  <data name="Game.CreateError" xml:space="preserve">
+    <value>Уенны булдыру мөмкин түгел</value>
+  </data>
+  <data name="Game.Draw" xml:space="preserve">
+    <value>Ничья</value>
+  </data>
+  <data name="Game.Finished" xml:space="preserve">
+    <value>Уен инде тәмамланган</value>
+  </data>
+  <data name="Game.IsNotFound" xml:space="preserve">
+    <value>Уен табылмады</value>
+  </data>
+  <data name="Game.JoinButton" xml:space="preserve">
+    <value>Кушылу</value>
+  </data>
+  <data name="Game.JoinError" xml:space="preserve">
+    <value>Уенга кушылганда хата</value>
+  </data>
+  <data name="Game.LoadCategoryError" xml:space="preserve">
+    <value>Категорияләрне йөкләгәндә хата</value>
+  </data>
+  <data name="Game.LoadError" xml:space="preserve">
+    <value>Уенны йөкләп булмады</value>
+  </data>
+  <data name="Game.LoadQuestionsError" xml:space="preserve">
+    <value>Сорауларны йөкләп булмады</value>
+  </data>
+  <data name="Game.Lose" xml:space="preserve">
+    <value>Оту</value>
+  </data>
+  <data name="Game.NotStarted" xml:space="preserve">
+    <value>Икенче уенчы әле кушылмаган</value>
+  </data>
+  <data name="Game.PasTurnError" xml:space="preserve">
+    <value>Ходны тапшыру хатасы</value>
+  </data>
+  <data name="Game.Play" xml:space="preserve">
+    <value>Уйнарга</value>
+  </data>
+  <data name="Game.PlayerWon" xml:space="preserve">
+    <value>Уенчы җиңде</value>
+  </data>
+  <data name="Game.Rooms" xml:space="preserve">
+    <value>Уеннар</value>
+  </data>
+  <data name="Game.RoundOver" xml:space="preserve">
+    <value>Раунд тәмам</value>
+  </data>
+  <data name="Game.SamePlayers" xml:space="preserve">
+    <value>Сез үз уеныгызга кушыла алмыйсыз</value>
+  </data>
+  <data name="Game.SelectCategory" xml:space="preserve">
+    <value>Категорияне сайлагыз</value>
+  </data>
+  <data name="Game.StateError" xml:space="preserve">
+    <value>Уенга кушылып булмады</value>
+  </data>
+  <data name="Game.Win" xml:space="preserve">
+    <value>Җиңү</value>
+  </data>
+  <data name="Join.UpdateError" xml:space="preserve">
+    <value>Уеннарны йөкләп булмады</value>
+  </data>
+  <data name="Join.UpdateGames" xml:space="preserve">
+    <value>Яңарту</value>
+  </data>
+  <data name="JoinGameButton" xml:space="preserve">
+    <value>Уенга кушылу</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="leaderboard" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>assets\images\leaderboard.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Leaderboard.Answers" xml:space="preserve">
+    <value>дөрес җаваплар</value>
+  </data>
+  <data name="Leaderboard.Label" xml:space="preserve">
+    <value>Лидерлар таблицасы</value>
+  </data>
+  <data name="Login.BtnLogin" xml:space="preserve">
+    <value>Керү</value>
+  </data>
+  <data name="Login.EmptyUsername" xml:space="preserve">
+    <value>Кулланучы исемен языгыз</value>
+  </data>
+  <data name="Login.Error" xml:space="preserve">
+    <value>Аккаунтка кергәндә хата</value>
+  </data>
+  <data name="Login.Label" xml:space="preserve">
+    <value>Аккаунтка керү</value>
+  </data>
+  <data name="Login.NoAccount" xml:space="preserve">
+    <value>Аккаунтыгыз юкмы?</value>
+  </data>
+  <data name="Login.NonExistingUser" xml:space="preserve">
+    <value>Мондый кулланучы юк</value>
+  </data>
+  <data name="Login.Success" xml:space="preserve">
+    <value>Аккаунтка уңышлы керү</value>
+  </data>
+  <data name="Login.WrongPassword" xml:space="preserve">
+    <value>Ялгыш пароль</value>
+  </data>
+  <data name="Notification.Error" xml:space="preserve">
+    <value>Хата турында хәбәр</value>
+  </data>
+  <data name="Notification.Info" xml:space="preserve">
+    <value>Мәгълүмат</value>
+  </data>
+  <data name="Notification.Success" xml:space="preserve">
+    <value>Уңышлы гамәл</value>
+  </data>
+  <data name="Password.HasLowerChar" xml:space="preserve">
+    <value>Пароль должен содержать хотя бы одну строчную букву</value>
+  </data>
+  <data name="Password.HasNumber" xml:space="preserve">
+    <value>Пароль должен содержать хотя бы одну цифру</value>
+  </data>
+  <data name="Password.HasSymbols" xml:space="preserve">
+    <value>Пароль должен содержать хотя бы один специальный символ</value>
+  </data>
+  <data name="Password.HasUpperChar" xml:space="preserve">
+    <value>Пароль должен содержать хотя бы одну заглавную букву</value>
+  </data>
+  <data name="Password.IsLatinOnly" xml:space="preserve">
+    <value>Пароль должен содержать только латинские буквы</value>
+  </data>
+  <data name="Password.MinMaxChar" xml:space="preserve">
+    <value>Пароль должен быть не менее 8 и не более 20 символов</value>
+  </data>
+  <data name="PasswordLabel" xml:space="preserve">
+    <value>Серсүз</value>
+  </data>
+  <data name="Player1Label" xml:space="preserve">
+    <value>Уенчы 1</value>
+  </data>
+  <data name="Player2Label" xml:space="preserve">
+    <value>Уенчы 2</value>
+  </data>
+  <data name="Register.EmptyPassword" xml:space="preserve">
+    <value>Серсүзне языгыз</value>
+  </data>
+  <data name="Register.EmptyRepeatPassword" xml:space="preserve">
+    <value>Серсүзне кабат языгыз</value>
+  </data>
+  <data name="Register.EmptyUsername" xml:space="preserve">
+    <value>Кулланучы исемен языгыз</value>
+  </data>
+  <data name="Register.Error" xml:space="preserve">
+    <value>Аккаунтны теркәү хатасы</value>
+  </data>
+  <data name="Register.ExistingUser" xml:space="preserve">
+    <value>Мондый кулланучы инде бар.</value>
+  </data>
+  <data name="Register.HaveAnAccount" xml:space="preserve">
+    <value>Аккаунтыгыз бармы?</value>
+  </data>
+  <data name="Register.InvalidAge" xml:space="preserve">
+    <value>Сезгә ким дигәндә 4 яшь булырга тиеш</value>
+  </data>
+  <data name="Register.InvalidRepeatPassword" xml:space="preserve">
+    <value>Серсүзләр туры килергә тиеш</value>
+  </data>
+  <data name="Register.Label" xml:space="preserve">
+    <value>Теркәү</value>
+  </data>
+  <data name="Register.Successful" xml:space="preserve">
+    <value>Теркәү уңышлы узды</value>
+  </data>
+  <data name="RegisterButton" xml:space="preserve">
+    <value>Теркәү</value>
+  </data>
+  <data name="RepeatPasswordLabel" xml:space="preserve">
+    <value>Серсүзне кабатлагыз</value>
+  </data>
+  <data name="Minutes" xml:space="preserve">
+    <value>мин</value>
+  </data>
+  <data name="UsernameLabel" xml:space="preserve">
+    <value>Кулланучы исеме</value>
+  </data>
+  <data name="Hours" xml:space="preserve">
+    <value>с</value>
+  </data>
+  <data name="GameHistoryLoadError" xml:space="preserve">
+    <value>Уен тарихын йөкләп булмады</value>
+  </data>
+  <data name="GameHistoryLabel" xml:space="preserve">
+    <value>Уен тарихы</value>
+  </data>
+</root>
