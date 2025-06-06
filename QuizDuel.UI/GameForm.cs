@@ -133,6 +133,7 @@ namespace QuizDuel.UI
             {
                 _questions = await _gameService.GetShuffledQuestionsAsync(3);
                 _currentQuestionIndex = 0;
+                await ShowRoundInfo();
                 await ShowQuestion();
             } 
             catch 
@@ -159,6 +160,13 @@ namespace QuizDuel.UI
             gamePanel.Enabled = true;
 
             await StartTimerAsync(10);
+        }
+
+        private async Task ShowRoundInfo()
+        {
+            var (category, round) = await _gameService.GetCurrentCategoryAndRoundAsync();
+            roundLabel.Text = (round + 1).ToString();
+            categoryLabel.Text = category;
         }
 
         private void ResetButtonStyles()
@@ -219,10 +227,7 @@ namespace QuizDuel.UI
 
                 if (gameState.IsFinished)
                 {
-                    var winner = await _gameService.GetWinnerIdAsync();
-                    _notificationService.ShowInfo(
-                        winner == null ? Resources.Game_Draw : $"{Resources.Game_PlayerWon}: {winner}");
-                    _navigationService.NavigateTo<MainForm>();
+                    _navigationService.NavigateTo<WaitingForm>();
                     return;
                 }
 

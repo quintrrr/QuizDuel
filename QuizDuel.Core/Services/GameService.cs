@@ -1,4 +1,5 @@
 ﻿using Castle.Core.Logging;
+using Microsoft.EntityFrameworkCore;
 using QuizDuel.Core.DTO;
 using QuizDuel.Core.Interfaces;
 using QuizDuel.DataAccess;
@@ -20,6 +21,7 @@ namespace QuizDuel.Core.Services
         private readonly IRoundQuestionRepository _roundQuestionRepository;
         private readonly ILogger _logger;
         private readonly GameDbContext _gameDbContext;
+        private readonly QuestionsDbContext _questionsDbContext;
 
         private Guid _gameId;
 
@@ -48,7 +50,8 @@ namespace QuizDuel.Core.Services
             ICategoryRepository categoryRepository,
             IQuestionRepository questionRepository,
             IRoundQuestionRepository roundQuestionRepository,
-            GameDbContext gameDbContext)
+            GameDbContext gameDbContext,
+            QuestionsDbContext questionsDbContext)
         {
             _gameRepository = gameRepository;
             _logger = logger;
@@ -58,6 +61,7 @@ namespace QuizDuel.Core.Services
             _questionRepository = questionRepository;
             _roundQuestionRepository = roundQuestionRepository;
             _gameDbContext = gameDbContext;
+            _questionsDbContext = questionsDbContext;
         }
 
         /// <summary>
@@ -423,9 +427,15 @@ namespace QuizDuel.Core.Services
             try
             {
                 var game = await _gameRepository.GetGameByIdAsync(_gameId);
-                if (game == null) throw new Exception("Игра не найдена");
+                if (game == null) 
+                { 
+                    throw new Exception("Игра не найдена"); 
+                }
 
-                if (game.FinishedAt != null) throw new Exception("Игра уже завершена");
+                if (game.FinishedAt != null) 
+                { 
+                    throw new Exception("Игра уже завершена"); 
+                }
 
                 bool isEvenRound = game.CurrentRound % 2 == 0;
 
@@ -438,6 +448,11 @@ namespace QuizDuel.Core.Services
                     else
                     {
                         game.CurrentRound++;
+
+                        if (game.CurrentRound >= 6)
+                        {
+                            game.FinishedAt = DateTime.UtcNow.ToUniversalTime();
+                        }
                     }
                 }
                 else
@@ -449,11 +464,6 @@ namespace QuizDuel.Core.Services
                     else
                     {
                         game.Turn = 0;
-
-                        if (game.CurrentRound >= 6)
-                        {
-                            game.FinishedAt = DateTime.UtcNow.ToUniversalTime();
-                        }
                     }
                 }
 
@@ -469,9 +479,9 @@ namespace QuizDuel.Core.Services
         }
 
         /// <summary>
-        /// Возвращает id победителя
+        /// Возвращает победителя
         /// </summary>
-        public async Task<Guid?> GetWinnerIdAsync()
+        public async Task<string?> GetWinnerAsync()
         {
             try
             {
@@ -492,15 +502,52 @@ namespace QuizDuel.Core.Services
                 }
 
                 if (player1Score > player2Score)
-                    return game.Player1Id;
+                    return await _userRepository.GetUsernameById(game.Player1Id);
                 else if (player2Score > player1Score)
-                    return game.Player2Id;
+                    return await _userRepository.GetUsernameById(game.Player2Id);
                 else
                     return null;
             }
             catch (Exception ex)
             {
                 _logger.Error("Ошибка при выявлении победителя", ex);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Возвращает текущую категорию
+        /// </summary>
+        public async Task<(string category, int round)> GetCurrentCategoryAndRoundAsync()
+        {
+            try
+            {
+                var game = await _gameRepository.GetGameByIdIncludeRoundsAsync(_gameId);
+                if (game is null)
+                {
+                    throw new Exception($"Игра с {_gameId} не найдена.");
+                }
+
+                var round = game.Rounds.FirstOrDefault(r => r.Index == game.CurrentRound);
+
+                if (round is null)
+                {
+                    throw new Exception("Раунд не найден");
+                }
+
+                var category = await _questionsDbContext.Categories
+                    .AsNoTracking()
+                    .FirstOrDefaultAsync(c => c.Id == round.CategoryId);
+
+                if (category is null)
+                {
+                    throw new Exception("Категория не найдена");
+                }
+
+                return (category.Name, game.CurrentRound);
+            } catch (Exception ex)
+            {
+                _logger.Error("Не удалось получить категорию", ex);
                 throw;
             }
         }

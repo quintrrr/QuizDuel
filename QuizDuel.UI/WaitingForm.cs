@@ -1,4 +1,5 @@
 ﻿using Castle.Core.Logging;
+using QuizDuel.Core.DTO;
 using QuizDuel.Core.Interfaces;
 
 namespace QuizDuel.UI
@@ -12,6 +13,7 @@ namespace QuizDuel.UI
         private readonly IUserSessionService _userSessionService;
 
         private bool _isGameStarted;
+        private GameStateDTO _gameState;
 
         public WaitingForm(
             IGameService gameService,
@@ -29,32 +31,38 @@ namespace QuizDuel.UI
             _userSessionService = userSessionService;
         }
 
+        private async Task GetGameState()
+        {
+            _gameState = await _gameService.GetGameStateAsync();
+        }
+
         private async void BtnPlay_Click(object sender, EventArgs e)
         {
             btnPlay.Enabled = false;
             try
             {
-                var gameState = await _gameService.GetGameStateAsync();
+                await GetGameState();
 
-                if (!gameState.IsStarted)
+                if (!_gameState.IsStarted)
                 {
                     _notificationService.ShowError(Resources.Game_NotStarted);
+                    await UpdateLabels();
                     btnPlay.Enabled = true;
+                    return;
+                }
+                else if (_gameState.IsFinished)
+                {
+                    _notificationService.ShowError(Resources.Game_Finished);
                     await UpdateLabels();
                     return;
                 }
-                else if (gameState.IsFinished)
-                {
-                    _notificationService.ShowError(Resources.Game_Finished);
-                    _navigationService.NavigateTo<MainForm>();
-                }
 
                 _isGameStarted = true;
-                if (gameState.CurrentTurnPlayerId != _userSessionService.UserID)
+                if (_gameState.CurrentTurnPlayerId != _userSessionService.UserID)
                 {
                     _notificationService.ShowInfo(Resources.Game_AnotherTurn);
-                    btnPlay.Enabled = true;
                     await UpdateLabels();
+                    btnPlay.Enabled = true;
                 }
                 else
                 {
@@ -73,6 +81,11 @@ namespace QuizDuel.UI
         {
             try
             {
+                if (_gameState is null)
+                {
+                    await GetGameState();
+                }
+
                 var (player1, player2) = await _gameService.GetUsernamesAsync();
 
                 player1NameLabel.Text = player1 ?? Resources.Player1Label;
@@ -80,6 +93,14 @@ namespace QuizDuel.UI
 
                 var (score1, score2) = await _gameService.GetScoresAsync();
                 scoreLabel.Text = $"{score1} : {score2}";
+
+                if (_gameState.IsFinished)
+                {
+                    var winner = await _gameService.GetWinnerAsync();
+                    _notificationService.ShowInfo(
+                        winner == null ? Resources.Game_Draw : $"{Resources.Game_PlayerWon}: {winner}");
+                    _navigationService.NavigateTo<MainForm>();
+                }
             } 
             catch {
                 _notificationService.ShowError(Resources.Game_LoadError);
