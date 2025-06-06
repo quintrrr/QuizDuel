@@ -39,8 +39,8 @@
             // 
             tableLayoutPanel1.ColumnCount = 3;
             tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 10F));
-            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 60F));
-            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 30F));
+            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 51.4511871F));
+            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 38.6543541F));
             tableLayoutPanel1.Controls.Add(placeLabel, 0, 0);
             tableLayoutPanel1.Controls.Add(usernameLabel, 1, 0);
             tableLayoutPanel1.Controls.Add(answersLabel, 2, 0);
@@ -67,7 +67,7 @@
             usernameLabel.Location = new Point(78, 0);
             usernameLabel.Name = "usernameLabel";
             usernameLabel.Padding = new Padding(50, 0, 0, 0);
-            usernameLabel.Size = new Size(448, 65);
+            usernameLabel.Size = new Size(383, 65);
             usernameLabel.TabIndex = 1;
             usernameLabel.Text = "label1";
             usernameLabel.TextAlign = ContentAlignment.MiddleLeft;
@@ -75,9 +75,9 @@
             // answersLabel
             // 
             answersLabel.Font = new Font("Segoe UI", 15F);
-            answersLabel.Location = new Point(532, 0);
+            answersLabel.Location = new Point(467, 0);
             answersLabel.Name = "answersLabel";
-            answersLabel.Size = new Size(223, 65);
+            answersLabel.Size = new Size(284, 65);
             answersLabel.TabIndex = 2;
             answersLabel.Text = "label1";
             answersLabel.TextAlign = ContentAlignment.MiddleRight;

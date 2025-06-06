@@ -33,6 +33,11 @@ namespace QuizDuel.UI
             _logger = logger;
 
             selectCategoryLabel.Text = Resources.Game_SelectCategory;
+
+            Font = FontManager.GetCustomFont(15f);
+            selectCategoryLabel.Font = FontManager.GetCustomFont(30f);
+            questionLabel.Font = FontManager.GetCustomFont(18f);
+            roundLabel.Font = FontManager.GetCustomFont(12f);
         }
 
         private async Task ShowCategorySelectionAsync()
@@ -94,7 +99,7 @@ namespace QuizDuel.UI
                 }
                 else
                 {
-                    _notificationService.ShowInfo("Раунд завершён!");
+                    _notificationService.ShowInfo(Resources.Game_RoundOver);
                     await PassTurnAsync();
                     _isGameContinued = true;
                     _navigationService.NavigateTo<WaitingForm>();

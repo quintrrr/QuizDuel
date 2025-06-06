@@ -174,6 +174,12 @@
   <data name="Game.PlayerWon" xml:space="preserve">
     <value>Победил игрок</value>
   </data>
+  <data name="Game.Rooms" xml:space="preserve">
+    <value>Игры</value>
+  </data>
+  <data name="Game.RoundOver" xml:space="preserve">
+    <value>Раунд завершен</value>
+  </data>
   <data name="Game.SamePlayers" xml:space="preserve">
     <value>Вы не можете подключиться к своей игре</value>
   </data>
@@ -210,6 +216,9 @@
   </data>
   <data name="Login.Error" xml:space="preserve">
     <value>Ошибка при входе в аккаунт</value>
+  </data>
+  <data name="Login.Label" xml:space="preserve">
+    <value>Вход в аккаунт</value>
   </data>
   <data name="Login.NoAccount" xml:space="preserve">
     <value>Нет аккаунта? </value>
@@ -282,6 +291,9 @@
   </data>
   <data name="Register.InvalidRepeatPassword" xml:space="preserve">
     <value>Пароли должны совпадать</value>
+  </data>
+  <data name="Register.Label" xml:space="preserve">
+    <value>Регистрация</value>
   </data>
   <data name="Register.Successful" xml:space="preserve">
     <value>Регистрация прошла успешно</value>

@@ -27,6 +27,9 @@ namespace QuizDuel.UI
             _logger = logger;
 
             btnUpdateGames.Text = Resources.Join_UpdateGames;
+            titleLabel.Text = Resources.Game_Rooms;
+            Font = FontManager.GetCustomFont(15f);
+            titleLabel.Font = FontManager.GetCustomFont(30f);
         }
 
         private async void JoinGameForm_Load(object sender, EventArgs e)

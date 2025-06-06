@@ -35,11 +35,12 @@
             regLabel = new LinkLabel();
             btnLogin = new Button();
             toolStrip = new ToolStrip();
+            titleLabel = new Label();
             SuspendLayout();
             // 
             // usernameTextBox
             // 
-            usernameTextBox.Location = new Point(113, 119);
+            usernameTextBox.Location = new Point(113, 153);
             usernameTextBox.Name = "usernameTextBox";
             usernameTextBox.Size = new Size(247, 23);
             usernameTextBox.TabIndex = 0;
@@ -47,7 +48,7 @@
             // 
             // passwordTextBox
             // 
-            passwordTextBox.Location = new Point(113, 199);
+            passwordTextBox.Location = new Point(113, 233);
             passwordTextBox.Name = "passwordTextBox";
             passwordTextBox.Size = new Size(247, 23);
             passwordTextBox.TabIndex = 1;
@@ -56,21 +57,21 @@
             // 
             // usernameLabel
             // 
-            usernameLabel.AutoSize = true;
-            usernameLabel.Location = new Point(113, 101);
+            usernameLabel.Location = new Point(113, 126);
             usernameLabel.Name = "usernameLabel";
-            usernameLabel.Size = new Size(107, 15);
+            usernameLabel.Size = new Size(247, 19);
             usernameLabel.TabIndex = 2;
             usernameLabel.Text = "имя пользователя";
+            usernameLabel.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // passwordLabel
             // 
-            passwordLabel.AutoSize = true;
-            passwordLabel.Location = new Point(114, 182);
+            passwordLabel.Location = new Point(114, 207);
             passwordLabel.Name = "passwordLabel";
-            passwordLabel.Size = new Size(47, 15);
+            passwordLabel.Size = new Size(246, 19);
             passwordLabel.TabIndex = 3;
             passwordLabel.Text = "пароль";
+            passwordLabel.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // regLabel
             // 
@@ -87,7 +88,7 @@
             // 
             // btnLogin
             // 
-            btnLogin.Location = new Point(155, 287);
+            btnLogin.Location = new Point(155, 314);
             btnLogin.Name = "btnLogin";
             btnLogin.Size = new Size(162, 45);
             btnLogin.TabIndex = 5;
@@ -103,11 +104,22 @@
             toolStrip.TabIndex = 6;
             toolStrip.Text = "toolStrip1";
             // 
+            // titleLabel
+            // 
+            titleLabel.Font = new Font("Segoe UI", 30F);
+            titleLabel.Location = new Point(55, 25);
+            titleLabel.Name = "titleLabel";
+            titleLabel.Size = new Size(358, 63);
+            titleLabel.TabIndex = 7;
+            titleLabel.Text = "label1";
+            titleLabel.TextAlign = ContentAlignment.MiddleCenter;
+            // 
             // LoginForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(474, 432);
+            Controls.Add(titleLabel);
             Controls.Add(toolStrip);
             Controls.Add(btnLogin);
             Controls.Add(regLabel);
@@ -117,7 +129,7 @@
             Controls.Add(usernameTextBox);
             FormBorderStyle = FormBorderStyle.FixedDialog;
             Name = "LoginForm";
-            Text = "LoginForm";
+            Text = "QuizDuel";
             FormClosed += LoginForm_FormClosed;
             ResumeLayout(false);
             PerformLayout();
@@ -132,5 +144,6 @@
         private LinkLabel regLabel;
         private Button btnLogin;
         private ToolStrip toolStrip;
+        private Label titleLabel;
     }
 }

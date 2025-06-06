@@ -30,6 +30,9 @@ namespace QuizDuel.UI
 
             toolStrip.Items.Add(new ToolStripButton("RU", null, (_, _) => SetLanguage("ru")));
             toolStrip.Items.Add(new ToolStripButton("EN", null, (_, _) => SetLanguage("en")));
+
+            Font = FontManager.GetCustomFont(15f);
+            titleLabel.Font = FontManager.GetCustomFont(40f);
         }
 
         private void ApplyLocalization()

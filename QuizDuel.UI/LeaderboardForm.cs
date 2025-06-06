@@ -13,6 +13,7 @@ namespace QuizDuel.UI
 
             _gameService = gameService;
             _navigationService = navigationService;
+
         }
 
         private async void LeaderboardForm_Load(object sender, EventArgs e)

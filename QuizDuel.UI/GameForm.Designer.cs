@@ -116,7 +116,7 @@
             // 
             // btnAnswer4
             // 
-            btnAnswer4.Location = new Point(436, 323);
+            btnAnswer4.Location = new Point(430, 323);
             btnAnswer4.Name = "btnAnswer4";
             btnAnswer4.Size = new Size(242, 72);
             btnAnswer4.TabIndex = 7;
@@ -127,7 +127,7 @@
             // 
             // btnAnswer3
             // 
-            btnAnswer3.Location = new Point(436, 234);
+            btnAnswer3.Location = new Point(430, 234);
             btnAnswer3.Name = "btnAnswer3";
             btnAnswer3.Size = new Size(242, 72);
             btnAnswer3.TabIndex = 6;
@@ -138,7 +138,7 @@
             // 
             // btnAnswer2
             // 
-            btnAnswer2.Location = new Point(136, 323);
+            btnAnswer2.Location = new Point(130, 323);
             btnAnswer2.Name = "btnAnswer2";
             btnAnswer2.Size = new Size(244, 72);
             btnAnswer2.TabIndex = 5;
@@ -149,7 +149,7 @@
             // 
             // btnAnswer1
             // 
-            btnAnswer1.Location = new Point(136, 234);
+            btnAnswer1.Location = new Point(130, 234);
             btnAnswer1.Name = "btnAnswer1";
             btnAnswer1.Size = new Size(244, 72);
             btnAnswer1.TabIndex = 4;
@@ -170,7 +170,7 @@
             // questionTimer
             // 
             questionTimer.ForeColor = Color.FromArgb(255, 255, 128);
-            questionTimer.Location = new Point(137, 208);
+            questionTimer.Location = new Point(131, 208);
             questionTimer.Name = "questionTimer";
             questionTimer.Size = new Size(542, 15);
             questionTimer.TabIndex = 2;
@@ -190,7 +190,7 @@
             questionLabel.BackColor = SystemColors.Control;
             questionLabel.BorderStyle = BorderStyle.FixedSingle;
             questionLabel.Font = new Font("Segoe UI", 15F);
-            questionLabel.Location = new Point(107, 72);
+            questionLabel.Location = new Point(101, 72);
             questionLabel.Name = "questionLabel";
             questionLabel.Size = new Size(600, 125);
             questionLabel.TabIndex = 0;
@@ -206,7 +206,7 @@
             Controls.Add(categoryPanel);
             FormBorderStyle = FormBorderStyle.FixedSingle;
             Name = "GameForm";
-            Text = "GameForm";
+            Text = "QuizDuel";
             FormClosing += GameForm_FormClosing;
             Load += GameForm_Load;
             categoryPanel.ResumeLayout(false);

@@ -39,18 +39,19 @@
             btnRegister = new Button();
             haveAccountLinkLabel = new LinkLabel();
             toolStrip = new ToolStrip();
+            titleLabel = new Label();
             SuspendLayout();
             // 
             // usernameTextBox
             // 
-            usernameTextBox.Location = new Point(87, 53);
+            usernameTextBox.Location = new Point(87, 127);
             usernameTextBox.Name = "usernameTextBox";
             usernameTextBox.Size = new Size(287, 23);
             usernameTextBox.TabIndex = 0;
             // 
             // passwordTextBox
             // 
-            passwordTextBox.Location = new Point(86, 184);
+            passwordTextBox.Location = new Point(86, 258);
             passwordTextBox.Name = "passwordTextBox";
             passwordTextBox.Size = new Size(288, 23);
             passwordTextBox.TabIndex = 1;
@@ -58,7 +59,7 @@
             // 
             // repeatPasswordTextBox
             // 
-            repeatPasswordTextBox.Location = new Point(86, 249);
+            repeatPasswordTextBox.Location = new Point(86, 323);
             repeatPasswordTextBox.Name = "repeatPasswordTextBox";
             repeatPasswordTextBox.Size = new Size(288, 23);
             repeatPasswordTextBox.TabIndex = 2;
@@ -66,50 +67,50 @@
             // 
             // birthdatePicker
             // 
-            birthdatePicker.Location = new Point(86, 119);
+            birthdatePicker.Location = new Point(86, 193);
             birthdatePicker.Name = "birthdatePicker";
             birthdatePicker.Size = new Size(287, 23);
             birthdatePicker.TabIndex = 3;
             // 
             // usernameLabel
             // 
-            usernameLabel.AutoSize = true;
-            usernameLabel.Location = new Point(87, 35);
+            usernameLabel.Location = new Point(87, 106);
             usernameLabel.Name = "usernameLabel";
-            usernameLabel.Size = new Size(38, 15);
+            usernameLabel.Size = new Size(287, 20);
             usernameLabel.TabIndex = 4;
             usernameLabel.Text = "label1";
+            usernameLabel.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // birthdateLabel
             // 
-            birthdateLabel.AutoSize = true;
-            birthdateLabel.Location = new Point(87, 101);
+            birthdateLabel.Location = new Point(87, 172);
             birthdateLabel.Name = "birthdateLabel";
-            birthdateLabel.Size = new Size(38, 15);
+            birthdateLabel.Size = new Size(287, 20);
             birthdateLabel.TabIndex = 5;
             birthdateLabel.Text = "label2";
+            birthdateLabel.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // passwordLabel
             // 
-            passwordLabel.AutoSize = true;
-            passwordLabel.Location = new Point(86, 166);
+            passwordLabel.Location = new Point(86, 237);
             passwordLabel.Name = "passwordLabel";
-            passwordLabel.Size = new Size(38, 15);
+            passwordLabel.Size = new Size(287, 20);
             passwordLabel.TabIndex = 6;
             passwordLabel.Text = "label3";
+            passwordLabel.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // repeatPasswordLabel
             // 
-            repeatPasswordLabel.AutoSize = true;
-            repeatPasswordLabel.Location = new Point(86, 231);
+            repeatPasswordLabel.Location = new Point(86, 301);
             repeatPasswordLabel.Name = "repeatPasswordLabel";
-            repeatPasswordLabel.Size = new Size(38, 15);
+            repeatPasswordLabel.Size = new Size(287, 20);
             repeatPasswordLabel.TabIndex = 7;
             repeatPasswordLabel.Text = "label4";
+            repeatPasswordLabel.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // btnRegister
             // 
-            btnRegister.Location = new Point(136, 318);
+            btnRegister.Location = new Point(136, 377);
             btnRegister.Name = "btnRegister";
             btnRegister.Size = new Size(188, 53);
             btnRegister.TabIndex = 8;
@@ -120,9 +121,9 @@
             // haveAccountLinkLabel
             // 
             haveAccountLinkLabel.LinkColor = Color.Black;
-            haveAccountLinkLabel.Location = new Point(136, 404);
+            haveAccountLinkLabel.Location = new Point(71, 450);
             haveAccountLinkLabel.Name = "haveAccountLinkLabel";
-            haveAccountLinkLabel.Size = new Size(188, 19);
+            haveAccountLinkLabel.Size = new Size(319, 23);
             haveAccountLinkLabel.TabIndex = 9;
             haveAccountLinkLabel.TabStop = true;
             haveAccountLinkLabel.Text = "Есть аккаунт?";
@@ -137,11 +138,22 @@
             toolStrip.TabIndex = 10;
             toolStrip.Text = "toolStrip1";
             // 
+            // titleLabel
+            // 
+            titleLabel.AutoSize = true;
+            titleLabel.Font = new Font("Segoe UI", 30F);
+            titleLabel.Location = new Point(110, 27);
+            titleLabel.Name = "titleLabel";
+            titleLabel.Size = new Size(249, 54);
+            titleLabel.TabIndex = 11;
+            titleLabel.Text = "Регистрация";
+            // 
             // RegistrationForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(474, 432);
+            ClientSize = new Size(474, 478);
+            Controls.Add(titleLabel);
             Controls.Add(toolStrip);
             Controls.Add(haveAccountLinkLabel);
             Controls.Add(btnRegister);
@@ -155,7 +167,7 @@
             Controls.Add(usernameTextBox);
             FormBorderStyle = FormBorderStyle.FixedSingle;
             Name = "RegistrationForm";
-            Text = "RegistrationForm";
+            Text = "QuizDuel";
             FormClosed += RegistrationForm_FormClosed;
             ResumeLayout(false);
             PerformLayout();
@@ -174,5 +186,6 @@
         private Button btnRegister;
         private LinkLabel haveAccountLinkLabel;
         private ToolStrip toolStrip;
+        private Label titleLabel;
     }
 }

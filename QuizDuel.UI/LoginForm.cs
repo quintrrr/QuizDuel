@@ -27,6 +27,9 @@ namespace QuizDuel.UI
 
             toolStrip.Items.Add(new ToolStripButton("RU", null, (_, _) => SetLanguage("ru")));
             toolStrip.Items.Add(new ToolStripButton("EN", null, (_, _) => SetLanguage("en")));
+
+            Font = FontManager.GetCustomFont(15f);
+            titleLabel.Font = FontManager.GetCustomFont(30f);
         }
 
 
@@ -36,6 +39,7 @@ namespace QuizDuel.UI
             passwordLabel.Text = Resources.PasswordLabel;
             btnLogin.Text = Resources.Login_BtnLogin;
             regLabel.Text = Resources.Login_NoAccount;
+            titleLabel.Text = Resources.Login_Label;
         }
 
         public void SetLanguage(string langCode)

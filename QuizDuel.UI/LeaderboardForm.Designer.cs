@@ -42,7 +42,6 @@
             // 
             // leaderboardLabel
             // 
-            leaderboardLabel.Font = new Font("Segoe UI", 20F);
             leaderboardLabel.Location = new Point(227, 9);
             leaderboardLabel.Name = "leaderboardLabel";
             leaderboardLabel.Size = new Size(349, 49);
@@ -59,7 +58,7 @@
             Controls.Add(flowLeaders);
             FormBorderStyle = FormBorderStyle.FixedSingle;
             Name = "LeaderboardForm";
-            Text = "LeaderboardForm";
+            Text = "QuizDuel";
             FormClosing += LeaderboardForm_FormClosing;
             Load += LeaderboardForm_Load;
             ResumeLayout(false);
