@@ -29,6 +29,7 @@ namespace QuizDuel.UI
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(WaitingForm));
             btnPlay = new Button();
             player1NameLabel = new Label();
             player2NameLabel = new Label();
@@ -38,18 +39,25 @@ namespace QuizDuel.UI
             // 
             // btnPlay
             // 
+            btnPlay.BackColor = Color.Transparent;
+            btnPlay.Cursor = Cursors.Hand;
+            btnPlay.FlatAppearance.BorderSize = 2;
+            btnPlay.FlatStyle = FlatStyle.Flat;
+            btnPlay.ForeColor = Color.White;
             btnPlay.Location = new Point(274, 362);
             btnPlay.Name = "btnPlay";
             btnPlay.Size = new Size(257, 52);
             btnPlay.TabIndex = 2;
             btnPlay.Text = "Играть";
-            btnPlay.UseVisualStyleBackColor = true;
+            btnPlay.UseVisualStyleBackColor = false;
             btnPlay.Click += BtnPlay_Click;
             // 
             // player1NameLabel
             // 
             player1NameLabel.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            player1NameLabel.BackColor = Color.Transparent;
             player1NameLabel.Font = new Font("Segoe UI", 12F);
+            player1NameLabel.ForeColor = Color.White;
             player1NameLabel.Location = new Point(43, 105);
             player1NameLabel.Name = "player1NameLabel";
             player1NameLabel.Size = new Size(250, 32);
@@ -59,7 +67,9 @@ namespace QuizDuel.UI
             // 
             // player2NameLabel
             // 
+            player2NameLabel.BackColor = Color.Transparent;
             player2NameLabel.Font = new Font("Segoe UI", 12F);
+            player2NameLabel.ForeColor = Color.White;
             player2NameLabel.Location = new Point(510, 105);
             player2NameLabel.Name = "player2NameLabel";
             player2NameLabel.Size = new Size(263, 32);
@@ -69,7 +79,9 @@ namespace QuizDuel.UI
             // 
             // scoreLabel
             // 
+            scoreLabel.BackColor = Color.Transparent;
             scoreLabel.Font = new Font("Segoe UI", 18F);
+            scoreLabel.ForeColor = Color.White;
             scoreLabel.Location = new Point(357, 100);
             scoreLabel.Name = "scoreLabel";
             scoreLabel.Size = new Size(87, 42);
@@ -79,6 +91,8 @@ namespace QuizDuel.UI
             // 
             // titleLabel
             // 
+            titleLabel.BackColor = Color.Transparent;
+            titleLabel.ForeColor = Color.White;
             titleLabel.Location = new Point(274, 9);
             titleLabel.Name = "titleLabel";
             titleLabel.Size = new Size(253, 61);
@@ -90,12 +104,15 @@ namespace QuizDuel.UI
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
+            BackgroundImageLayout = ImageLayout.Zoom;
             ClientSize = new Size(800, 450);
             Controls.Add(titleLabel);
             Controls.Add(scoreLabel);
             Controls.Add(player2NameLabel);
             Controls.Add(player1NameLabel);
             Controls.Add(btnPlay);
+            DoubleBuffered = true;
             Name = "WaitingForm";
             Text = "QuizDuel";
             FormClosing += WaitingForm_FormClosing;

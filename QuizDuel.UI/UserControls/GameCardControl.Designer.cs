@@ -36,12 +36,16 @@
             // 
             btnJoin.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Right;
             btnJoin.AutoSize = true;
+            btnJoin.BackColor = Color.Transparent;
+            btnJoin.Cursor = Cursors.Hand;
+            btnJoin.FlatAppearance.BorderSize = 3;
+            btnJoin.FlatStyle = FlatStyle.Flat;
             btnJoin.Location = new Point(641, 18);
             btnJoin.Name = "btnJoin";
             btnJoin.Size = new Size(107, 39);
             btnJoin.TabIndex = 0;
             btnJoin.Text = "button1";
-            btnJoin.UseVisualStyleBackColor = true;
+            btnJoin.UseVisualStyleBackColor = false;
             // 
             // hostUsernameLabel
             // 

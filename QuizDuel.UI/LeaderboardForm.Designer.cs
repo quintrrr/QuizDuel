@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(LeaderboardForm));
             flowLeaders = new FlowLayoutPanel();
             leaderboardLabel = new Label();
             SuspendLayout();
@@ -35,6 +36,8 @@
             // flowLeaders
             // 
             flowLeaders.AutoScroll = true;
+            flowLeaders.BackColor = Color.Transparent;
+            flowLeaders.ForeColor = Color.White;
             flowLeaders.Location = new Point(12, 83);
             flowLeaders.Name = "flowLeaders";
             flowLeaders.Size = new Size(776, 342);
@@ -42,6 +45,8 @@
             // 
             // leaderboardLabel
             // 
+            leaderboardLabel.BackColor = Color.Transparent;
+            leaderboardLabel.ForeColor = Color.White;
             leaderboardLabel.Location = new Point(153, 12);
             leaderboardLabel.Name = "leaderboardLabel";
             leaderboardLabel.Size = new Size(510, 49);
@@ -53,6 +58,8 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
+            BackgroundImageLayout = ImageLayout.Stretch;
             ClientSize = new Size(800, 450);
             Controls.Add(leaderboardLabel);
             Controls.Add(flowLeaders);

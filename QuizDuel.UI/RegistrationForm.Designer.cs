@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(RegistrationForm));
             usernameTextBox = new TextBox();
             passwordTextBox = new TextBox();
             repeatPasswordTextBox = new TextBox();
@@ -44,14 +45,14 @@
             // 
             // usernameTextBox
             // 
-            usernameTextBox.Location = new Point(87, 127);
+            usernameTextBox.Location = new Point(230, 127);
             usernameTextBox.Name = "usernameTextBox";
             usernameTextBox.Size = new Size(287, 23);
             usernameTextBox.TabIndex = 0;
             // 
             // passwordTextBox
             // 
-            passwordTextBox.Location = new Point(86, 258);
+            passwordTextBox.Location = new Point(229, 258);
             passwordTextBox.Name = "passwordTextBox";
             passwordTextBox.Size = new Size(288, 23);
             passwordTextBox.TabIndex = 1;
@@ -59,7 +60,7 @@
             // 
             // repeatPasswordTextBox
             // 
-            repeatPasswordTextBox.Location = new Point(86, 323);
+            repeatPasswordTextBox.Location = new Point(229, 323);
             repeatPasswordTextBox.Name = "repeatPasswordTextBox";
             repeatPasswordTextBox.Size = new Size(288, 23);
             repeatPasswordTextBox.TabIndex = 2;
@@ -67,14 +68,16 @@
             // 
             // birthdatePicker
             // 
-            birthdatePicker.Location = new Point(86, 193);
+            birthdatePicker.Location = new Point(229, 193);
             birthdatePicker.Name = "birthdatePicker";
             birthdatePicker.Size = new Size(287, 23);
             birthdatePicker.TabIndex = 3;
             // 
             // usernameLabel
             // 
-            usernameLabel.Location = new Point(87, 106);
+            usernameLabel.BackColor = Color.Transparent;
+            usernameLabel.ForeColor = Color.White;
+            usernameLabel.Location = new Point(230, 106);
             usernameLabel.Name = "usernameLabel";
             usernameLabel.Size = new Size(287, 20);
             usernameLabel.TabIndex = 4;
@@ -83,7 +86,9 @@
             // 
             // birthdateLabel
             // 
-            birthdateLabel.Location = new Point(87, 172);
+            birthdateLabel.BackColor = Color.Transparent;
+            birthdateLabel.ForeColor = Color.White;
+            birthdateLabel.Location = new Point(230, 172);
             birthdateLabel.Name = "birthdateLabel";
             birthdateLabel.Size = new Size(287, 20);
             birthdateLabel.TabIndex = 5;
@@ -92,7 +97,9 @@
             // 
             // passwordLabel
             // 
-            passwordLabel.Location = new Point(86, 237);
+            passwordLabel.BackColor = Color.Transparent;
+            passwordLabel.ForeColor = Color.White;
+            passwordLabel.Location = new Point(229, 237);
             passwordLabel.Name = "passwordLabel";
             passwordLabel.Size = new Size(287, 20);
             passwordLabel.TabIndex = 6;
@@ -101,7 +108,9 @@
             // 
             // repeatPasswordLabel
             // 
-            repeatPasswordLabel.Location = new Point(86, 301);
+            repeatPasswordLabel.BackColor = Color.Transparent;
+            repeatPasswordLabel.ForeColor = Color.White;
+            repeatPasswordLabel.Location = new Point(229, 301);
             repeatPasswordLabel.Name = "repeatPasswordLabel";
             repeatPasswordLabel.Size = new Size(287, 20);
             repeatPasswordLabel.TabIndex = 7;
@@ -110,18 +119,25 @@
             // 
             // btnRegister
             // 
-            btnRegister.Location = new Point(136, 377);
+            btnRegister.BackColor = Color.Transparent;
+            btnRegister.Cursor = Cursors.Hand;
+            btnRegister.FlatAppearance.BorderSize = 3;
+            btnRegister.FlatStyle = FlatStyle.Flat;
+            btnRegister.ForeColor = Color.White;
+            btnRegister.Location = new Point(264, 377);
             btnRegister.Name = "btnRegister";
-            btnRegister.Size = new Size(188, 53);
+            btnRegister.Size = new Size(214, 53);
             btnRegister.TabIndex = 8;
             btnRegister.Text = "button1";
-            btnRegister.UseVisualStyleBackColor = true;
+            btnRegister.UseVisualStyleBackColor = false;
             btnRegister.Click += BtnRegister_Click;
             // 
             // haveAccountLinkLabel
             // 
-            haveAccountLinkLabel.LinkColor = Color.Black;
-            haveAccountLinkLabel.Location = new Point(71, 450);
+            haveAccountLinkLabel.BackColor = Color.Transparent;
+            haveAccountLinkLabel.ForeColor = Color.White;
+            haveAccountLinkLabel.LinkColor = Color.Silver;
+            haveAccountLinkLabel.Location = new Point(214, 450);
             haveAccountLinkLabel.Name = "haveAccountLinkLabel";
             haveAccountLinkLabel.Size = new Size(319, 23);
             haveAccountLinkLabel.TabIndex = 9;
@@ -132,17 +148,21 @@
             // 
             // toolStrip
             // 
+            toolStrip.BackColor = Color.Transparent;
+            toolStrip.GripStyle = ToolStripGripStyle.Hidden;
             toolStrip.Location = new Point(0, 0);
             toolStrip.Name = "toolStrip";
-            toolStrip.Size = new Size(474, 25);
+            toolStrip.Size = new Size(756, 25);
             toolStrip.TabIndex = 10;
             toolStrip.Text = "toolStrip1";
             // 
             // titleLabel
             // 
             titleLabel.AutoSize = true;
+            titleLabel.BackColor = Color.Transparent;
             titleLabel.Font = new Font("Segoe UI", 30F);
-            titleLabel.Location = new Point(110, 27);
+            titleLabel.ForeColor = Color.White;
+            titleLabel.Location = new Point(253, 27);
             titleLabel.Name = "titleLabel";
             titleLabel.Size = new Size(249, 54);
             titleLabel.TabIndex = 11;
@@ -152,7 +172,9 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(474, 478);
+            BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
+            BackgroundImageLayout = ImageLayout.Stretch;
+            ClientSize = new Size(756, 478);
             Controls.Add(titleLabel);
             Controls.Add(toolStrip);
             Controls.Add(haveAccountLinkLabel);
@@ -165,6 +187,7 @@
             Controls.Add(repeatPasswordTextBox);
             Controls.Add(passwordTextBox);
             Controls.Add(usernameTextBox);
+            DoubleBuffered = true;
             FormBorderStyle = FormBorderStyle.FixedSingle;
             Name = "RegistrationForm";
             Text = "QuizDuel";

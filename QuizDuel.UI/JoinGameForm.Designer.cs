@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(JoinGameForm));
             flowGames = new FlowLayoutPanel();
             btnUpdateGames = new Button();
             titleLabel = new Label();
@@ -36,6 +37,8 @@
             // flowGames
             // 
             flowGames.AutoScroll = true;
+            flowGames.BackColor = Color.Transparent;
+            flowGames.ForeColor = Color.White;
             flowGames.Location = new Point(12, 73);
             flowGames.Name = "flowGames";
             flowGames.Size = new Size(776, 365);
@@ -43,16 +46,23 @@
             // 
             // btnUpdateGames
             // 
+            btnUpdateGames.BackColor = Color.Transparent;
+            btnUpdateGames.Cursor = Cursors.Hand;
+            btnUpdateGames.FlatAppearance.BorderSize = 3;
+            btnUpdateGames.FlatStyle = FlatStyle.Flat;
+            btnUpdateGames.ForeColor = Color.White;
             btnUpdateGames.Location = new Point(12, 16);
             btnUpdateGames.Name = "btnUpdateGames";
             btnUpdateGames.Size = new Size(125, 39);
             btnUpdateGames.TabIndex = 1;
             btnUpdateGames.Text = "button1";
-            btnUpdateGames.UseVisualStyleBackColor = true;
+            btnUpdateGames.UseVisualStyleBackColor = false;
             btnUpdateGames.Click += BtnUpdateGames_Click;
             // 
             // titleLabel
             // 
+            titleLabel.BackColor = Color.Transparent;
+            titleLabel.ForeColor = Color.White;
             titleLabel.Location = new Point(275, 4);
             titleLabel.Name = "titleLabel";
             titleLabel.Size = new Size(253, 61);
@@ -64,10 +74,13 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
+            BackgroundImageLayout = ImageLayout.Stretch;
             ClientSize = new Size(800, 450);
             Controls.Add(titleLabel);
             Controls.Add(btnUpdateGames);
             Controls.Add(flowGames);
+            DoubleBuffered = true;
             FormBorderStyle = FormBorderStyle.FixedSingle;
             Name = "JoinGameForm";
             Text = "QuizDuel";

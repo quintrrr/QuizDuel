@@ -43,26 +43,38 @@ namespace QuizDuel.UI
             // 
             // btnCreateGame
             // 
+            btnCreateGame.BackColor = Color.Transparent;
+            btnCreateGame.Cursor = Cursors.Hand;
+            btnCreateGame.FlatAppearance.BorderSize = 3;
+            btnCreateGame.FlatStyle = FlatStyle.Flat;
+            btnCreateGame.ForeColor = Color.White;
             btnCreateGame.Location = new Point(291, 225);
             btnCreateGame.Name = "btnCreateGame";
             btnCreateGame.Size = new Size(222, 77);
             btnCreateGame.TabIndex = 0;
             btnCreateGame.Text = "Создать игру";
-            btnCreateGame.UseVisualStyleBackColor = true;
+            btnCreateGame.UseVisualStyleBackColor = false;
             btnCreateGame.Click += BtnCreateGame_Click;
             // 
             // btnJoinGame
             // 
+            btnJoinGame.BackColor = Color.Transparent;
+            btnJoinGame.Cursor = Cursors.Hand;
+            btnJoinGame.FlatAppearance.BorderSize = 3;
+            btnJoinGame.FlatStyle = FlatStyle.Flat;
+            btnJoinGame.ForeColor = Color.White;
             btnJoinGame.Location = new Point(291, 110);
             btnJoinGame.Name = "btnJoinGame";
             btnJoinGame.Size = new Size(222, 77);
             btnJoinGame.TabIndex = 1;
             btnJoinGame.Text = "присоединиться к игре";
-            btnJoinGame.UseVisualStyleBackColor = true;
+            btnJoinGame.UseVisualStyleBackColor = false;
             btnJoinGame.Click += BtnJoinGame_Click;
             // 
             // toolStrip
             // 
+            toolStrip.BackColor = Color.Transparent;
+            toolStrip.GripStyle = ToolStripGripStyle.Hidden;
             toolStrip.Location = new Point(0, 0);
             toolStrip.Name = "toolStrip";
             toolStrip.Size = new Size(800, 25);
@@ -86,6 +98,8 @@ namespace QuizDuel.UI
             // 
             // titleLabel
             // 
+            titleLabel.BackColor = Color.Transparent;
+            titleLabel.ForeColor = Color.White;
             titleLabel.Location = new Point(279, 21);
             titleLabel.Name = "titleLabel";
             titleLabel.Size = new Size(253, 61);
@@ -96,6 +110,8 @@ namespace QuizDuel.UI
             // flowGameHistory
             // 
             flowGameHistory.AutoScroll = true;
+            flowGameHistory.BackColor = Color.Transparent;
+            flowGameHistory.ForeColor = Color.White;
             flowGameHistory.Location = new Point(71, 321);
             flowGameHistory.Name = "flowGameHistory";
             flowGameHistory.Size = new Size(660, 124);
@@ -104,6 +120,8 @@ namespace QuizDuel.UI
             // 
             // gameHistoryLabel
             // 
+            gameHistoryLabel.BackColor = Color.Transparent;
+            gameHistoryLabel.ForeColor = Color.White;
             gameHistoryLabel.Location = new Point(71, 289);
             gameHistoryLabel.Name = "gameHistoryLabel";
             gameHistoryLabel.Size = new Size(173, 29);
@@ -115,6 +133,8 @@ namespace QuizDuel.UI
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
+            BackgroundImageLayout = ImageLayout.Stretch;
             ClientSize = new Size(800, 450);
             Controls.Add(gameHistoryLabel);
             Controls.Add(flowGameHistory);
@@ -123,6 +143,7 @@ namespace QuizDuel.UI
             Controls.Add(toolStrip);
             Controls.Add(btnJoinGame);
             Controls.Add(btnCreateGame);
+            DoubleBuffered = true;
             FormBorderStyle = FormBorderStyle.FixedSingle;
             Name = "MainForm";
             Text = "QuizDuel";

@@ -191,7 +191,7 @@ namespace QuizDuel.UI
         {
             foreach (var btn in new[] { btnAnswer1, btnAnswer2, btnAnswer3, btnAnswer4 })
             {
-                btn.BackColor = SystemColors.Control;
+                btn.BackColor = Color.Transparent;
             }
         }
 
@@ -268,7 +268,7 @@ namespace QuizDuel.UI
                 else if (i == selected)
                     buttons[i].BackColor = Color.IndianRed;
                 else
-                    buttons[i].BackColor = SystemColors.Control;
+                    buttons[i].BackColor = Color.Transparent;
             }
         }
 

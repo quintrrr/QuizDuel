@@ -30,6 +30,7 @@ namespace QuizDuel.UI
             toolStrip.Items.Add(new ToolStripButton("TT", null, (_, _) => SetLanguage("tt")));
 
             Font = FontManager.GetCustomFont(15f);
+            toolStrip.Font = FontManager.GetCustomFont(12f);
             titleLabel.Font = FontManager.GetCustomFont(30f);
         }
 
