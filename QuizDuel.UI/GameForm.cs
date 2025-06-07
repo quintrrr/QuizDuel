@@ -33,6 +33,11 @@ namespace QuizDuel.UI
             _logger = logger;
 
             selectCategoryLabel.Text = Resources.Game_SelectCategory;
+
+            Font = FontManager.GetCustomFont(15f);
+            selectCategoryLabel.Font = FontManager.GetCustomFont(30f);
+            questionLabel.Font = FontManager.GetCustomFont(18f);
+            roundLabel.Font = FontManager.GetCustomFont(12f);
         }
 
         private async Task ShowCategorySelectionAsync()
@@ -55,7 +60,6 @@ namespace QuizDuel.UI
             {
                 _notificationService.ShowError(Resources.Game_LoadCategoryError);
                 _isGameContinued = true;
-                _isAnswered = true;
                 _navigationService.NavigateTo<WaitingForm>();
             }
         }
@@ -95,7 +99,7 @@ namespace QuizDuel.UI
                 }
                 else
                 {
-                    _notificationService.ShowInfo("Раунд завершён!");
+                    _notificationService.ShowInfo(Resources.Game_RoundOver);
                     await PassTurnAsync();
                     _isGameContinued = true;
                     _navigationService.NavigateTo<WaitingForm>();
@@ -105,7 +109,6 @@ namespace QuizDuel.UI
             {
                 _notificationService.ShowError(Resources.Game_AnswerError);
                 _isGameContinued = true;
-                _isAnswered = true;
                 _navigationService.NavigateTo<WaitingForm>();
             }
         }
@@ -131,7 +134,6 @@ namespace QuizDuel.UI
             {
                 _logger.Error("Ошибка при выборе категории", ex);
                 _isGameContinued = true;
-                _isAnswered = true;
                 _navigationService.NavigateTo<WaitingForm>();
             }
         }
@@ -154,7 +156,6 @@ namespace QuizDuel.UI
             {
                 _notificationService.ShowError(Resources.Game_LoadQuestionsError);
                 _isGameContinued = true;
-                _isAnswered = true;
                 _navigationService.NavigateTo<WaitingForm>();
             }
         }
@@ -190,7 +191,7 @@ namespace QuizDuel.UI
         {
             foreach (var btn in new[] { btnAnswer1, btnAnswer2, btnAnswer3, btnAnswer4 })
             {
-                btn.BackColor = SystemColors.Control;
+                btn.BackColor = Color.Transparent;
             }
         }
 
@@ -253,7 +254,6 @@ namespace QuizDuel.UI
             {
                 _notificationService.ShowError(Resources.Game_AnswerError);
                 _isGameContinued = true;
-                _isAnswered = true;
                 _navigationService.NavigateTo<WaitingForm>();
             }
         }
@@ -268,7 +268,7 @@ namespace QuizDuel.UI
                 else if (i == selected)
                     buttons[i].BackColor = Color.IndianRed;
                 else
-                    buttons[i].BackColor = SystemColors.Control;
+                    buttons[i].BackColor = Color.Transparent;
             }
         }
 
@@ -282,7 +282,6 @@ namespace QuizDuel.UI
             {
                 _notificationService.ShowError(Resources.Game_PasTurnError);
                 _isGameContinued = true;
-                _isAnswered = true;
                 _navigationService.NavigateTo<WaitingForm>();
             }
         }
@@ -315,17 +314,32 @@ namespace QuizDuel.UI
                 _logger.Error("Не удалось загрузить игру", ex);
                 _notificationService.ShowError(Resources.Game_LoadError);
                 _isGameContinued = true;
-                _isAnswered = true;
                 _navigationService.NavigateTo<WaitingForm>();
             }
         }
 
         private async void GameForm_FormClosing(object sender, FormClosingEventArgs e)
         {
+            if (e.CloseReason == CloseReason.UserClosing)
+            {
+                var result = MessageBox.Show(
+                    Resources.ConfirmExitGameMessage,
+                    Resources.ConformExitGame,
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Question
+                );
+
+                if (result == DialogResult.No)
+                {
+                    e.Cancel = true;
+                    return;
+                }
+            }
+
+            _isAnswered = true;
             if (!_isGameContinued)
             {
                 await _gameService.DeleteGameAsync();
-                _isAnswered = true;
                 _navigationService.NavigateTo<MainForm>();
             }
         }

@@ -1,6 +1,7 @@
 ﻿using System.Globalization;
 using Castle.Core.Logging;
 using QuizDuel.Core.Interfaces;
+using QuizDuel.UI.UserControls;
 
 namespace QuizDuel.UI
 {
@@ -30,12 +31,38 @@ namespace QuizDuel.UI
 
             toolStrip.Items.Add(new ToolStripButton("RU", null, (_, _) => SetLanguage("ru")));
             toolStrip.Items.Add(new ToolStripButton("EN", null, (_, _) => SetLanguage("en")));
+            toolStrip.Items.Add(new ToolStripButton("TT", null, (_, _) => SetLanguage("tt")));
+
+            Font = FontManager.GetCustomFont(15f);
+            toolStrip.Font = FontManager.GetCustomFont(12f);
+            titleLabel.Font = FontManager.GetCustomFont(40f);
         }
 
         private void ApplyLocalization()
         {
             btnCreateGame.Text = Resources.CreateGameButton;
             btnJoinGame.Text = Resources.JoinGameButton;
+            gameHistoryLabel.Text = Resources.GameHistoryLabel;
+        }
+
+        private async Task LoadGameHistory()
+        {
+            flowGameHistory.Controls.Clear();
+
+            var games = await _gameService.GetGameHistoryAsync(10);
+
+            foreach (var game in games)
+            {
+                var item = new GameHistoryItemControl
+                {
+                    OpponentName = game.OpponentUsername,
+                    GameEndTime = game.EndTime
+                };
+                item.RefreshTimeAgo();
+                item.SetResult(game.WinnerId, _userSessionService.UserID);
+
+                flowGameHistory.Controls.Add(item);
+            }
         }
 
         private async void BtnCreateGame_Click(object sender, EventArgs e)
@@ -65,6 +92,7 @@ namespace QuizDuel.UI
             if (_userSessionService.UserID == default)
             {
                 _navigationService.NavigateTo<LoginForm>();
+                return;
             }
         }
 
@@ -78,11 +106,32 @@ namespace QuizDuel.UI
             Thread.CurrentThread.CurrentUICulture = new CultureInfo(langCode);
 
             ApplyLocalization();
+            _navigationService.CurrentForm = null;
+            Hide();
+            _navigationService.NavigateTo<MainForm>();
         }
 
         private void PictureBox1_Click(object sender, EventArgs e)
         {
             _navigationService.NavigateTo<LeaderboardForm>();
+        }
+
+        private async void MainForm_VisibleChanged(object sender, EventArgs e)
+        {
+            if (Visible && _navigationService.CurrentForm is not MainForm)
+            {
+                Enabled = false;
+                try
+                {
+                    await LoadGameHistory();
+                }
+                catch
+                {
+                    _notificationService.ShowError(Resources.GameHistoryLoadError);
+                }
+
+                Enabled = true;
+            }
         }
     }
 }

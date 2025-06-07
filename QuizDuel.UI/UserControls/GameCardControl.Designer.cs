@@ -36,23 +36,26 @@
             // 
             btnJoin.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Right;
             btnJoin.AutoSize = true;
-            btnJoin.Location = new Point(641, 20);
+            btnJoin.BackColor = Color.Transparent;
+            btnJoin.Cursor = Cursors.Hand;
+            btnJoin.FlatAppearance.BorderSize = 3;
+            btnJoin.FlatStyle = FlatStyle.Flat;
+            btnJoin.Location = new Point(641, 18);
             btnJoin.Name = "btnJoin";
             btnJoin.Size = new Size(107, 39);
             btnJoin.TabIndex = 0;
             btnJoin.Text = "button1";
-            btnJoin.UseVisualStyleBackColor = true;
+            btnJoin.UseVisualStyleBackColor = false;
             // 
             // hostUsernameLabel
             // 
             hostUsernameLabel.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
-            hostUsernameLabel.AutoSize = true;
-            hostUsernameLabel.Font = new Font("Segoe UI", 15F);
             hostUsernameLabel.Location = new Point(18, 24);
             hostUsernameLabel.Name = "hostUsernameLabel";
-            hostUsernameLabel.Size = new Size(65, 28);
+            hostUsernameLabel.Size = new Size(221, 25);
             hostUsernameLabel.TabIndex = 1;
             hostUsernameLabel.Text = "label1";
+            hostUsernameLabel.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // GameCardControl
             // 

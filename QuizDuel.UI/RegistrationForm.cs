@@ -29,6 +29,11 @@ namespace QuizDuel.UI
 
             toolStrip.Items.Add(new ToolStripButton("RU", null, (_, _) => SetLanguage("ru")));
             toolStrip.Items.Add(new ToolStripButton("EN", null, (_, _) => SetLanguage("en")));
+            toolStrip.Items.Add(new ToolStripButton("TT", null, (_, _) => SetLanguage("tt")));
+
+            Font = FontManager.GetCustomFont(15f);
+            toolStrip.Font = FontManager.GetCustomFont(12f);
+            titleLabel.Font = FontManager.GetCustomFont(30f);
         }
 
         private void ApplyLocalization()
@@ -39,6 +44,7 @@ namespace QuizDuel.UI
             repeatPasswordLabel.Text = Resources.RepeatPasswordLabel;
             btnRegister.Text = Resources.RegisterButton;
             haveAccountLinkLabel.Text = Resources.Register_HaveAnAccount;
+            titleLabel.Text = Resources.Register_Label;
         }
         public void SetLanguage(string langCode)
         {

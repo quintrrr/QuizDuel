@@ -41,6 +41,5 @@ namespace QuizDuel.Core.Services
 
             _currentForm = nextForm;
         }
-
     }
 }

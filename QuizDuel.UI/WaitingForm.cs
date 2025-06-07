@@ -30,6 +30,14 @@ namespace QuizDuel.UI
             _logger = logger;
             _notificationService = notificationService;
             _userSessionService = userSessionService;
+
+            Font = FontManager.GetCustomFont(20f);
+            player1NameLabel.Font = FontManager.GetCustomFont(20f);
+            player2NameLabel.Font = FontManager.GetCustomFont(20f);
+            titleLabel.Font = FontManager.GetCustomFont(40f);
+            scoreLabel.Font = FontManager.GetCustomFont(30f);
+
+            btnPlay.Enabled = false;
         }
 
         private void ApplyLocalization()
@@ -63,15 +71,14 @@ namespace QuizDuel.UI
                     return;
                 }
 
-                _isGameStarted = true;
                 if (_gameState.CurrentTurnPlayerId != _userSessionService.UserID)
                 {
                     _notificationService.ShowInfo(Resources.Game_AnotherTurn);
                     await UpdateLabels();
-                    btnPlay.Enabled = true;
                 }
                 else
                 {
+                    _isGameStarted = true;
                     _navigationService.NavigateTo<GameForm>();
                 }
             }
@@ -100,6 +107,7 @@ namespace QuizDuel.UI
                 var (score1, score2) = await _gameService.GetScoresAsync();
                 scoreLabel.Text = $"{score1} : {score2}";
 
+
                 if (_gameState.IsFinished)
                 {
                     var winner = await _gameService.GetWinnerAsync();
@@ -107,6 +115,8 @@ namespace QuizDuel.UI
                         winner == null ? Resources.Game_Draw : $"{Resources.Game_PlayerWon}: {winner}");
                     _navigationService.NavigateTo<MainForm>();
                 }
+
+                btnPlay.Enabled = true;
             } 
             catch {
                 _notificationService.ShowError(Resources.Game_LoadError);
@@ -116,6 +126,22 @@ namespace QuizDuel.UI
 
         private async void WaitingForm_FormClosing(object sender, FormClosingEventArgs e)
         {
+            if (e.CloseReason == CloseReason.UserClosing)
+            {
+                var result = MessageBox.Show(
+                    Resources.ConfirmExitGameMessage,
+                    Resources.ConformExitGame,
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Question
+                );
+
+                if (result == DialogResult.No)
+                {
+                    e.Cancel = true;
+                    return;
+                }
+            }
+
             if (!_isGameStarted)
             {
                 await _gameService.DeleteGameAsync();

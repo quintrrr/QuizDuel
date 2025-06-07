@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(LeaderboardForm));
             flowLeaders = new FlowLayoutPanel();
             leaderboardLabel = new Label();
             SuspendLayout();
@@ -35,17 +36,20 @@
             // flowLeaders
             // 
             flowLeaders.AutoScroll = true;
-            flowLeaders.Location = new Point(12, 61);
+            flowLeaders.BackColor = Color.Transparent;
+            flowLeaders.ForeColor = Color.White;
+            flowLeaders.Location = new Point(12, 83);
             flowLeaders.Name = "flowLeaders";
-            flowLeaders.Size = new Size(776, 364);
+            flowLeaders.Size = new Size(776, 342);
             flowLeaders.TabIndex = 1;
             // 
             // leaderboardLabel
             // 
-            leaderboardLabel.Font = new Font("Segoe UI", 20F);
-            leaderboardLabel.Location = new Point(227, 9);
+            leaderboardLabel.BackColor = Color.Transparent;
+            leaderboardLabel.ForeColor = Color.White;
+            leaderboardLabel.Location = new Point(153, 12);
             leaderboardLabel.Name = "leaderboardLabel";
-            leaderboardLabel.Size = new Size(349, 49);
+            leaderboardLabel.Size = new Size(510, 49);
             leaderboardLabel.TabIndex = 2;
             leaderboardLabel.Text = "label1";
             leaderboardLabel.TextAlign = ContentAlignment.MiddleCenter;
@@ -54,12 +58,14 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
+            BackgroundImageLayout = ImageLayout.Stretch;
             ClientSize = new Size(800, 450);
             Controls.Add(leaderboardLabel);
             Controls.Add(flowLeaders);
             FormBorderStyle = FormBorderStyle.FixedSingle;
             Name = "LeaderboardForm";
-            Text = "LeaderboardForm";
+            Text = "QuizDuel";
             FormClosing += LeaderboardForm_FormClosing;
             Load += LeaderboardForm_Load;
             ResumeLayout(false);

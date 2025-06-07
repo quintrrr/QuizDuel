@@ -46,5 +46,10 @@ namespace QuizDuel.DataAccess.Interfaces
         /// Асихронно получает игру по id c раундами и ответами из базы данных.
         /// </summary>
         Task<Game?> GetGameByIdIncludeRoundsAndAnswersAsync(Guid id);
+
+        /// <summary>
+        /// Получает последние завершенные игры по id пользователя.
+        /// </summary>
+        Task<List<Game>> GetLastFinishedGamesAsync(Guid userId, int amount);
     }
 }

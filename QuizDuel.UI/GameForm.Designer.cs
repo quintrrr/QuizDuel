@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(GameForm));
             categoryPanel = new Panel();
             selectCategoryLabel = new Label();
             btnCategory3 = new Button();
@@ -48,6 +49,7 @@
             // 
             // categoryPanel
             // 
+            categoryPanel.BackColor = Color.Transparent;
             categoryPanel.Controls.Add(selectCategoryLabel);
             categoryPanel.Controls.Add(btnCategory3);
             categoryPanel.Controls.Add(btnCategory2);
@@ -61,6 +63,7 @@
             // selectCategoryLabel
             // 
             selectCategoryLabel.Font = new Font("Segoe UI", 16F);
+            selectCategoryLabel.ForeColor = Color.White;
             selectCategoryLabel.Location = new Point(30, 20);
             selectCategoryLabel.Name = "selectCategoryLabel";
             selectCategoryLabel.Size = new Size(293, 85);
@@ -70,6 +73,10 @@
             // 
             // btnCategory3
             // 
+            btnCategory3.Cursor = Cursors.Hand;
+            btnCategory3.FlatAppearance.BorderSize = 3;
+            btnCategory3.FlatStyle = FlatStyle.Flat;
+            btnCategory3.ForeColor = Color.White;
             btnCategory3.Location = new Point(63, 295);
             btnCategory3.Name = "btnCategory3";
             btnCategory3.Size = new Size(226, 56);
@@ -80,6 +87,10 @@
             // 
             // btnCategory2
             // 
+            btnCategory2.Cursor = Cursors.Hand;
+            btnCategory2.FlatAppearance.BorderSize = 3;
+            btnCategory2.FlatStyle = FlatStyle.Flat;
+            btnCategory2.ForeColor = Color.White;
             btnCategory2.Location = new Point(63, 207);
             btnCategory2.Name = "btnCategory2";
             btnCategory2.Size = new Size(226, 52);
@@ -90,6 +101,10 @@
             // 
             // btnCategory1
             // 
+            btnCategory1.Cursor = Cursors.Hand;
+            btnCategory1.FlatAppearance.BorderSize = 3;
+            btnCategory1.FlatStyle = FlatStyle.Flat;
+            btnCategory1.ForeColor = Color.White;
             btnCategory1.Location = new Point(63, 121);
             btnCategory1.Name = "btnCategory1";
             btnCategory1.Size = new Size(226, 54);
@@ -100,6 +115,7 @@
             // 
             // gamePanel
             // 
+            gamePanel.BackColor = Color.Transparent;
             gamePanel.Controls.Add(btnAnswer4);
             gamePanel.Controls.Add(btnAnswer3);
             gamePanel.Controls.Add(btnAnswer2);
@@ -108,58 +124,79 @@
             gamePanel.Controls.Add(questionTimer);
             gamePanel.Controls.Add(roundLabel);
             gamePanel.Controls.Add(questionLabel);
-            gamePanel.Location = new Point(1, 2);
+            gamePanel.Location = new Point(1, 0);
             gamePanel.Name = "gamePanel";
-            gamePanel.Size = new Size(799, 436);
+            gamePanel.Size = new Size(799, 438);
             gamePanel.TabIndex = 1;
             gamePanel.Visible = false;
             // 
             // btnAnswer4
             // 
-            btnAnswer4.Location = new Point(436, 323);
+            btnAnswer4.BackColor = Color.Transparent;
+            btnAnswer4.Cursor = Cursors.Hand;
+            btnAnswer4.FlatAppearance.BorderSize = 3;
+            btnAnswer4.FlatStyle = FlatStyle.Flat;
+            btnAnswer4.ForeColor = Color.White;
+            btnAnswer4.Location = new Point(430, 323);
             btnAnswer4.Name = "btnAnswer4";
             btnAnswer4.Size = new Size(242, 72);
             btnAnswer4.TabIndex = 7;
             btnAnswer4.Tag = "3";
             btnAnswer4.Text = "button4";
-            btnAnswer4.UseVisualStyleBackColor = true;
+            btnAnswer4.UseVisualStyleBackColor = false;
             btnAnswer4.Click += ButtonAnswer_Click;
             // 
             // btnAnswer3
             // 
-            btnAnswer3.Location = new Point(436, 234);
+            btnAnswer3.BackColor = Color.Transparent;
+            btnAnswer3.Cursor = Cursors.Hand;
+            btnAnswer3.FlatAppearance.BorderSize = 3;
+            btnAnswer3.FlatStyle = FlatStyle.Flat;
+            btnAnswer3.ForeColor = Color.White;
+            btnAnswer3.Location = new Point(430, 234);
             btnAnswer3.Name = "btnAnswer3";
             btnAnswer3.Size = new Size(242, 72);
             btnAnswer3.TabIndex = 6;
             btnAnswer3.Tag = "2";
             btnAnswer3.Text = "button3";
-            btnAnswer3.UseVisualStyleBackColor = true;
+            btnAnswer3.UseVisualStyleBackColor = false;
             btnAnswer3.Click += ButtonAnswer_Click;
             // 
             // btnAnswer2
             // 
-            btnAnswer2.Location = new Point(136, 323);
+            btnAnswer2.BackColor = Color.Transparent;
+            btnAnswer2.Cursor = Cursors.Hand;
+            btnAnswer2.FlatAppearance.BorderSize = 3;
+            btnAnswer2.FlatStyle = FlatStyle.Flat;
+            btnAnswer2.ForeColor = Color.White;
+            btnAnswer2.Location = new Point(130, 323);
             btnAnswer2.Name = "btnAnswer2";
             btnAnswer2.Size = new Size(244, 72);
             btnAnswer2.TabIndex = 5;
             btnAnswer2.Tag = "1";
             btnAnswer2.Text = "button2";
-            btnAnswer2.UseVisualStyleBackColor = true;
+            btnAnswer2.UseVisualStyleBackColor = false;
             btnAnswer2.Click += ButtonAnswer_Click;
             // 
             // btnAnswer1
             // 
-            btnAnswer1.Location = new Point(136, 234);
+            btnAnswer1.BackColor = Color.Transparent;
+            btnAnswer1.Cursor = Cursors.Hand;
+            btnAnswer1.FlatAppearance.BorderSize = 3;
+            btnAnswer1.FlatStyle = FlatStyle.Flat;
+            btnAnswer1.ForeColor = Color.White;
+            btnAnswer1.Location = new Point(130, 234);
             btnAnswer1.Name = "btnAnswer1";
             btnAnswer1.Size = new Size(244, 72);
             btnAnswer1.TabIndex = 4;
             btnAnswer1.Tag = "0";
             btnAnswer1.Text = "button1";
-            btnAnswer1.UseVisualStyleBackColor = true;
+            btnAnswer1.UseVisualStyleBackColor = false;
             btnAnswer1.Click += ButtonAnswer_Click;
             // 
             // categoryLabel
             // 
+            categoryLabel.ForeColor = Color.White;
             categoryLabel.Location = new Point(251, 51);
             categoryLabel.Name = "categoryLabel";
             categoryLabel.Size = new Size(300, 21);
@@ -169,8 +206,8 @@
             // 
             // questionTimer
             // 
-            questionTimer.ForeColor = Color.FromArgb(255, 255, 128);
-            questionTimer.Location = new Point(137, 208);
+            questionTimer.ForeColor = Color.Black;
+            questionTimer.Location = new Point(131, 208);
             questionTimer.Name = "questionTimer";
             questionTimer.Size = new Size(542, 15);
             questionTimer.TabIndex = 2;
@@ -178,6 +215,7 @@
             // roundLabel
             // 
             roundLabel.Font = new Font("Segoe UI", 12F);
+            roundLabel.ForeColor = Color.White;
             roundLabel.Location = new Point(329, 6);
             roundLabel.Name = "roundLabel";
             roundLabel.Size = new Size(145, 36);
@@ -187,10 +225,11 @@
             // 
             // questionLabel
             // 
-            questionLabel.BackColor = SystemColors.Control;
+            questionLabel.BackColor = Color.Transparent;
             questionLabel.BorderStyle = BorderStyle.FixedSingle;
             questionLabel.Font = new Font("Segoe UI", 15F);
-            questionLabel.Location = new Point(107, 72);
+            questionLabel.ForeColor = Color.White;
+            questionLabel.Location = new Point(101, 72);
             questionLabel.Name = "questionLabel";
             questionLabel.Size = new Size(600, 125);
             questionLabel.TabIndex = 0;
@@ -201,12 +240,15 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
+            BackgroundImageLayout = ImageLayout.Stretch;
             ClientSize = new Size(800, 450);
             Controls.Add(gamePanel);
             Controls.Add(categoryPanel);
+            DoubleBuffered = true;
             FormBorderStyle = FormBorderStyle.FixedSingle;
             Name = "GameForm";
-            Text = "GameForm";
+            Text = "QuizDuel";
             FormClosing += GameForm_FormClosing;
             Load += GameForm_Load;
             categoryPanel.ResumeLayout(false);

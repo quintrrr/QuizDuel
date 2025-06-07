@@ -70,6 +70,24 @@ namespace QuizDuel.UI {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Вы действительно хотите выйти из игры?.
+        /// </summary>
+        internal static string ConfirmExitGameMessage {
+            get {
+                return ResourceManager.GetString("ConfirmExitGameMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Подтверждение выхода.
+        /// </summary>
+        internal static string ConformExitGame {
+            get {
+                return ResourceManager.GetString("ConformExitGame", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Создать игру.
         /// </summary>
         internal static string CreateGameButton {
@@ -178,6 +196,15 @@ namespace QuizDuel.UI {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Поражение.
+        /// </summary>
+        internal static string Game_Lose {
+            get {
+                return ResourceManager.GetString("Game.Lose", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Второй игрок еще не присоединился..
         /// </summary>
         internal static string Game_NotStarted {
@@ -214,6 +241,24 @@ namespace QuizDuel.UI {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Игры.
+        /// </summary>
+        internal static string Game_Rooms {
+            get {
+                return ResourceManager.GetString("Game.Rooms", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Раунд завершен.
+        /// </summary>
+        internal static string Game_RoundOver {
+            get {
+                return ResourceManager.GetString("Game.RoundOver", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Вы не можете подключиться к своей игре.
         /// </summary>
         internal static string Game_SamePlayers {
@@ -237,6 +282,42 @@ namespace QuizDuel.UI {
         internal static string Game_StateError {
             get {
                 return ResourceManager.GetString("Game.StateError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Победа.
+        /// </summary>
+        internal static string Game_Win {
+            get {
+                return ResourceManager.GetString("Game.Win", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to История игр.
+        /// </summary>
+        internal static string GameHistoryLabel {
+            get {
+                return ResourceManager.GetString("GameHistoryLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Не удалось загрузить историю игр.
+        /// </summary>
+        internal static string GameHistoryLoadError {
+            get {
+                return ResourceManager.GetString("GameHistoryLoadError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ч.
+        /// </summary>
+        internal static string Hours {
+            get {
+                return ResourceManager.GetString("Hours", resourceCulture);
             }
         }
         
@@ -323,6 +404,15 @@ namespace QuizDuel.UI {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Вход в аккаунт.
+        /// </summary>
+        internal static string Login_Label {
+            get {
+                return ResourceManager.GetString("Login.Label", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Нет аккаунта? .
         /// </summary>
         internal static string Login_NoAccount {
@@ -355,6 +445,15 @@ namespace QuizDuel.UI {
         internal static string Login_WrongPassword {
             get {
                 return ResourceManager.GetString("Login.WrongPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to мин.
+        /// </summary>
+        internal static string Minutes {
+            get {
+                return ResourceManager.GetString("Minutes", resourceCulture);
             }
         }
         
@@ -535,6 +634,15 @@ namespace QuizDuel.UI {
         internal static string Register_InvalidRepeatPassword {
             get {
                 return ResourceManager.GetString("Register.InvalidRepeatPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Регистрация.
+        /// </summary>
+        internal static string Register_Label {
+            get {
+                return ResourceManager.GetString("Register.Label", resourceCulture);
             }
         }
         
